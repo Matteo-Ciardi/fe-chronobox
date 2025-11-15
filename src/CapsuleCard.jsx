@@ -2,27 +2,71 @@ import './CapsuleCard.css';
 
 export default function CapsuleCard() {
   return (
-    <div className="container-capsule">
-      <div className="container-image">
-        <img
-          src="./src/assets/img/capsule-classic.jpg"
-          alt="capsule-classic"
-        />
+    <>
+    <div className="container-cards">
+      <div className="container-capsule">
+        <div className="container-image">
+          <img
+            src="./src/assets/img/capsule-classic.jpg"
+            alt="capsule-classic"
+          />
 
+        </div>
+
+        <div className="container-capsule-body">
+          <h5 className="capsule-title">Capsula Cupido</h5>
+          <p className="capsule-description">Capsula da regalare alla persona amata</p>
+
+          <div className="capsule-footer">
+            <span className="capsule-price">&euro;50,00</span>
+            <button className="capsule-button">Dettagli</button>
+          </div>
+        </div>
       </div>
 
-      <div className="container-capsule-body">
-        <h5 className="capsule-title">Capsula</h5>
-        <p className="capsule-description">Capsula da ragalare ad un amico</p>
+       {/*  */}
 
-        <div className="capsule-footer">
-          <span className="capsule-price">50,00</span>
-          {/* <Link to={`/product/${id}`} className="product-button">
-            Dettagli
-          </Link> */}
+      <div className="container-capsule">
+        <div className="container-image">
+          <img
+            src="./src/assets/img/capsule-mini.jpg"
+            alt="capsule-mini"
+          />
+
+        </div>
+
+        <div className="container-capsule-body">
+          <h5 className="capsule-title">Capsula Amicizia</h5>
+          <p className="capsule-description">Capsula da regalare ad un amico</p>
+          <div className="capsule-footer">
+            <span className="capsule-price">&euro;30,00</span>
+            <button className="capsule-button">Dettagli</button>
+          </div>
+        </div>
+      </div>
+
+        {/*  */}
+
+      <div className="container-capsule">
+        <div className="container-image">
+          <img
+            src="./src/assets/img/capsule-premium.jpg"
+            alt="capsule-premium"
+          />
+
+        </div>
+
+        <div className="container-capsule-body">
+          <h5 className="capsule-title">Capsula Laurea</h5>
+          <p className="capsule-description">Capsula da regalare per una laurea</p>
+
+          <div className="capsule-footer">
+            <span className="capsule-price">&euro;45,00</span>
+            <button className="capsule-button">Dettagli</button>
+          </div>
         </div>
       </div>
     </div>
-
+    </>
   )
 }
