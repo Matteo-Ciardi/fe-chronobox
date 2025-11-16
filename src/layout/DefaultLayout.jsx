@@ -12,6 +12,10 @@ const DefaultLayout = () => {
             <main>
                 <Outlet />
             </main>
+
+            <footer>
+                -- CREARE FOOTER --
+            </footer>
         </>
     );
 }
