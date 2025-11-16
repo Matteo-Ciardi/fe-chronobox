@@ -6,7 +6,6 @@ import DefaultLayout from "./layout/DefaultLayout";
 import "./App.css";
 
 function App() {
-
 	const ProductPage = () => <h1>Prodotti</h1>;
 	const WhoWeArePage = () => <h1>Chi Siamo</h1>;
 	const ContactPage = () => <h1>Contatti</h1>;
