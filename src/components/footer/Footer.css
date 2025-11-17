@@ -94,24 +94,45 @@
   color: white;
 }
 
-
-@media (min-width: 768px) {
+/* DESKTOP */
+@media (max-width: 1920px) {
   .footer-bottom {
     flex-direction: row;
     justify-content: space-between;
   }
-
-  /* .footer-bottom-links {
-  gap: 0px;
-} */
 }
 
-/* @media (min-width: 1200px) {
-  
+
+ /* TABLET   */
+@media (max-width: 900px) {
+  .footer-container {
+    width: 85%;
+    gap: 40px;
+  }
+
+  .footer-bottom {
+    width: 85%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+  }
 
   .footer-bottom-links {
-  gap: 220px;
+    gap: 20px;
+  }
 }
-} */
 
+/* MOBILE) */
+@media (max-width: 600px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-bottom-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
 
