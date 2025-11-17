@@ -1,5 +1,9 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
+import { FaFacebook } from "react-icons/fa";
+import { SlSocialInstagram } from "react-icons/sl";
+import { SlSocialTwitter } from "react-icons/sl";
+import { MdEmail } from "react-icons/md";
 
 export default function Footer() {
     return (
@@ -13,10 +17,10 @@ export default function Footer() {
                     </p>
 
                     <div className="footer-social">
-                        {/* <a href="#"><Facebook size={20} /></a>
-                        <a href="#"><Instagram size={20} /></a>
-                        <a href="#"><Twitter size={20} /></a>
-                        <a href="#"><Mail size={20} /></a> */}
+                        <a href="#"><FaFacebook size={20}/></a>
+                        <a href="#"><SlSocialInstagram size={20} /></a>
+                        <a href="#"><SlSocialTwitter size={20} /></a>
+                        <a href="#"><MdEmail size={20} /></a>
                     </div>
                 </div>
 
