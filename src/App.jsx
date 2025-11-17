@@ -4,6 +4,7 @@ import HomePage from "./pages/homepage/HomePage";
 import DefaultLayout from "./layout/DefaultLayout";
 
 import "./App.css";
+import CapsuleCard from "./CapsuleCard";
 
 function App() {
 	const ProductPage = () => <h1>Prodotti</h1>;
