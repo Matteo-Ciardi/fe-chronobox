@@ -1,3 +1,5 @@
+import CapsuleCard from "../../components/capsulecard/CapsuleCard";
+
 import "./HomePage.css";
 
 const HomePage = () => {
@@ -54,7 +56,9 @@ const HomePage = () => {
 						<p>Scopri le nostre ultime capsule del tempo</p>
 					</div>
 
-					<div>-- CARD NUOVI ARRIVI --</div>
+					<div>
+						<CapsuleCard />
+					</div>
 				</section>
 
 				<section className="popular">
