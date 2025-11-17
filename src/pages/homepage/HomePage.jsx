@@ -67,7 +67,9 @@ const HomePage = () => {
 						<p>Le capsule più amate dai nostri clienti</p>
 					</div>
 
-					<div>-- CARD PRODOTTI PIU' POPOLARI --</div>
+					<div>
+						<CapsuleCard />
+					</div>
 				</section>
 			</div>
 		</>
