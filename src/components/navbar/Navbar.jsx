@@ -8,7 +8,9 @@ const Navbar = () => {
 			<div className="container">
 				<div className="navbar-container">
 					<NavLink to="/" className="navbar-brand">
-						Chronobox
+						<h1>
+							Chronobox
+						</h1>
 					</NavLink>
 
 					<ul className="navbar-nav">
