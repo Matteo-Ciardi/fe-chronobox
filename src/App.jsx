@@ -1,42 +1,27 @@
-import { useState } from "react";
-import PremiumPage from "./ProductDetail/PremiumPage.jsx";
-import AmorePage from "./capsula-amore/AmorePage.jsx";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-export default function App() {
-  const [selectedPage, setSelectedPage] = useState("premium");
+import HomePage from "./pages/homepage/HomePage";
+import DefaultLayout from "./layout/DefaultLayout";
 
-  function handleNavigate(page) {
-    setSelectedPage(page);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+import "./App.css";
 
-  return (
-    <div>
+function App() {
+	const ProductPage = () => <h1>Prodotti</h1>;
+	const WhoWeArePage = () => <h1>Chi Siamo</h1>;
+	const ContactPage = () => <h1>Contatti</h1>;
 
-      <header className="top-nav">
-        <button
-          className={
-            "nav-btn " + (selectedPage === "premium" ? "nav-btn-active" : "")
-          }
-          onClick={() => handleNavigate("premium")}
-        >
-          Capsula Premium
-        </button>
-        <button
-          className={
-            "nav-btn " + (selectedPage === "amore" ? "nav-btn-active" : "")
-          }
-          onClick={() => handleNavigate("amore")}
-        >
-          Capsula Amore
-        </button>
-      </header>
-
-      {selectedPage === "premium" ? (
-        <PremiumPage onSelectPage={handleNavigate} />
-      ) : (
-        <AmorePage onSelectPage={handleNavigate} />
-      )}
-    </div>
-  );
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route element={<DefaultLayout />}>
+					<Route index element={<HomePage />} />
+					<Route path="/prodotti" element={<ProductPage />} />
+					<Route path="/chi-siamo" element={<WhoWeArePage />} />
+					<Route path="/contatti" element={<ContactPage />} />
+				</Route>
+			</Routes>
+		</BrowserRouter>
+	);
 }
+
+export default App;
