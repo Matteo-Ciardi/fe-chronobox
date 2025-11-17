@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/homepage/HomePage";
 import DefaultLayout from "./layout/DefaultLayout";
+import AmorePage from "./capsula-amore/AmorePage";
 
 import "./App.css";
 
@@ -18,6 +19,7 @@ function App() {
 					<Route path="/prodotti" element={<ProductPage />} />
 					<Route path="/chi-siamo" element={<WhoWeArePage />} />
 					<Route path="/contatti" element={<ContactPage />} />
+					<Route path="/dettagli" element={<AmorePage />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

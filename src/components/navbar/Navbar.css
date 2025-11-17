@@ -1,8 +1,8 @@
 .navbar-container {
-    display: flex;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .navbar-nav {
-    display: flex;
+	display: flex;
 }
