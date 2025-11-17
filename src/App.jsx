@@ -5,6 +5,7 @@ import DefaultLayout from "./layout/DefaultLayout";
 import AmorePage from "./capsula-amore/AmorePage";
 
 import "./App.css";
+import PremiumPage from "./ProductDetail/PremiumPage";
 
 function App() {
 	const ProductPage = () => <h1>Prodotti</h1>;
@@ -20,6 +21,7 @@ function App() {
 					<Route path="/chi-siamo" element={<WhoWeArePage />} />
 					<Route path="/contatti" element={<ContactPage />} />
 					<Route path="/dettagli" element={<AmorePage />} />
+					<Route path="/dettagli-premium" element={<PremiumPage />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>

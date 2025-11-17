@@ -10,7 +10,7 @@ export default function AmorePage({ onSelectPage }) {
 			id: "verde",
 			name: "Capsula Amore Verde",
 			price: "€179,00",
-			image: "/img/capsula-amore-verde.png",
+			image: "src/assets/img/capsula-amore-verde.png",
 			accentColor: "#8FB396",
 			label: "Verde",
 		},
