@@ -1,3 +1,7 @@
+import { IoShieldOutline } from "react-icons/io5";
+import { GoClock } from "react-icons/go";
+import { BsBoxSeam } from "react-icons/bs";
+
 import CapsuleCard from "../../components/capsulecard/CapsuleCard";
 
 import "./HomePage.css";
@@ -8,11 +12,10 @@ const HomePage = () => {
 			<div className="page-wrapper">
 				<section className="hero">
 					<div className="hero-image">
-						<img alt="Chronobox Time Capsule" />
 					</div>
 
 					<div className="hero-content">
-						<h1>
+						<h1 className="hero-title">
 							Benvenuto in <br />
 							<span>Chronobox</span>
 						</h1>
@@ -28,20 +31,23 @@ const HomePage = () => {
 
 						<div className="features">
 							<div className="feature-item">
-								<h3>Duratura</h3>
-								<p>Materiali premium garantiti per 100+ anni</p>
+								<GoClock size={60} />
+								<h3 className="features-title">Duratura</h3>
+								<p className="features-content">Materiali premium garantiti per 100+ anni</p>
 							</div>
 
 							<div className="feature-item">
-								<h3>Protetta</h3>
-								<p>
+								<IoShieldOutline size={60} />
+								<h3 className="features-title">Protetta</h3>
+								<p className="features-content">
 									Design ermetico a prova di acqua e polvere
 								</p>
 							</div>
 
 							<div className="feature-item">
-								<h3>Elegante</h3>
-								<p>
+								<BsBoxSeam size={60} />
+								<h3 className="features-title">Elegante</h3>
+								<p className="features-content">
 									Design minimalista che si adatta a ogni
 									ambiente
 								</p>
