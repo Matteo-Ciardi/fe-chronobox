@@ -7,8 +7,8 @@ const NewArrivals = () => {
         <>
             <section className="new-arrivals">
                 <div className="section-header">
-                    <h2>Nuovi Arrivi</h2>
-                    <p>Scopri le nostre ultime capsule del tempo</p>
+                    <h2 className="sct-title">Nuovi Arrivi</h2>
+                    <p  className="sct-subtitle">Scopri le nostre ultime capsule del tempo</p>
                 </div>
 
                 <div>
