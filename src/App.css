@@ -1,10 +1,22 @@
 :root {
-	background-color: white;
+	background-color: black;
 	color: white;
 }
 
+/* CSS RESET */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* GENERICS */
+ul,
+ol {
+	list-style-type: none;
+}
+
+a {
+	color: white;
+	text-decoration: none;
 }
