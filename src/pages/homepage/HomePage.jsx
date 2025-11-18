@@ -8,7 +8,7 @@ const HomePage = () => {
 	return (
 		<>
 			<div className="page-wrapper">
-				<Hero />	
+				<Hero />
 			</div>
 			<NewArrivals />
 			<Popular />
