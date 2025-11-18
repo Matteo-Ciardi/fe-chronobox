@@ -2,10 +2,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/homepage/HomePage";
 import DefaultLayout from "./layout/DefaultLayout";
-import AmorePage from "./capsula-amore/AmorePage";
+import AmorePage from "./pages/lovecapsulepage/AmorePage";
+import PremiumPage from "./pages/detailpage/PremiumPage";
 
 import "./App.css";
-import PremiumPage from "./ProductDetail/PremiumPage";
 
 function App() {
 	const ProductPage = () => <h1>Prodotti</h1>;
