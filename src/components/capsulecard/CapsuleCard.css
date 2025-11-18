@@ -7,7 +7,7 @@
 .container-capsule {
 	border-radius: 10px;
 	background: #fff;
-	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	box-shadow: 0px 2px 10px 5px rgb(0, 0, 0);
 	overflow: hidden;
 	transition: transform 0.2s ease;
 }
@@ -56,12 +56,12 @@
 
 .capsule-button {
 	color: white;
-	background-color: #2c3e50;
+	background-color: var(--mauve-bark);
 	padding: 8px 14px;
 	border-radius: 6px;
 	text-decoration: none;
 }
 
 .capsule-button:hover {
-	background: #004c99;
+	background: var(--dusty-taupe);
 }

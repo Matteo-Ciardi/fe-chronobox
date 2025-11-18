@@ -1,5 +1,5 @@
 .container {
-	background-color: #111111ea;
+	background-color: var(--clay-soil);
 }
 
 .navbar {
