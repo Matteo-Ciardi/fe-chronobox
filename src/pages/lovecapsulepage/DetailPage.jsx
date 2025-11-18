@@ -281,7 +281,7 @@ export default function DetailPage({ onSelectPage }) {
 						<p className="amore-related-price">{product.price}</p>
 						<button
 							className="btn-related-price"
-							style={{ backgroundColor: selectedVariant.accentColor }}
+							// style={{ backgroundColor: selectedVariant.accentColor }}
 						>
 							Vai alla pagina
 						</button>

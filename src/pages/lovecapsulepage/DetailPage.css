@@ -42,7 +42,7 @@
 .amore-info h1 {
 	font-size: 40px;
 	margin-bottom: 10px;
-	color: #233142;
+	/* color: black; */
 }
 
 .amore-price {
@@ -190,9 +190,9 @@
 	transition: background-color 0.3s ease;
 }
 
-.btn-related-price {
+.btn-related-price:hover {
 	opacity: 0.9;
-	background-color: var(--dusty-taupe);
+	background: var(--dusty-taupe);
 }
 
 
