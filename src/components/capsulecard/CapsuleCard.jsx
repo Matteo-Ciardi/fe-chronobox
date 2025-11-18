@@ -70,7 +70,7 @@ export default function CapsuleCard() {
 						</p>
 
 						<div className="capsule-footer">
-							<span className="capsule-price">&euro;45,00</span>
+							<span className="capsule-price">&euro;179,00</span>
 							<Link to="/dettagli" className="capsule-button">
 								Dettagli
 							</Link>
