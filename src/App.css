@@ -17,8 +17,8 @@ a {
 }
 
 body {
-	background-color: #f5c1b7;
-	/* color: white; */
+	background-color: var(--yale-blue);
+	color: #ffffff;
 }
 
 main {

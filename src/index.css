@@ -1,7 +1,12 @@
  :root {
- 	--frozen-water: #bee9e8ff;
- 	--pacific-blue: #62b6cbff;
- 	--yale-blue: #1b4965ff;
- 	--pale-sky: #cae9ffff;
- 	--fresh-sky: #5fa8d3ff;
+ 	--clay-soil: #7b4d3eff;
+ 	--powder-petal: #e3cdbcff;
+ 	--espresso: #56352cff;
+ 	--deep-mocha: #503c36ff;
+ 	--dark-coffee: #412720ff;
+ 	--desert-sand: #d9bdacff;
+ 	--mauve-bark: #6b473bff;
+ 	--dusty-taupe: #a68272ff;
+ 	--desert-sand-2: #cab1a3ff;
+ 	--dark-coffee-2: #492c25ff;
  }
