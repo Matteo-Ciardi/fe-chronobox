@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import "./Footer.css";
-import { FaFacebook } from "react-icons/fa";
-import { SlSocialInstagram } from "react-icons/sl";
-import { SlSocialTwitter } from "react-icons/sl";
 import { MdEmail } from "react-icons/md";
+import { FaFacebook } from "react-icons/fa";
+import { SlSocialTwitter } from "react-icons/sl";
+import { SlSocialInstagram } from "react-icons/sl";
+
+import "./Footer.css";
 
 export default function Footer() {
 	return (

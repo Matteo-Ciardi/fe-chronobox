@@ -15,3 +15,12 @@ a {
 	color: white;
 	text-decoration: none;
 }
+
+body {
+	background-color: black;
+	color: white;
+}
+
+main {
+	padding-top: 78px;
+}
