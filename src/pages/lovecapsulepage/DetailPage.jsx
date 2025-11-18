@@ -10,7 +10,7 @@ export default function DetailPage({ onSelectPage }) {
 			id: "verde",
 			name: "Capsula Futuro Me",
 			price: "€179,00",
-			image: "src/assets/img/capsula-amore-verde.png",
+			image: "src/assets/img/futuro_me.png",
 			accentColor: "#8FB396",
 			label: "Verde",
 		},
@@ -171,7 +171,6 @@ export default function DetailPage({ onSelectPage }) {
 
 					<button
 						className="amore-btn"
-						style={{ backgroundColor: selectedVariant.accentColor }}
 					>
 						Aggiungi al carrello
 					</button>

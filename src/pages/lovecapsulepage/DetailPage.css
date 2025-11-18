@@ -58,7 +58,7 @@
 }
 
 .amore-btn {
-	background: #2f5d3e;
+	background-color: var(--mauve-bark);
 	/* verdino amore */
 	color: #fff;
 	border: none;
@@ -71,6 +71,7 @@
 
 .amore-btn:hover {
 	opacity: 0.9;
+	background-color: var(--dusty-taupe);
 }
 
 /* caratteristiche */
@@ -181,13 +182,19 @@
 .btn-related-price {
 	margin-top: 10px;
 	padding: 8px 16px;
-	background-color: #2f5d3e;
+	background-color: var(--mauve-bark);
 	color: #fff;
 	border: none;
 	border-radius: 6px;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 }
+
+.btn-related-price {
+	opacity: 0.9;
+	background-color: var(--dusty-taupe);
+}
+
 
 
 .amore-related-title {
