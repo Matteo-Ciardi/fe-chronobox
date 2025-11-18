@@ -30,7 +30,7 @@ export default function CapsuleCard() {
 				</div>
 
 				{/*  */}
-{/* 
+
 				<div className="container-capsule">
 					<div className="container-image">
 						<img
@@ -46,16 +46,16 @@ export default function CapsuleCard() {
 						</p>
 						<div className="capsule-footer">
 							<span className="capsule-price">&euro;30,00</span>
-							<Link to="/prodotti" className="capsule-button">
+							<Link to="/dettagli" className="capsule-button">
 								Dettagli
 							</Link>
 						</div>
 					</div>
-				</div> */}
+				</div>
 
 				{/*  */}
 
-				{/* <div className="container-capsule">
+				<div className="container-capsule">
 					<div className="container-image">
 						<img
 							src="./src/assets/img/capsule-premium.jpg"
@@ -71,12 +71,12 @@ export default function CapsuleCard() {
 
 						<div className="capsule-footer">
 							<span className="capsule-price">&euro;45,00</span>
-							<Link to="/prodotti" className="capsule-button">
+							<Link to="/dettagli" className="capsule-button">
 								Dettagli
 							</Link>
 						</div>
 					</div>
-				</div> */}
+				</div>
 			</div>
 		</>
 	);
