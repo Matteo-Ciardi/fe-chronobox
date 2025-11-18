@@ -1,35 +1,35 @@
 import { useState } from "react";
-import "./AmorePage.css";
+import "./DetailPage.css";
 
-export default function AmorePage({ onSelectPage }) {
+export default function DetailPage({ onSelectPage }) {
 	const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
 	// VARIANTI COLORE DELLA CAPSULA AMORE
 	const variants = [
 		{
 			id: "verde",
-			name: "Capsula Amore Verde",
+			name: "Capsula Futuro Me",
 			price: "€179,00",
 			image: "src/assets/img/capsula-amore-verde.png",
 			accentColor: "#8FB396",
 			label: "Verde",
 		},
-		{
-			id: "rossa",
-			name: "Capsula Amore Rossa",
-			price: "€189,00",
-			image: "/img/capsula-amore-rossa.png",
-			accentColor: "#B62218",
-			label: "Rossa",
-		},
-		{
-			id: "lilla",
-			name: "Capsula Amore Lilla",
-			price: "€189,00",
-			image: "/img/capsula-amore-lilla.png",
-			accentColor: "#A688AC",
-			label: "Lilla",
-		},
+		// {
+		// 	id: "rossa",
+		// 	name: "Capsula Amore Rossa",
+		// 	price: "€189,00",
+		// 	image: "/img/capsula-amore-rossa.png",
+		// 	accentColor: "#B62218",
+		// 	label: "Rossa",
+		// },
+		// {
+		// 	id: "lilla",
+		// 	name: "Capsula Amore Lilla",
+		// 	price: "€189,00",
+		// 	image: "/img/capsula-amore-lilla.png",
+		// 	accentColor: "#A688AC",
+		// 	label: "Lilla",
+		// },
 	];
 
 	const [selectedVariant, setSelectedVariant] = useState(variants[0]);
@@ -59,17 +59,29 @@ export default function AmorePage({ onSelectPage }) {
 	// PRODOTTI CORRELATI
 	const relatedProducts = [
 		{
-			name: "Capsula Premium",
-			price: "€249,00",
-			image: "/img/capsule-premium.jpg",
+			name: "Capsula Futuro Me Blu",
+			price: "€179,00",
+			image: "src/assets/img/futuro_me_blu.jpg",
 			target: "premium",
 		},
 		{
-			name: "Capsula Mini",
-			price: "€89,00",
-			image: "/img/capsule-mini.jpg",
+			name: "Capsula Futuro Me Blu Bronzo",
+			price: "€179,00",
+			image: "src/assets/img/futuro_me_bronzo.jpg",
 			target: null,
 		},
+		{
+			name: "Capsula Futuro Me Blu Oro",
+			price: "€179,00",
+			image: "src/assets/img/futuro_me_oro.jpg",
+			target: null,
+		},
+		{
+			name: "Capsula Futuro Me Blu Verde",
+			price: "€179,00",
+			image: "src/assets/img/futuro_me_verde.jpg",
+			target: null,
+		}
 	];
 
 	// COSA PUOI CONSERVARE
@@ -77,22 +89,22 @@ export default function AmorePage({ onSelectPage }) {
 		{
 			title: "Lettere",
 			caption: "Messaggi che durano per sempre",
-			image: "/img/lettere.jpeg",
+			image: "src/assets/img/lettere.jpeg",
 		},
 		{
 			title: "Foto",
 			caption: "Momenti condivisi",
-			image: "/img/foto.jpg",
+			image: "src/assets/img/foto.jpg",
 		},
 		{
 			title: "Ricordi",
 			caption: "Biglietti, oggetti simbolici",
-			image: "/img/oggetti.jpg",
+			image: "src/assets/img/oggetti.jpg",
 		},
 		{
 			title: "Promesse",
 			caption: "Documenti e dediche speciali",
-			image: "/img/documenti.jpg",
+			image: "src/assets/img/documenti.jpg",
 		},
 	];
 
@@ -113,40 +125,48 @@ export default function AmorePage({ onSelectPage }) {
 				</div>
 
 				<div className="amore-info">
-					<h1>{selectedVariant.name}</h1>
-					<p className="amore-price">{selectedVariant.price}</p>
+					<h1>
+						{/* {selectedVariant.name} */}
+						Capsula Futuro Me
+					</h1>
+					<p className="amore-price">
+						{/* {selectedVariant.price} */}
+						€179,00
+					</p>
+
+					<h2 className="amore-section-title">Descrizione</h2>
 
 					<div className="amore-variants">
-						{variants.map((variant) => (
-							<button
-								key={variant.id}
-								className={`amore-variant-btn ${
-									selectedVariant.id === variant.id
-										? "active"
-										: ""
-								}`}
-								onClick={() => setSelectedVariant(variant)}
-								style={{
-									borderColor: variant.accentColor,
-									backgroundColor:
+						{/* {variants.map((variant) => (
+								<button
+									key={variant.id}
+									className={`amore-variant-btn ${
 										selectedVariant.id === variant.id
-											? variant.accentColor
-											: "#fff",
-									color:
-										selectedVariant.id === variant.id
-											? "#fff"
-											: "#333",
-								}}
-							>
-								{variant.label}
-							</button>
-						))}
+											? "active"
+											: ""
+									}`}
+									onClick={() => setSelectedVariant(variant)}
+									style={{
+										borderColor: variant.accentColor,
+										backgroundColor:
+											selectedVariant.id === variant.id
+												? variant.accentColor
+												: "#fff",
+										color:
+											selectedVariant.id === variant.id
+												? "#fff"
+												: "#333",
+									}}
+								>
+									{variant.label}
+								</button>
+							))} */}
 					</div>
 
 					<p className="amore-description">
-						Pensata per custodire le vostre promesse, lettere e
-						ricordi di coppia. Una capsula simbolica, ideale per
-						anniversari, proposte o momenti unici.
+						Tema centrato su lettere al futuro sé e carte con domande a cui rispondere oggi e rileggere domani. Puoi includere domande tipo “Sono felice?”,
+						“Cosa mi preoccupa adesso?”,
+						“Cosa spero di aver imparato quando aprirò questa capsula?”
 					</p>
 
 					<button
@@ -177,8 +197,8 @@ export default function AmorePage({ onSelectPage }) {
 				</div>
 			</div>
 
-			<h2 className="amore-section-title">Descrizione</h2>
-			<div className="amore-long-description">
+			{/* <h2 className="amore-section-title">Descrizione</h2> */}
+			{/* <div className="amore-long-description">
 				<p>
 					Ogni capsula è realizzata a mano con materiali di altissima
 					qualità e sottoposta a rigorosi controlli di qualità.
@@ -188,7 +208,7 @@ export default function AmorePage({ onSelectPage }) {
 					ambiente, mentre la costruzione robusta garantisce
 					protezione totale dal tempo e dagli elementi.
 				</p>
-			</div>
+			</div> */}
 
 			{/* SPECIFICHE TECNICHE */}
 			<h2 className="amore-section-title">Specifiche tecniche</h2>
@@ -246,13 +266,13 @@ export default function AmorePage({ onSelectPage }) {
 					<div
 						className="amore-related-card"
 						key={product.name}
-						onClick={() => {
-							if (product.target && onSelectPage) {
-								onSelectPage(product.target);
-							} else {
-								alert("Pagina non ancora disponibile");
-							}
-						}}
+						// onClick={() => {
+						// 	if (product.target && onSelectPage) {
+						// 		onSelectPage(product.target);
+						// 	} else {
+						// 		alert("Pagina non ancora disponibile");
+						// 	}
+						// }}
 						style={{
 							cursor: product.target ? "pointer" : "default",
 						}}
@@ -260,6 +280,12 @@ export default function AmorePage({ onSelectPage }) {
 						<img src={product.image} alt={product.name} />
 						<h3>{product.name}</h3>
 						<p className="amore-related-price">{product.price}</p>
+						<button
+							className="btn-related-price"
+							style={{ backgroundColor: selectedVariant.accentColor }}
+						>
+							Vai alla pagina
+						</button>
 					</div>
 				))}
 			</div>
