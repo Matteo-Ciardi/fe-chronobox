@@ -17,8 +17,8 @@ a {
 }
 
 body {
-	background-color: black;
-	color: white;
+	background-color: rgb(234, 216, 216);
+	/* color: white; */
 }
 
 main {
