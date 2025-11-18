@@ -67,6 +67,7 @@
 	font-size: 16px;
 	cursor: pointer;
 	margin-bottom: 25px;
+	box-shadow: 0px 0px 10px 2px rgb(0, 0, 0);
 }
 
 .amore-btn:hover {
@@ -83,6 +84,7 @@
 
 .amore-feature {
 	background: #ffffff;
+	color: #000000;
 	border-radius: 10px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 	padding: 12px 14px;
@@ -131,7 +133,7 @@
 }
 
 .amore-spec-value {
-	color: #555;
+	/* color: #555; */
 }
 
 /* cosa puoi conservare */
@@ -155,6 +157,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
+	color: #000000;
 }
 
 .amore-icon-image {
@@ -230,6 +233,7 @@
 .amore-related-card h3 {
 	font-size: 18px;
 	margin-bottom: 4px;
+	color: #000000;
 }
 
 .amore-related-price {

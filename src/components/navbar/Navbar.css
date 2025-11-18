@@ -1,5 +1,7 @@
 .container {
 	background-color: var(--clay-soil);
+	box-shadow: 0 0 10px 1px #000000;
+	backdrop-filter: blur(10px);
 }
 
 .navbar {
