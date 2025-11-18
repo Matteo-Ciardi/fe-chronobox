@@ -1,6 +1,6 @@
-import { IoShieldOutline } from "react-icons/io5";
 import { GoClock } from "react-icons/go";
 import { BsBoxSeam } from "react-icons/bs";
+import { IoShieldOutline } from "react-icons/io5";
 
 import './Hero.css'
 
@@ -22,8 +22,8 @@ const Hero = () => {
                     </p>
 
                     <div className="hero-buttons">
-                        <button>Acquista una capsula</button>
-                        <button>Scopri come funziona</button>
+                        <button className="hero-btn">Acquista una capsula</button>
+                        <button className="hero-btn">Scopri come funziona</button>
                     </div>
                 </div>
 

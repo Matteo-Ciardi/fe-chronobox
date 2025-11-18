@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+
 import "./CapsuleCard.css";
 
 export default function CapsuleCard() {
