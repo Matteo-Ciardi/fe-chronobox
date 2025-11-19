@@ -1,4 +1,5 @@
-import CapsuleCard from "../capsulecard/CapsuleCard";
+// import CapsuleCard from "../capsulecard/CapsuleCard";
+import CapsuleList from "../capsulecard/CapsuleList";
 
 import "./NewArrivals.css";
 
@@ -14,7 +15,7 @@ const NewArrivals = () => {
 				</div>
 
 				<div>
-					<CapsuleCard />
+					<CapsuleList />
 				</div>
 			</section>
 		</>

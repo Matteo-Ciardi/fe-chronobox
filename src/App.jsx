@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { DefaultProvider } from "./context/DefaultContext";
+
 import HomePage from "./pages/homepage/HomePage";
 import DefaultLayout from "./layout/DefaultLayout";
 import DetailPage from "./pages/lovecapsulepage/DetailPage";
@@ -13,18 +15,20 @@ function App() {
 	const ContactPage = () => <h1>Contatti</h1>;
 
 	return (
-		<BrowserRouter>
-			<Routes>
-				<Route element={<DefaultLayout />}>
-					<Route index element={<HomePage />} />
-					<Route path="/prodotti" element={<ProductPage />} />
-					<Route path="/chi-siamo" element={<WhoWeArePage />} />
-					<Route path="/contatti" element={<ContactPage />} />
-					<Route path="/dettagli" element={<DetailPage />} />
-					<Route path="/dettagli-premium" element={<PremiumPage />} />
-				</Route>
-			</Routes>
-		</BrowserRouter>
+		<DefaultProvider>
+			<BrowserRouter>
+				<Routes>
+					<Route element={<DefaultLayout />}>
+						<Route index element={<HomePage />} />
+						<Route path="/prodotti" element={<ProductPage />} />
+						<Route path="/chi-siamo" element={<WhoWeArePage />} />
+						<Route path="/contatti" element={<ContactPage />} />
+						<Route path="/dettagli" element={<DetailPage />} />
+						<Route path="/dettagli-premium" element={<PremiumPage />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</DefaultProvider>
 	);
 }
 
