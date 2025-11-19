@@ -190,7 +190,7 @@ export default function DetailPage({ onSelectPage }) {
 						</div>
 						<div className="amore-feature">
 							<strong>Consegna</strong>
-							<span>3–5 giorni</span>
+							<span>1-5 anni</span>
 						</div>
 					</div>
 				</div>
