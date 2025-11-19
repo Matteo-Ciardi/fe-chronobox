@@ -6,6 +6,7 @@ export default function CapsuleCard(props) {
 
 	const { product } = props;
 
+	if(!product) return null;
 	return (
 		<>
 			< div className="container-cards">
