@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/homepage/HomePage";
-import DefaultLayout from "./layout/DefaultLayout";
+import ProductPage from "./pages/productpage/ProductPage";
 import DetailPage from "./pages/detailpage/DetailPage";
+import DefaultLayout from "./layout/DefaultLayout";
 
 import "./App.css";
 
 function App() {
-	const ProductPage = () => <h1>Prodotti</h1>;
 	const WhoWeArePage = () => <h1>Chi Siamo</h1>;
 	const ContactPage = () => <h1>Contatti</h1>;
 

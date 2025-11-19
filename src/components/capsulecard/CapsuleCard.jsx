@@ -42,7 +42,7 @@ export default function CapsuleCard() {
 					<div className="container-capsule-body">
 						<h5 className="capsule-title">Capsula "Il mio anno"</h5>
 						<p className="capsule-description">
-							Conserva i momenti speciali del tuo anno 
+							Conserva i momenti speciali del tuo anno
 						</p>
 						<div className="capsule-footer">
 							<span className="capsule-price">&euro;30,00</span>
