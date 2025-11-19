@@ -6,7 +6,7 @@ const ProductPage = () => {
     return (
         <>
             <div className='product-wrapper'>
-                <section className='filters'>
+            <section className='filters'>
                     <input type='text' name='searchbar' placeholder='Cerca..'></input>
                     <select name='order'>
                         <option value="">Scegli</option>
