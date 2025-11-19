@@ -1,13 +1,27 @@
+import { useState } from 'react'
+
 import ProductList from '../../components/productlist/ProductList'
 
 import './ProductPage.css'
 
 const ProductPage = () => {
+
+    const [searchTerm, setSearchTerm] = useState('')
+
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value)
+    }
+
     return (
         <>
             <div className='product-wrapper'>
-            <section className='filters'>
-                    <input type='text' name='searchbar' placeholder='Cerca..'></input>
+                <section className='filters'>
+                    <input type='text'
+                        name='searchbar'
+                        placeholder='Cerca..'
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                    />
                     <select name='order'>
                         <option value="">Scegli</option>
                         <option value="Prezzo Alto-Basso">Prezzo Alto-Basso</option>
@@ -18,8 +32,8 @@ const ProductPage = () => {
                         <option value="Meno Recenti-Recenti">Meno Recenti-Recenti</option>
                     </select>
                 </section>
-                <ProductList />
-            </div>
+                <ProductList searchTerm={searchTerm} />
+            </div >
         </>
     )
 }
