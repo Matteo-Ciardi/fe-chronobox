@@ -1,4 +1,4 @@
-import CapsuleCard from "../capsulecard/CapsuleCard";
+import CapsuleList from "../capsulecard/CapsuleList";
 
 import "./Popular.css";
 
@@ -14,7 +14,7 @@ const Popular = () => {
 				</div>
 
 				<div>
-					<CapsuleCard />
+					<CapsuleList />
 				</div>
 			</section>
 		</>
