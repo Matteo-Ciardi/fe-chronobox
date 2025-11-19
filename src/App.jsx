@@ -2,8 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import HomePage from "./pages/homepage/HomePage";
 import DefaultLayout from "./layout/DefaultLayout";
-import DetailPage from "./pages/lovecapsulepage/DetailPage";
-import PremiumPage from "./pages/detailpage/PremiumPage";
+import DetailPage from "./pages/detailpage/DetailPage";
 
 import "./App.css";
 
@@ -21,7 +20,6 @@ function App() {
 					<Route path="/chi-siamo" element={<WhoWeArePage />} />
 					<Route path="/contatti" element={<ContactPage />} />
 					<Route path="/dettagli" element={<DetailPage />} />
-					<Route path="/dettagli-premium" element={<PremiumPage />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
