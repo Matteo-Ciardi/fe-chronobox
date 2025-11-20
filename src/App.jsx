@@ -5,6 +5,7 @@ import { DefaultProvider } from "./context/DefaultContext";
 import HomePage from "./pages/homepage/HomePage";
 import ProductPage from "./pages/productpage/ProductPage";
 import DetailPage from "./pages/detailpage/DetailPage";
+import WishlistPage from "./pages/wishlistpage/WishlistPage";
 import DefaultLayout from "./layout/DefaultLayout";
 
 import "./App.css";
@@ -23,6 +24,7 @@ function App() {
 						<Route path="/chi-siamo" element={<WhoWeArePage />} />
 						<Route path="/contatti" element={<ContactPage />} />
 						<Route path="/dettagli" element={<DetailPage />} />
+						<Route path="/wishlist" element={<WishlistPage />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

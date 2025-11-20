@@ -23,6 +23,12 @@ const Navbar = () => {
 								Prodotti
 							</NavLink>
 						</li>
+
+						<li>
+							<NavLink to="/wishlist" className="nav-link">
+								Wishlist
+							</NavLink>
+						</li>
 					</ul>
 				</div>
 			</div>

@@ -54,14 +54,30 @@
 	color: #2c3e50;
 }
 
+.capsule-buttons {
+	display: flex;
+	gap: 8px;
+}
+
 .capsule-button {
 	color: white;
 	background-color: var(--mauve-bark);
 	padding: 8px 14px;
 	border-radius: 6px;
 	text-decoration: none;
+	border: none;
+	cursor: pointer;
+	font-size: 14px;
 }
 
 .capsule-button:hover {
 	background: var(--dusty-taupe);
+}
+
+.wishlist-btn {
+	background-color: #ff4444;
+}
+
+.wishlist-btn:hover {
+	background-color: #cc3333;
 }
