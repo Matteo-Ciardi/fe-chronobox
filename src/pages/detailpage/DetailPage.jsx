@@ -5,11 +5,11 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import "./DetailPage.css";
 
 // Import test slug
-// import { useParams } from "react-router-dom";
-// import { useEffect } from "react";
-// import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
 
-export default function DetailPage({ onSelectPage }) {
+export default function DetailPage() {
 	const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
 	const location = useLocation();
@@ -24,51 +24,37 @@ export default function DetailPage({ onSelectPage }) {
 	}
 
 	// ------------------------------------------ test slug -------------------------------------------------------
-
-	// const { slug } = useParams(); // Recupero slug dall' URL della rotta
-	// const [product, setProduct] = useState(null); // Hook di stato per salvare i dati dinamici della capsula dal backend
-	// const [loading, setLoading] = useState(true); // Hook di stato per salvare lo stato della risposta API
+	const { slug } = useParams(); // Recupero slug dall' URL della rotta
+	const [product, setProduct] = useState(null); // Hook di stato per salvare i dati dinamici della capsula dal backend
+	const [loading, setLoading] = useState(true); // Hook di stato per salvare lo stato della risposta API
 
 	// Funzione che recupera la capsula cliccata dal backend tramite slug
-	// function fetchProduct() {
-	// 	setLoading(true); // inizio caricamento per aspettare risp API
-	// 	axios.get(`http://localhost:3000/api/capsule/${slug}`)
-	// 		.then((res) => {
-	// 			console.log("DETAIL RESPONSE:", res.data);
-	// 			setProduct(res.data);
-	// 		})
-	// 		.catch((error) => {
-	// 			console.error("DETAIL ERROR:", error);
-	// 		})
-	// 		.finally(() => {
-	// 			setLoading(false); // fine caricamento (sia successo che errore)
-	// 		});
-	// }
+	function fetchProduct() {
+		setLoading(true); // inizio caricamento per aspettare risp API
+		axios.get(`http://localhost:3000/api/capsules/${slug}`)
+			.then((res) => {
+				console.log("DETAIL RESPONSE:", res.data);
+				setProduct(res.data);
+			})
+			.catch((error) => {
+				console.error("DETAIL ERROR:", error);
+			})
+			.finally(() => {
+				setLoading(false); // fine caricamento (sia successo che errore)
+			});
+	}
 
 	// Hook di effetto che chiama la funzione fetchProduct ogni volta che cambia lo slug
-	// useEffect(() => {
-	// 	fetchProduct();
-	// }, [slug]);
+	useEffect(() => {
+		fetchProduct();
+	}, [slug]);
 
 	// Evito crash se i dati non sono ancora caricati
 	// if (loading || !product) return null;
 
 	// ------------------------------------------------------------------------------------------------------------
 
-
-	// VARIANTI COLORE DELLA CAPSULA AMORE
-	const variants = [
-		{
-			id: "verde",
-			name: "Capsula Futuro Me",
-			price: "€179,00",
-			image: "src/assets/img/futuro_me.png",
-			accentColor: "#8FB396",
-			label: "Verde",
-		},
-	];
-
-	const [selectedVariant, setSelectedVariant] = useState(variants[0]);
+if (loading || !product) return <p>Caricamento...</p>;
 
 	function handleMouseMove(e) {
 		const rect = e.currentTarget.getBoundingClientRect();
@@ -96,34 +82,6 @@ export default function DetailPage({ onSelectPage }) {
 		addToCart(product);
 		navigate("/carrello");
 	};
-
-	// PRODOTTI CORRELATI
-	const relatedProducts = [
-		{
-			name: "Capsula Futuro Me Blu",
-			price: "€179,00",
-			image: "src/assets/img/futuro_me_blu.jpg",
-			target: "premium",
-		},
-		{
-			name: "Capsula Futuro Me Blu Bronzo",
-			price: "€179,00",
-			image: "src/assets/img/futuro_me_bronzo.jpg",
-			target: null,
-		},
-		{
-			name: "Capsula Futuro Me Blu Oro",
-			price: "€179,00",
-			image: "src/assets/img/futuro_me_oro.jpg",
-			target: null,
-		},
-		{
-			name: "Capsula Futuro Me Blu Verde",
-			price: "€179,00",
-			image: "src/assets/img/futuro_me_verde.jpg",
-			target: null,
-		}
-	];
 
 	// COSA PUOI CONSERVARE
 	const itemsToStore = [
@@ -187,19 +145,15 @@ export default function DetailPage({ onSelectPage }) {
 					<div className="amore-feature-box">
 						<div className="amore-feature">
 							<strong>Dimensioni</strong>
-							<span>18cm × 7cm ø</span>
+							<span>{product.dimension}</span>
 						</div>
 						<div className="amore-feature">
 							<strong>Materiale</strong>
-							<span>Acciaio inox 316</span>
+							<span>{product.material}</span>
 						</div>
 						<div className="amore-feature">
 							<strong>Peso</strong>
-							<span>720g</span>
-						</div>
-						<div className="amore-feature">
-							<strong>Consegna</strong>
-							<span>1-5 anni</span>
+							<span>{product.weight} g</span>
 						</div>
 					</div>
 				</div>
@@ -210,31 +164,27 @@ export default function DetailPage({ onSelectPage }) {
 			<div className="amore-specs">
 				<div className="amore-spec-row">
 					<span className="amore-spec-label">Peso</span>
-					<span className="amore-spec-value">720 g</span>
+					<span className="amore-spec-value">{product.weight} g</span>
 				</div>
 				<div className="amore-spec-row">
 					<span className="amore-spec-label">Capacità</span>
-					<span className="amore-spec-value">7 litri</span>
+					<span className="amore-spec-value">{product.capacity} litri</span>
 				</div>
 				<div className="amore-spec-row">
 					<span className="amore-spec-label">
 						Materiale principale
 					</span>
 					<span className="amore-spec-value">
-						Acciaio inossidabile 316
+						{product.material}
 					</span>
 				</div>
 				<div className="amore-spec-row">
 					<span className="amore-spec-label">Resistenza</span>
-					<span className="amore-spec-value">IP68</span>
+					<span className="amore-spec-value">{product.resistance}</span>
 				</div>
 				<div className="amore-spec-row">
 					<span className="amore-spec-label">Garanzia</span>
-					<span className="amore-spec-value">Vita</span>
-				</div>
-				<div className="amore-spec-row">
-					<span className="amore-spec-label">Contenuto incluso</span>
-					<span className="amore-spec-value">Busta protettiva</span>
+					<span className="amore-spec-value">{product.warrenty} anno</span>
 				</div>
 			</div>
 
@@ -257,7 +207,7 @@ export default function DetailPage({ onSelectPage }) {
 				Potrebbe interessarti anche
 			</h2>
 			<div className="amore-related-row">
-				{relatedProducts.map((product) => (
+				{/* {relatedProducts.map((product) => (
 					<div
 						className="amore-related-card"
 						key={product.name}
@@ -265,13 +215,11 @@ export default function DetailPage({ onSelectPage }) {
 						<img src={product.image} alt={product.name} />
 						<h3>{product.name}</h3>
 						<p className="amore-related-price">{product.price}</p>
-						<button
-							className="btn-related-price"
-						>
+						<button className="btn-related-price">
 							Vai alla pagina
 						</button>
 					</div>
-				))}
+				))} */}
 			</div>
 		</div>
 	);

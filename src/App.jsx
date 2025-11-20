@@ -10,7 +10,8 @@ import DefaultLayout from "./layout/DefaultLayout";
 
 import "./App.css";
 
-function App() {;
+function App() {
+
 	return (
 		<DefaultProvider>
 			<BrowserRouter>
@@ -18,11 +19,7 @@ function App() {;
 					<Route element={<DefaultLayout />}>
 						<Route index element={<HomePage />} />
 						<Route path="/prodotti" element={<ProductPage />} />
-						<Route path="/carrello" element={<CartPage />} />
-						<Route path="/dettagli" element={<DetailPage />} />
-
-						{/* Test slug */}
-						{/* <Route path="/dettagli/:slug" element={<DetailPage />} /> */}
+						<Route path="/dettagli/:slug" element={<DetailPage />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>
