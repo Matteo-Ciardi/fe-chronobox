@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { AiOutlineOrderedList } from "react-icons/ai";
+
+
 
 import ProductList from '../../components/productlist/ProductList'
 
@@ -28,7 +31,8 @@ const ProductPage = () => {
                         onChange={handleSearchChange}
                     />
                     <select name='order' value={order} onChange={handleOrderChange}>
-                        <option value="">Scegli</option>
+                        <option value="">Ordina in base a..
+                        </option>
                         <option value="price-desc">Prezzo Alto-Basso</option>
                         <option value="price-asc">Prezzo Basso-Alto</option>
                         <option value="name-asc">Nome A-Z</option>
@@ -37,7 +41,7 @@ const ProductPage = () => {
                         <option value="recent-asc">Meno Recenti-Recenti</option>
                     </select>
                 </section>
-                <ProductList searchTerm={searchTerm} order= {order} />
+                <ProductList searchTerm={searchTerm} order={order} />
             </div >
         </>
     )
