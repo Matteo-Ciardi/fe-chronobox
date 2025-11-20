@@ -25,7 +25,10 @@ export default function CapsuleCard(props) {
 
 					<div className="capsule-footer">
 						<span className="capsule-price">&euro;{product.price}</span>
-						<Link to="/dettagli" className="capsule-button">
+						<Link to="/dettagli"
+							state={{ product }}
+							className="capsule-button"
+						>
 							Dettagli
 						</Link>
 
