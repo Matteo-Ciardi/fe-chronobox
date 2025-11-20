@@ -1,11 +1,28 @@
 import { useState } from 'react'
 import { AiOutlineOrderedList } from "react-icons/ai";
 
-
+import Select from 'react-select';
 
 import ProductList from '../../components/productlist/ProductList'
 
 import './ProductPage.css'
+
+const orderOptions = [
+    {
+        value: '',
+        label: (
+            <span>
+                <AiOutlineOrderedList />
+            </span>
+        ),
+    },
+    { value: 'price-desc', label: 'Prezzo Alto-Basso' },
+    { value: 'price-asc', label: 'Prezzo Basso-Alto' },
+    { value: 'name-asc', label: 'Nome A-Z' },
+    { value: 'name-desc', label: 'Nome Z-A' },
+    { value: 'recent-desc', label: 'Recenti-Meno Recenti' },
+    { value: 'recent-asc', label: 'Meno Recenti-Recenti' },
+]
 
 const ProductPage = () => {
 
@@ -16,30 +33,32 @@ const ProductPage = () => {
         setSearchTerm(e.target.value)
     }
 
-    const handleOrderChange = (e) => {
-        setOrder(e.target.value)
+    const handleOrderChange = (selectedOption) => {
+        setOrder(selectedOption?.value || '')
     }
+
+    const selectedOrderOption =
+        orderOptions.find((opt) => opt.value === order) || orderOptions[0]
 
     return (
         <>
             <div className='product-wrapper'>
                 <section className='filters'>
-                    <input type='text'
+                    <input
+                        type='text'
                         name='searchbar'
                         placeholder='Cerca..'
                         value={searchTerm}
                         onChange={handleSearchChange}
                     />
-                    <select name='order' value={order} onChange={handleOrderChange}>
-                        <option value="">Ordina in base a..
-                        </option>
-                        <option value="price-desc">Prezzo Alto-Basso</option>
-                        <option value="price-asc">Prezzo Basso-Alto</option>
-                        <option value="name-asc">Nome A-Z</option>
-                        <option value="name-desc">Nome Z-A</option>
-                        <option value="recent-desc">Recenti-Meno Recenti</option>
-                        <option value="recent-asc">Meno Recenti-Recenti</option>
-                    </select>
+                    <Select
+                        className='order-select'
+                        classNamePrefix='order-select'
+                        value={selectedOrderOption}
+                        onChange={handleOrderChange}
+                        options={orderOptions}
+                        isSearchable={false}
+                    />
                 </section>
                 <ProductList searchTerm={searchTerm} order={order} />
             </div >
