@@ -1,8 +1,13 @@
 import { useState } from "react";
 import { useProducts } from "../../context/DefaultContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { /*useLocation ,*/ useNavigate } from "react-router-dom";
 
 import "./DetailPage.css";
+
+import lettereImg from "../../assets/img/lettere.jpeg";
+import fotoImg from "../../assets/img/foto.jpg";
+import ricordiImg from "../../assets/img/oggetti.jpg";
+import documentiImg from "../../assets/img/documenti.jpg";
 
 // Import test slug
 import { useParams } from "react-router-dom";
@@ -12,16 +17,18 @@ import axios from "axios";
 export default function DetailPage() {
 	const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
-	const location = useLocation();
+	const [relatedProducts, setRelatedProducts] = useState([]);
+	const [loading, setLoading] = useState(true);// Hook di stato per salvare lo stato della risposta API
+
+	// const location = useLocation();
 	const navigate = useNavigate();
 	const { addToCart } = useProducts();
 
-	const products = location.state?.product;
+	// const products = location.state?.product;
 
 	// ------------------------------------------ test slug -------------------------------------------------------
 	const { slug } = useParams(); // Recupero slug dall' URL della rotta
 	const [product, setProduct] = useState(null); // Hook di stato per salvare i dati dinamici della capsula dal backend
-	const [loading, setLoading] = useState(true); // Hook di stato per salvare lo stato della risposta API
 
 	// Funzione che recupera la capsula cliccata dal backend tramite slug
 	function fetchProduct() {
@@ -40,11 +47,31 @@ export default function DetailPage() {
 			});
 	}
 
+	// Funzione che recupera i prodotti correlati dal backend tramite slug
+	function fetchRelatedProducts() {
+		axios.get(`http://localhost:3000/api/capsules/${slug}/related`)
+			.then((res) => {
+				console.log("RELATED:", res.data);
+				setRelatedProducts(res.data);
+			})
+			.catch((error) => {
+				console.error("RELATED ERROR:", error);
+			});
+	}
+
 	// Hook di effetto che chiama la funzione fetchProduct ogni volta che cambia lo slug
 	useEffect(() => {
 		fetchProduct();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [slug]);
 
+	// Hook di effetto che chiama la funzione fetchRelatedProducts ogni volta che cambia il prodotto
+	useEffect(() => {
+		if (product) {
+			fetchRelatedProducts();
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [product]);
 	// Evito crash se i dati non sono ancora caricati
 	// if (loading || !product) return null;
 
@@ -84,22 +111,22 @@ export default function DetailPage() {
 		{
 			title: "Lettere",
 			caption: "Messaggi che durano per sempre",
-			image: "src/assets/img/lettere.jpeg",
+			image: lettereImg,
 		},
 		{
 			title: "Foto",
 			caption: "Momenti condivisi",
-			image: "src/assets/img/foto.jpg",
+			image: fotoImg,
 		},
 		{
 			title: "Ricordi",
 			caption: "Biglietti, oggetti simbolici",
-			image: "src/assets/img/oggetti.jpg",
+			image: ricordiImg,
 		},
 		{
 			title: "Promesse",
 			caption: "Documenti e dediche speciali",
-			image: "src/assets/img/documenti.jpg",
+			image: documentiImg,
 		},
 	];
 
@@ -202,19 +229,24 @@ export default function DetailPage() {
 				Potrebbe interessarti anche
 			</h2>
 			<div className="amore-related-row">
-				{/* {relatedProducts.map((product) => (
+				{relatedProducts.length === 0 && (
+					<p>Nessun prodotto correlato disponibile.</p>
+				)}
+
+				{relatedProducts.map((item) => (
 					<div
 						className="amore-related-card"
-						key={product.name}
+						key={item.slug}
+						onClick={() => navigate(`/dettagli/${item.slug}`)}
 					>
-						<img src={product.image} alt={product.name} />
-						<h3>{product.name}</h3>
-						<p className="amore-related-price">{product.price}</p>
-						<button className="btn-related-price">
-							Vai alla pagina
-						</button>
+						<img src={item.img} alt={item.name} />
+						<h3>{item.name}</h3>
+						<p className="amore-related-price">
+							{(item.discounted_price ?? item.price) + " €"}
+						</p>
+						<button className="btn-related-price">Vai alla pagina</button>
 					</div>
-				))} */}
+				))}
 			</div>
 		</div>
 	);
