@@ -12,6 +12,9 @@ import axios from "axios";
 export default function DetailPage() {
 	const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
+	const [relatedProducts, setRelatedProducts] = useState([]);
+	const [loading, setLoading] = useState(true);// Hook di stato per salvare lo stato della risposta API
+
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { addToCart } = useProducts();
@@ -21,7 +24,6 @@ export default function DetailPage() {
 	// ------------------------------------------ test slug -------------------------------------------------------
 	const { slug } = useParams(); // Recupero slug dall' URL della rotta
 	const [product, setProduct] = useState(null); // Hook di stato per salvare i dati dinamici della capsula dal backend
-	const [loading, setLoading] = useState(true); // Hook di stato per salvare lo stato della risposta API
 
 	// Funzione che recupera la capsula cliccata dal backend tramite slug
 	function fetchProduct() {
@@ -40,11 +42,29 @@ export default function DetailPage() {
 			});
 	}
 
+	// Funzione che recupera i prodotti correlati dal backend tramite slug
+	function fetchRelatedProducts() {
+		axios.get(`http://localhost:3000/api/capsules/${slug}/related`)
+			.then((res) => {
+				console.log("RELATED:", res.data);
+				setRelatedProducts(res.data);
+			})
+			.catch((error) => {
+				console.error("RELATED ERROR:", error);
+			});
+	}
+
 	// Hook di effetto che chiama la funzione fetchProduct ogni volta che cambia lo slug
 	useEffect(() => {
 		fetchProduct();
 	}, [slug]);
 
+	// Hook di effetto che chiama la funzione fetchRelatedProducts ogni volta che cambia il prodotto
+	useEffect(() => {
+		if (product) {
+			fetchRelatedProducts();
+		}
+	}, [product]);
 	// Evito crash se i dati non sono ancora caricati
 	// if (loading || !product) return null;
 
@@ -215,6 +235,25 @@ export default function DetailPage() {
 						</button>
 					</div>
 				))} */}
+
+				{relatedProducts.length === 0 && (
+					<p>Nessun prodotto correlato disponibile.</p>
+				)}
+
+				{relatedProducts.map((item) => (
+					<div
+						className="amore-related-card"
+						key={item.slug}
+						onClick={() => navigate(`/dettagli/${item.slug}`)}
+					>
+						<img src={item.img} alt={item.name} />
+						<h3>{item.name}</h3>
+						<p className="amore-related-price">
+							{(item.discounted_price ?? item.price) + " €"}
+						</p>
+						<button className="btn-related-price">Vai alla pagina</button>
+					</div>
+				))}
 			</div>
 		</div>
 	);
