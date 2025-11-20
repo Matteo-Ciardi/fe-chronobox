@@ -18,7 +18,7 @@ export default function DetailPage() {
 	const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
 	const [relatedProducts, setRelatedProducts] = useState([]);
-	const [loading, setLoading] = useState(true);// Hook di stato per salvare lo stato della risposta API
+	const [loading, setLoading] = useState(true); // Hook di stato per salvare lo stato della risposta API
 
 	// const location = useLocation();
 	const navigate = useNavigate();
@@ -49,7 +49,8 @@ export default function DetailPage() {
 
 	// Funzione che recupera i prodotti correlati dal backend tramite slug
 	function fetchRelatedProducts() {
-		axios.get(`http://localhost:3000/api/capsules/${slug}/related`)
+		axios
+			.get(`http://localhost:3000/api/capsules/${slug}/related`)
 			.then((res) => {
 				console.log("RELATED:", res.data);
 				setRelatedProducts(res.data);
@@ -62,7 +63,7 @@ export default function DetailPage() {
 	// Hook di effetto che chiama la funzione fetchProduct ogni volta che cambia lo slug
 	useEffect(() => {
 		fetchProduct();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [slug]);
 
 	// Hook di effetto che chiama la funzione fetchRelatedProducts ogni volta che cambia il prodotto
@@ -70,7 +71,7 @@ export default function DetailPage() {
 		if (product) {
 			fetchRelatedProducts();
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [product]);
 	// Evito crash se i dati non sono ancora caricati
 	// if (loading || !product) return null;
@@ -244,7 +245,9 @@ export default function DetailPage() {
 						<p className="amore-related-price">
 							{(item.discounted_price ?? item.price) + " €"}
 						</p>
-						<button className="btn-related-price">Vai alla pagina</button>
+						<button className="btn-related-price">
+							Vai alla pagina
+						</button>
 					</div>
 				))}
 			</div>
