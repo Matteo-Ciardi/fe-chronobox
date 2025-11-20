@@ -6,6 +6,7 @@ import CartPage from "./pages/cartpage/Cart";
 import HomePage from "./pages/homepage/HomePage";
 import DetailPage from "./pages/detailpage/DetailPage";
 import ProductPage from "./pages/productpage/ProductPage";
+import CheckoutPage from "./pages/checkoutpage/CheckutPage";
 import DefaultLayout from "./layout/DefaultLayout";
 
 import "./App.css";
@@ -23,6 +24,7 @@ function App() {
 							element={<DetailPage />}
 						/>
 						<Route path="/carrello" element={<CartPage />} />
+						<Route path="/checkout" element={<CheckoutPage />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

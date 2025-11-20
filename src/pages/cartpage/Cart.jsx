@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useProducts } from "../../context/DefaultContext";
 import "./Cart.css";
 
@@ -105,6 +106,10 @@ const CartPage = () => {
 							<span>Totale:</span>
 							<strong>{cartTotal.toFixed(2)} €</strong>
 						</div>
+
+						<Link to="/checkout" className="cart-checkout-btn">
+							Procedi al checkout
+						</Link>
 					</>
 				)}
 			</main>
