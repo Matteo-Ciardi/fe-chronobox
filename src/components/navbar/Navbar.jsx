@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { IoMdCart } from "react-icons/io";
 
 import "./Navbar.css";
 
@@ -21,6 +22,12 @@ const Navbar = () => {
 						<li>
 							<NavLink to="/prodotti" className="nav-link">
 								Prodotti
+							</NavLink>
+						</li>
+
+						<li>
+							<NavLink to="/carrello" className="nav-link">
+								<IoMdCart />
 							</NavLink>
 						</li>
 					</ul>

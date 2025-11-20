@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useProducts } from "../../context/DefaultContext"
+import { useLocation, useNavigate } from 'react-router-dom'
+
 import "./DetailPage.css";
 
 // Import test slug
@@ -9,8 +12,19 @@ import "./DetailPage.css";
 export default function DetailPage({ onSelectPage }) {
 	const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
+	const location = useLocation();
+	const navigate = useNavigate();
+	const { addToCart } = useProducts();
+
+	const product = location.state?.product;
+
+	// Se arrivi a /dettagli senza aver passato state (es. refresh diretto)
+	if (!product) {
+		return <p>Nessun prodotto selezionato.</p>;
+	}
+
 	// ------------------------------------------ test slug -------------------------------------------------------
-	
+
 	// const { slug } = useParams(); // Recupero slug dall' URL della rotta
 	// const [product, setProduct] = useState(null); // Hook di stato per salvare i dati dinamici della capsula dal backend
 	// const [loading, setLoading] = useState(true); // Hook di stato per salvare lo stato della risposta API
@@ -52,22 +66,6 @@ export default function DetailPage({ onSelectPage }) {
 			accentColor: "#8FB396",
 			label: "Verde",
 		},
-		// {
-		// 	id: "rossa",
-		// 	name: "Capsula Amore Rossa",
-		// 	price: "€189,00",
-		// 	image: "/img/capsula-amore-rossa.png",
-		// 	accentColor: "#B62218",
-		// 	label: "Rossa",
-		// },
-		// {
-		// 	id: "lilla",
-		// 	name: "Capsula Amore Lilla",
-		// 	price: "€189,00",
-		// 	image: "/img/capsula-amore-lilla.png",
-		// 	accentColor: "#A688AC",
-		// 	label: "Lilla",
-		// },
 	];
 
 	const [selectedVariant, setSelectedVariant] = useState(variants[0]);
@@ -92,6 +90,11 @@ export default function DetailPage({ onSelectPage }) {
 
 	const imgStyle = {
 		transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
+	};
+
+	const handleAddToCart = () => {
+		addToCart(product);
+		navigate("/carrello");
 	};
 
 	// PRODOTTI CORRELATI
@@ -155,60 +158,28 @@ export default function DetailPage({ onSelectPage }) {
 					onMouseLeave={handleMouseLeave}
 				>
 					<img
-						src={selectedVariant.image}
-						alt={selectedVariant.name}
+						src={product.img}
+						alt={product.name}
 						className="amore-image"
 						style={imgStyle}
 					/>
 				</div>
 
 				<div className="amore-info">
-					<h1>
-						{/* {selectedVariant.name} */}
-						Capsula Futuro Me
-					</h1>
+					<h1>{product.name}</h1>
 					<p className="amore-price">
-						{/* {selectedVariant.price} */}
-						€179,00
+						{(product.discounted_price ?? product.price) + " €"}
 					</p>
 
 					<h2 className="amore-section-title">Descrizione</h2>
 
-					<div className="amore-variants">
-						{/* {variants.map((variant) => (
-								<button
-									key={variant.id}
-									className={`amore-variant-btn ${
-										selectedVariant.id === variant.id
-											? "active"
-											: ""
-									}`}
-									onClick={() => setSelectedVariant(variant)}
-									style={{
-										borderColor: variant.accentColor,
-										backgroundColor:
-											selectedVariant.id === variant.id
-												? variant.accentColor
-												: "#fff",
-										color:
-											selectedVariant.id === variant.id
-												? "#fff"
-												: "#333",
-									}}
-								>
-									{variant.label}
-								</button>
-							))} */}
-					</div>
-
 					<p className="amore-description">
-						Tema centrato su lettere al futuro sé e carte con domande a cui rispondere oggi e rileggere domani. Puoi includere domande tipo “Sono felice?”,
-						“Cosa mi preoccupa adesso?”,
-						“Cosa spero di aver imparato quando aprirò questa capsula?”
+						{product.description}
 					</p>
 
 					<button
 						className="amore-btn"
+						onClick={handleAddToCart}
 					>
 						Aggiungi al carrello
 					</button>
@@ -233,19 +204,6 @@ export default function DetailPage({ onSelectPage }) {
 					</div>
 				</div>
 			</div>
-
-			{/* <h2 className="amore-section-title">Descrizione</h2> */}
-			{/* <div className="amore-long-description">
-				<p>
-					Ogni capsula è realizzata a mano con materiali di altissima
-					qualità e sottoposta a rigorosi controlli di qualità.
-				</p>
-				<p>
-					Il design minimalista si integra perfettamente in qualsiasi
-					ambiente, mentre la costruzione robusta garantisce
-					protezione totale dal tempo e dagli elementi.
-				</p>
-			</div> */}
 
 			{/* SPECIFICHE TECNICHE */}
 			<h2 className="amore-section-title">Specifiche tecniche</h2>
@@ -303,23 +261,12 @@ export default function DetailPage({ onSelectPage }) {
 					<div
 						className="amore-related-card"
 						key={product.name}
-						// onClick={() => {
-						// 	if (product.target && onSelectPage) {
-						// 		onSelectPage(product.target);
-						// 	} else {
-						// 		alert("Pagina non ancora disponibile");
-						// 	}
-						// }}
-						style={{
-							cursor: product.target ? "pointer" : "default",
-						}}
 					>
 						<img src={product.image} alt={product.name} />
 						<h3>{product.name}</h3>
 						<p className="amore-related-price">{product.price}</p>
 						<button
 							className="btn-related-price"
-							// style={{ backgroundColor: selectedVariant.accentColor }}
 						>
 							Vai alla pagina
 						</button>
