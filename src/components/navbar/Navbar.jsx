@@ -23,18 +23,6 @@ const Navbar = () => {
 								Prodotti
 							</NavLink>
 						</li>
-
-						<li>
-							<NavLink to="/chi-siamo" className="nav-link">
-								Chi Siamo
-							</NavLink>
-						</li>
-
-						<li>
-							<NavLink to="/contatti" className="nav-link">
-								Contatti
-							</NavLink>
-						</li>
 					</ul>
 				</div>
 			</div>
