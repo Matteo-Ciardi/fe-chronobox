@@ -88,7 +88,7 @@ const CheckoutPage = () => {
             };
 
             const res = await axios.post(
-                "http://localhost:3000/api/orders",
+                "http://localhost:3000/api/checkout/orders",
                 orderPayload
             );
 
