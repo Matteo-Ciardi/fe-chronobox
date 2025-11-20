@@ -10,8 +10,6 @@ import DefaultLayout from "./layout/DefaultLayout";
 import "./App.css";
 
 function App() {
-	const WhoWeArePage = () => <h1>Chi Siamo</h1>;
-	const ContactPage = () => <h1>Contatti</h1>;
 
 	return (
 		<DefaultProvider>
@@ -20,12 +18,7 @@ function App() {
 					<Route element={<DefaultLayout />}>
 						<Route index element={<HomePage />} />
 						<Route path="/prodotti" element={<ProductPage />} />
-						<Route path="/chi-siamo" element={<WhoWeArePage />} />
-						<Route path="/contatti" element={<ContactPage />} />
-						<Route path="/dettagli" element={<DetailPage />} />
-
-						{/* Test slug */}
-						{/* <Route path="/dettagli/:slug" element={<DetailPage />} /> */}
+						<Route path="/dettagli/:slug" element={<DetailPage />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

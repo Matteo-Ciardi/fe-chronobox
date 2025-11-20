@@ -10,7 +10,7 @@ const DefaultProvider = ( { children } ) =>{
     function fetchProducts() {
     axios.get("http://localhost:3000/api/capsules")
         .then((res) => {
-            console.log("RESPONSE:", res.data);
+            // console.log("RESPONSE:", res.data);
             setProducts(res.data);
         })
         .catch(error => console.error("FETCH ERROR:", error));
