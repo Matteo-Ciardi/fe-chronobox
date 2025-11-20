@@ -30,8 +30,22 @@ const CheckoutCartSummary = () => {
                 ))}
             </ul>
 
+            <div className="summary-row">
+                <span>Subtotale:</span>
+                <span>{cartTotal.toFixed(2)} €</span>
+            </div>
+
+            <div className="summary-row">
+                <span>Costi di spedizione:</span>
+                <span>
+                    {shippingCost > 0
+                        ? `+ ${shippingCost.toFixed(2)} €`
+                        : "0 €"}
+                </span>
+            </div>
+
             <div className="summary-total">
-                <span>Totale:</span>
+                <span>Totale ordine:</span>
                 <strong>{finalTotal.toFixed(2)} €</strong>
             </div>
         </aside>
