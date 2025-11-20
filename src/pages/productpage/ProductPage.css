@@ -1,57 +1,57 @@
 .product-wrapper {
-    width: 70%;
-    margin: 0 auto;
+	width: 70%;
+	margin: 0 auto;
 }
 
 .filters {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
 }
 
 /* contenitore generale */
 .order-select {
-    width: 220px;
-    font-size: 0.9rem;
+	width: 220px;
+	font-size: 0.9rem;
 }
 
 /* box della select chiusa */
 .order-select__control {
-    background-color: #1a1a1f;
-    border-radius: 999px;
-    border: 1px solid #444;
-    min-height: 36px;
-    cursor: pointer;
+	background-color: #1a1a1f;
+	border-radius: 999px;
+	border: 1px solid #444;
+	min-height: 36px;
+	cursor: pointer;
 }
 
 /* testo/valore selezionato */
 .order-select__single-value {
-    color: #000000;
+	color: #000000;
 }
 
 /* menu a discesa */
 .order-select__menu {
-    background-color: #1a1a1f;
-    color: #000000;
-    border-radius: 12px;
-    overflow: hidden;
+	background-color: #1a1a1f;
+	color: #000000;
+	border-radius: 12px;
+	overflow: hidden;
 }
 
 /* singola option */
 .order-select__option {
-    background-color: transparent;
-    color: #000000;
-    padding: 8px 12px;
+	background-color: transparent;
+	color: #000000;
+	padding: 8px 12px;
 }
 
 /* option hover/focus */
 .order-select__option--is-focused {
-    background-color: #2a2a33;
-    color: #000000;
+	background-color: #2a2a33;
+	color: #000000;
 }
 
 /* option selezionata */
 .order-select__option--is-selected {
-    background-color: #ff0000;
-    color: #000000;
+	background-color: #ff0000;
+	color: #000000;
 }

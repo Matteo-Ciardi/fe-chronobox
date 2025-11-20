@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useProducts } from "../../context/DefaultContext"
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useProducts } from "../../context/DefaultContext";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import "./DetailPage.css";
 
@@ -16,12 +16,7 @@ export default function DetailPage() {
 	const navigate = useNavigate();
 	const { addToCart } = useProducts();
 
-	const product = location.state?.product;
-
-	// Se arrivi a /dettagli senza aver passato state (es. refresh diretto)
-	if (!product) {
-		return <p>Nessun prodotto selezionato.</p>;
-	}
+	const products = location.state?.product;
 
 	// ------------------------------------------ test slug -------------------------------------------------------
 	const { slug } = useParams(); // Recupero slug dall' URL della rotta
@@ -31,7 +26,8 @@ export default function DetailPage() {
 	// Funzione che recupera la capsula cliccata dal backend tramite slug
 	function fetchProduct() {
 		setLoading(true); // inizio caricamento per aspettare risp API
-		axios.get(`http://localhost:3000/api/capsules/${slug}`)
+		axios
+			.get(`http://localhost:3000/api/capsules/${slug}`)
 			.then((res) => {
 				console.log("DETAIL RESPONSE:", res.data);
 				setProduct(res.data);
@@ -54,7 +50,7 @@ export default function DetailPage() {
 
 	// ------------------------------------------------------------------------------------------------------------
 
-if (loading || !product) return <p>Caricamento...</p>;
+	if (loading || !product) return <p>Caricamento...</p>;
 
 	function handleMouseMove(e) {
 		const rect = e.currentTarget.getBoundingClientRect();
@@ -131,14 +127,9 @@ if (loading || !product) return <p>Caricamento...</p>;
 
 					<h2 className="amore-section-title">Descrizione</h2>
 
-					<p className="amore-description">
-						{product.description}
-					</p>
+					<p className="amore-description">{product.description}</p>
 
-					<button
-						className="amore-btn"
-						onClick={handleAddToCart}
-					>
+					<button className="amore-btn" onClick={handleAddToCart}>
 						Aggiungi al carrello
 					</button>
 
@@ -168,23 +159,27 @@ if (loading || !product) return <p>Caricamento...</p>;
 				</div>
 				<div className="amore-spec-row">
 					<span className="amore-spec-label">Capacità</span>
-					<span className="amore-spec-value">{product.capacity} litri</span>
+					<span className="amore-spec-value">
+						{product.capacity} litri
+					</span>
 				</div>
 				<div className="amore-spec-row">
 					<span className="amore-spec-label">
 						Materiale principale
 					</span>
-					<span className="amore-spec-value">
-						{product.material}
-					</span>
+					<span className="amore-spec-value">{product.material}</span>
 				</div>
 				<div className="amore-spec-row">
 					<span className="amore-spec-label">Resistenza</span>
-					<span className="amore-spec-value">{product.resistance}</span>
+					<span className="amore-spec-value">
+						{product.resistance}
+					</span>
 				</div>
 				<div className="amore-spec-row">
 					<span className="amore-spec-label">Garanzia</span>
-					<span className="amore-spec-value">{product.warrenty} anno</span>
+					<span className="amore-spec-value">
+						{product.warrenty} anno
+					</span>
 				</div>
 			</div>
 

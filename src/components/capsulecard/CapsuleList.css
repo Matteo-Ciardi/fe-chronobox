@@ -17,7 +17,8 @@
 .marquee-item {
 	/* flex: 0 0 calc(25% - 15px); */
 	/* circa 4 card visibili */
-	max-width: 350px; }
+	max-width: 350px;
+}
 
 /* animazione continua da 0 a -50% (perché abbiamo duplicato la lista) */
 @keyframes marquee-scroll {

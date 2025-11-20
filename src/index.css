@@ -1,12 +1,12 @@
- :root {
- 	--clay-soil: rgba(123, 77, 62, 0.80);
- 	--powder-petal: rgba(227, 205, 188, 0.6);
- 	--espresso: #56352cff;
- 	--deep-mocha: #503c36ff;
- 	--dark-coffee: #412720ff;
- 	--desert-sand: #d9bdacff;
- 	--mauve-bark: #6b473bff;
- 	--dusty-taupe: #a68272ff;
- 	--desert-sand-2: #cab1a3ff;
- 	--dark-coffee-2: #492c25ff;
- }
+:root {
+	--clay-soil: rgba(123, 77, 62, 0.8);
+	--powder-petal: rgba(227, 205, 188, 0.6);
+	--espresso: #56352cff;
+	--deep-mocha: #503c36ff;
+	--dark-coffee: #412720ff;
+	--desert-sand: #d9bdacff;
+	--mauve-bark: #6b473bff;
+	--dusty-taupe: #a68272ff;
+	--desert-sand-2: #cab1a3ff;
+	--dark-coffee-2: #492c25ff;
+}

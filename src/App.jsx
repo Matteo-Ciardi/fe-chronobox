@@ -11,7 +11,6 @@ import DefaultLayout from "./layout/DefaultLayout";
 import "./App.css";
 
 function App() {
-
 	return (
 		<DefaultProvider>
 			<BrowserRouter>
@@ -19,7 +18,11 @@ function App() {
 					<Route element={<DefaultLayout />}>
 						<Route index element={<HomePage />} />
 						<Route path="/prodotti" element={<ProductPage />} />
-						<Route path="/dettagli/:slug" element={<DetailPage />} />
+						<Route
+							path="/dettagli/:slug"
+							element={<DetailPage />}
+						/>
+						<Route path="/carrello" element={<CartPage />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>
