@@ -2,9 +2,10 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { DefaultProvider } from "./context/DefaultContext";
 
+import CartPage from "./pages/cartpage/Cart";
 import HomePage from "./pages/homepage/HomePage";
-import ProductPage from "./pages/productpage/ProductPage";
 import DetailPage from "./pages/detailpage/DetailPage";
+import ProductPage from "./pages/productpage/ProductPage";
 import DefaultLayout from "./layout/DefaultLayout";
 
 import "./App.css";

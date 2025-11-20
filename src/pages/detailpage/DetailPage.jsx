@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useProducts } from "../../context/DefaultContext"
+import { useLocation, useNavigate } from 'react-router-dom'
+
 import "./DetailPage.css";
 
 // Import test slug
@@ -9,8 +12,18 @@ import axios from "axios";
 export default function DetailPage() {
 	const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
+	const location = useLocation();
+	const navigate = useNavigate();
+	const { addToCart } = useProducts();
+
+	const product = location.state?.product;
+
+	// Se arrivi a /dettagli senza aver passato state (es. refresh diretto)
+	if (!product) {
+		return <p>Nessun prodotto selezionato.</p>;
+	}
+
 	// ------------------------------------------ test slug -------------------------------------------------------
-	
 	const { slug } = useParams(); // Recupero slug dall' URL della rotta
 	const [product, setProduct] = useState(null); // Hook di stato per salvare i dati dinamici della capsula dal backend
 	const [loading, setLoading] = useState(true); // Hook di stato per salvare lo stato della risposta API
@@ -42,6 +55,7 @@ export default function DetailPage() {
 	// ------------------------------------------------------------------------------------------------------------
 
 if (loading || !product) return <p>Caricamento...</p>;
+
 	function handleMouseMove(e) {
 		const rect = e.currentTarget.getBoundingClientRect();
 		const x = e.clientX - rect.left;
@@ -62,6 +76,11 @@ if (loading || !product) return <p>Caricamento...</p>;
 
 	const imgStyle = {
 		transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
+	};
+
+	const handleAddToCart = () => {
+		addToCart(product);
+		navigate("/carrello");
 	};
 
 	// COSA PUOI CONSERVARE
@@ -105,21 +124,20 @@ if (loading || !product) return <p>Caricamento...</p>;
 				</div>
 
 				<div className="amore-info">
-					<h1>
-						{product.name}
-					</h1>
+					<h1>{product.name}</h1>
 					<p className="amore-price">
-						{product.price}
+						{(product.discounted_price ?? product.price) + " €"}
 					</p>
 
 					<h2 className="amore-section-title">Descrizione</h2>
-					
+
 					<p className="amore-description">
 						{product.description}
 					</p>
 
 					<button
 						className="amore-btn"
+						onClick={handleAddToCart}
 					>
 						Aggiungi al carrello
 					</button>
@@ -193,7 +211,6 @@ if (loading || !product) return <p>Caricamento...</p>;
 					<div
 						className="amore-related-card"
 						key={product.name}
-
 					>
 						<img src={product.image} alt={product.name} />
 						<h3>{product.name}</h3>
