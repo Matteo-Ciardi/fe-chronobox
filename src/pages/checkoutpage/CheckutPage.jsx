@@ -2,6 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 import { useProducts } from "../../context/DefaultContext";
 
+import BillingForm from "../../components/billingform/BillingForm";
+import ShippingForm from "../../components/shippingform/ShippingForm";
+import CapsuleDetailsForm from "../../components/capsuledetailform/CapsuleDetailForm";
+import CheckoutCartSummary from "../../components/checkoutsummary/CheckoutSummary";
+import OrderSuccessSummary from "../../components/ordersuccess/OrderSuccess";
+
 const CheckoutPage = () => {
     const { cart, cartTotal, clearCart } = useProducts();
 
@@ -25,6 +31,7 @@ const CheckoutPage = () => {
     const [shippingDate, setShippingDate] = useState("");
     const [letterContent, setLetterContent] = useState("");
     const [submitting, setSubmitting] = useState(false);
+    const [orderSummary, setOrderSummary] = useState(null);
 
     const handleBillingChange = (e) => {
         const { name, value } = e.target;
@@ -43,16 +50,34 @@ const CheckoutPage = () => {
         setSubmitting(true);
 
         try {
-            const orderPayload = {
-                method_id: 1,
-                session_id: null,
+            // Snapshot per riepilogo
+            const summary = {
                 customer_name: `${billing.firstName} ${billing.lastName}`,
                 customer_email: billing.email,
+                billing: { ...billing },
+                shipping: { ...shipping },
+                shippingDate,
+                letterContent,
+                items: cart.map((item) => ({
+                    id: item.id,
+                    name: item.name,
+                    quantity: item.quantity,
+                    price: item.price,
+                    subtotal: item.price * item.quantity,
+                })),
+                total: cartTotal,
+            };
+
+            // Payload per backend (allineato a tabella orders/capsule_order)
+            const orderPayload = {
+                method_id: 1,
+                customer_name: summary.customer_name,
+                customer_email: summary.customer_email,
                 shipping_address: `${shipping.address}, ${shipping.zip} ${shipping.city}, ${shipping.country}`,
                 billing_address: `${billing.address}, ${billing.zip} ${billing.city}, ${billing.country}`,
                 total_amount: cartTotal,
                 status: "pending",
-                items: cart.map((item) => ({
+                items: summary.items.map((item) => ({
                     capsule_id: item.id,
                     quantity: item.quantity,
                     unit_price: item.price,
@@ -68,8 +93,8 @@ const CheckoutPage = () => {
             );
 
             console.log("ORDER CREATED:", res.data);
+            setOrderSummary(summary);
             clearCart();
-            // TODO: navigate("/ordine-completato");
         } catch (err) {
             console.error("ORDER ERROR:", err);
         } finally {
@@ -77,121 +102,39 @@ const CheckoutPage = () => {
         }
     };
 
-    if (cart.length === 0) {
+    // Nessun riepilogo e carrello vuoto -> niente da mostrare
+    if (!orderSummary && cart.length === 0) {
         return <p>Il carrello è vuoto.</p>;
     }
 
+    // Dopo ordine: riepilogo completo + messaggio successo
+    if (orderSummary) {
+        return <OrderSuccessSummary summary={orderSummary} />;
+    }
+
+    // Vista checkout normale: form + riepilogo carrello laterale
     return (
-        <main>
+        <main className="checkout-page">
             <h1>Checkout</h1>
-            <form onSubmit={handleSubmit}>
-                <h2>Fatturazione</h2>
-                <input
-                    name="firstName"
-                    placeholder="Nome"
-                    value={billing.firstName}
-                    onChange={handleBillingChange}
-                    required
-                />
-                <input
-                    name="lastName"
-                    placeholder="Cognome"
-                    value={billing.lastName}
-                    onChange={handleBillingChange}
-                    required
-                />
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={billing.email}
-                    onChange={handleBillingChange}
-                    required
-                />
-                <input
-                    name="address"
-                    placeholder="Indirizzo fatturazione"
-                    value={billing.address}
-                    onChange={handleBillingChange}
-                    required
-                />
-                <input
-                    name="city"
-                    placeholder="Città"
-                    value={billing.city}
-                    onChange={handleBillingChange}
-                    required
-                />
-                <input
-                    name="zip"
-                    placeholder="CAP"
-                    value={billing.zip}
-                    onChange={handleBillingChange}
-                    required
-                />
-                <input
-                    name="country"
-                    placeholder="Paese"
-                    value={billing.country}
-                    onChange={handleBillingChange}
-                    required
-                />
 
-                <h2>Spedizione</h2>
-                <input
-                    name="address"
-                    placeholder="Indirizzo spedizione"
-                    value={shipping.address}
-                    onChange={handleShippingChange}
-                    required
-                />
-                <input
-                    name="city"
-                    placeholder="Città"
-                    value={shipping.city}
-                    onChange={handleShippingChange}
-                    required
-                />
-                <input
-                    name="zip"
-                    placeholder="CAP"
-                    value={shipping.zip}
-                    onChange={handleShippingChange}
-                    required
-                />
-                <input
-                    name="country"
-                    placeholder="Paese"
-                    value={shipping.country}
-                    onChange={handleShippingChange}
-                    required
-                />
-
-                <h2>Dettagli capsula</h2>
-                <label>
-                    Data di consegna/apertura
-                    <input
-                        type="date"
-                        value={shippingDate}
-                        onChange={(e) => setShippingDate(e.target.value)}
-                        required
+            <div className="checkout-layout">
+                <form className="checkout-form" onSubmit={handleSubmit}>
+                    <BillingForm billing={billing} onChange={handleBillingChange} />
+                    <ShippingForm shipping={shipping} onChange={handleShippingChange} />
+                    <CapsuleDetailsForm
+                        shippingDate={shippingDate}
+                        onChangeShippingDate={setShippingDate}
+                        letterContent={letterContent}
+                        onChangeLetterContent={setLetterContent}
                     />
-                </label>
 
-                <label>
-                    Contenuto della lettera
-                    <textarea
-                        value={letterContent}
-                        onChange={(e) => setLetterContent(e.target.value)}
-                        rows={4}
-                        required
-                    />
-                </label>
+                    <button type="submit" disabled={submitting}>
+                        {submitting ? "Invio..." : "Conferma ordine"}
+                    </button>
+                </form>
 
-                <button type="submit" disabled={submitting}>
-                    {submitting ? "Invio..." : "Conferma ordine"}
-                </button>
-            </form>
+                <CheckoutCartSummary />
+            </div>
         </main>
     );
 };
