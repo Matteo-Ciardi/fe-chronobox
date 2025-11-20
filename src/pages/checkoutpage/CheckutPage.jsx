@@ -50,6 +50,12 @@ const CheckoutPage = () => {
         setSubmitting(true);
 
         try {
+            const SHIPPING_THRESHOLD = 170;
+            const SHIPPING_FEE = 30;
+
+            const shippingCost = cartTotal < SHIPPING_THRESHOLD ? SHIPPING_FEE : 0;
+            const finalTotal = cartTotal + shippingCost;
+
             // Snapshot per riepilogo
             const summary = {
                 customer_name: `${billing.firstName} ${billing.lastName}`,
@@ -65,7 +71,9 @@ const CheckoutPage = () => {
                     price: item.price,
                     subtotal: item.price * item.quantity,
                 })),
-                total: cartTotal,
+                productsTotal: cartTotal,   // totale solo prodotti
+                shippingCost,               // costo spedizione calcolato
+                total: finalTotal,          // prodotti + spedizione
             };
 
             // Payload per backend (allineato a tabella orders/capsule_order)
@@ -75,7 +83,7 @@ const CheckoutPage = () => {
                 customer_email: summary.customer_email,
                 shipping_address: `${shipping.address}, ${shipping.zip} ${shipping.city}, ${shipping.country}`,
                 billing_address: `${billing.address}, ${billing.zip} ${billing.city}, ${billing.country}`,
-                total_amount: cartTotal,
+                total_amount: finalTotal,
                 status: "pending",
                 items: summary.items.map((item) => ({
                     capsule_id: item.id,

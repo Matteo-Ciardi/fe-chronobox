@@ -7,6 +7,12 @@ const CheckoutCartSummary = () => {
         return null;
     }
 
+    const SHIPPING_THRESHOLD = 170;
+    const SHIPPING_FEE = 30;
+
+    const shippingCost = cartTotal < SHIPPING_THRESHOLD ? SHIPPING_FEE : 0;
+    const finalTotal = cartTotal + shippingCost;
+
     return (
         <aside className="checkout-summary">
             <h2>Riepilogo ordine</h2>
@@ -26,7 +32,7 @@ const CheckoutCartSummary = () => {
 
             <div className="summary-total">
                 <span>Totale:</span>
-                <strong>{cartTotal.toFixed(2)} €</strong>
+                <strong>{finalTotal.toFixed(2)} €</strong>
             </div>
         </aside>
     );

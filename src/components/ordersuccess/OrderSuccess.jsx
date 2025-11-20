@@ -45,9 +45,19 @@ const OrderSuccessSummary = ({ summary }) => {
                         </li>
                     ))}
                 </ul>
-                <p>Totale ordine: {summary.total.toFixed(2)} €</p>
+                <p>Totale prodotti: {summary.productsTotal.toFixed(2)} €</p>
+                <p>
+                    Spedizione:{" "}
+                    {summary.shippingCost > 0
+                        ? `${summary.shippingCost.toFixed(2)} €`
+                        : "Gratis"}
+                </p>
+
+                <p>
+                    Totale ordine: {summary.total.toFixed(2)} €
+                </p>
             </section>
-        </main>
+        </main >
     );
 };
 
