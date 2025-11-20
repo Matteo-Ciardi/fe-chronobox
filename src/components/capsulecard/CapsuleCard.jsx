@@ -28,6 +28,11 @@ export default function CapsuleCard(props) {
 						<Link to="/dettagli" className="capsule-button">
 							Dettagli
 						</Link>
+
+						{/* Test slug */}
+						{/* <Link to={`/dettagli/${product.slug}`} className="capsule-button">
+							Dettagli
+						</Link> */}
 					</div>
 				</div>
 			</div>
