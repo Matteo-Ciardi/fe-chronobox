@@ -1,8 +1,46 @@
 import { useState } from "react";
 import "./DetailPage.css";
 
+// Import test slug
+// import { useParams } from "react-router-dom";
+// import { useEffect } from "react";
+// import axios from "axios";
+
 export default function DetailPage({ onSelectPage }) {
 	const [rotation, setRotation] = useState({ x: 0, y: 0 });
+
+	// ------------------------------------------ test slug -------------------------------------------------------
+	
+	// const { slug } = useParams(); // Recupero slug dall' URL della rotta
+	// const [product, setProduct] = useState(null); // Hook di stato per salvare i dati dinamici della capsula dal backend
+	// const [loading, setLoading] = useState(true); // Hook di stato per salvare lo stato della risposta API
+
+	// Funzione che recupera la capsula cliccata dal backend tramite slug
+	// function fetchProduct() {
+	// 	setLoading(true); // inizio caricamento per aspettare risp API
+	// 	axios.get(`http://localhost:3000/api/capsule/${slug}`)
+	// 		.then((res) => {
+	// 			console.log("DETAIL RESPONSE:", res.data);
+	// 			setProduct(res.data);
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error("DETAIL ERROR:", error);
+	// 		})
+	// 		.finally(() => {
+	// 			setLoading(false); // fine caricamento (sia successo che errore)
+	// 		});
+	// }
+
+	// Hook di effetto che chiama la funzione fetchProduct ogni volta che cambia lo slug
+	// useEffect(() => {
+	// 	fetchProduct();
+	// }, [slug]);
+
+	// Evito crash se i dati non sono ancora caricati
+	// if (loading || !product) return null;
+
+	// ------------------------------------------------------------------------------------------------------------
+
 
 	// VARIANTI COLORE DELLA CAPSULA AMORE
 	const variants = [

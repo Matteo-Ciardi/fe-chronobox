@@ -23,6 +23,9 @@ function App() {
 						<Route path="/chi-siamo" element={<WhoWeArePage />} />
 						<Route path="/contatti" element={<ContactPage />} />
 						<Route path="/dettagli" element={<DetailPage />} />
+
+						{/* Test slug */}
+						{/* <Route path="/dettagli/:slug" element={<DetailPage />} /> */}
 					</Route>
 				</Routes>
 			</BrowserRouter>
