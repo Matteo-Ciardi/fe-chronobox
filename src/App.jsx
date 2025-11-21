@@ -2,18 +2,17 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { DefaultProvider } from "./context/DefaultContext";
 
+import CartPage from "./pages/cartpage/Cart";
 import HomePage from "./pages/homepage/HomePage";
-import ProductPage from "./pages/productpage/ProductPage";
 import DetailPage from "./pages/detailpage/DetailPage";
 import WishlistPage from "./pages/wishlistpage/WishlistPage";
+import ProductPage from "./pages/productpage/ProductPage";
+import CheckoutPage from "./pages/checkoutpage/CheckutPage";
 import DefaultLayout from "./layout/DefaultLayout";
 
 import "./App.css";
 
 function App() {
-	const WhoWeArePage = () => <h1>Chi Siamo</h1>;
-	const ContactPage = () => <h1>Contatti</h1>;
-
 	return (
 		<DefaultProvider>
 			<BrowserRouter>
@@ -25,6 +24,12 @@ function App() {
 						<Route path="/contatti" element={<ContactPage />} />
 						<Route path="/dettagli" element={<DetailPage />} />
 						<Route path="/wishlist" element={<WishlistPage />} />
+						<Route
+							path="/dettagli/:slug"
+							element={<DetailPage />}
+						/>
+						<Route path="/carrello" element={<CartPage />} />
+						<Route path="/checkout" element={<CheckoutPage />} />
 					</Route>
 				</Routes>
 			</BrowserRouter>

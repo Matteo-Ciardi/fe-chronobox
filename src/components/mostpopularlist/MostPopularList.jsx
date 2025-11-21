@@ -1,15 +1,15 @@
 import { useProducts } from "../../context/DefaultContext";
 
-import CapsuleCard from "./CapsuleCard";
+import CapsuleCard from "../capsulecard/CapsuleCard";
 
-import "./CapsuleList.css";
+import "./MostPopularList.css";
 
-export default function CapsuleList() {
+export default function MostPopularList() {
 	const { products } = useProducts();
 
 	if (!products || products.length === 0) return null;
 
-	const newArrivals = products.slice(-6);
+	const newArrivals = products.slice(0, 6);
 
 	const marqueeItems = [...newArrivals, ...newArrivals];
 

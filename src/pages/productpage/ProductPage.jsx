@@ -1,69 +1,68 @@
-import { useState } from 'react'
+import { useState } from "react";
 import { AiOutlineOrderedList } from "react-icons/ai";
 
-import Select from 'react-select';
+import Select from "react-select";
 
-import ProductList from '../../components/productlist/ProductList'
+import ProductList from "../../components/productlist/ProductList";
 
-import './ProductPage.css'
+import "./ProductPage.css";
 
 const orderOptions = [
-    {
-        value: '',
-        label: (
-            <span>
-                <AiOutlineOrderedList />
-            </span>
-        ),
-    },
-    { value: 'price-desc', label: 'Prezzo Alto-Basso' },
-    { value: 'price-asc', label: 'Prezzo Basso-Alto' },
-    { value: 'name-asc', label: 'Nome A-Z' },
-    { value: 'name-desc', label: 'Nome Z-A' },
-    { value: 'recent-desc', label: 'Recenti-Meno Recenti' },
-    { value: 'recent-asc', label: 'Meno Recenti-Recenti' },
-]
+	{
+		value: "",
+		label: (
+			<span>
+				<AiOutlineOrderedList />
+			</span>
+		),
+	},
+	{ value: "price-desc", label: "Prezzo Alto-Basso" },
+	{ value: "price-asc", label: "Prezzo Basso-Alto" },
+	{ value: "name-asc", label: "Nome A-Z" },
+	{ value: "name-desc", label: "Nome Z-A" },
+	{ value: "recent-desc", label: "Recenti-Meno Recenti" },
+	{ value: "recent-asc", label: "Meno Recenti-Recenti" },
+];
 
 const ProductPage = () => {
+	const [searchTerm, setSearchTerm] = useState("");
+	const [order, setOrder] = useState("");
 
-    const [searchTerm, setSearchTerm] = useState('')
-    const [order, setOrder] = useState('')
+	const handleSearchChange = (e) => {
+		setSearchTerm(e.target.value);
+	};
 
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value)
-    }
+	const handleOrderChange = (selectedOption) => {
+		setOrder(selectedOption?.value || "");
+	};
 
-    const handleOrderChange = (selectedOption) => {
-        setOrder(selectedOption?.value || '')
-    }
+	const selectedOrderOption =
+		orderOptions.find((opt) => opt.value === order) || orderOptions[0];
 
-    const selectedOrderOption =
-        orderOptions.find((opt) => opt.value === order) || orderOptions[0]
+	return (
+		<>
+			<div className="product-wrapper">
+				<section className="filters">
+					<input
+						type="text"
+						name="searchbar"
+						placeholder="Cerca.."
+						value={searchTerm}
+						onChange={handleSearchChange}
+					/>
+					<Select
+						className="order-select"
+						classNamePrefix="order-select"
+						value={selectedOrderOption}
+						onChange={handleOrderChange}
+						options={orderOptions}
+						isSearchable={false}
+					/>
+				</section>
+				<ProductList searchTerm={searchTerm} order={order} />
+			</div>
+		</>
+	);
+};
 
-    return (
-        <>
-            <div className='product-wrapper'>
-                <section className='filters'>
-                    <input
-                        type='text'
-                        name='searchbar'
-                        placeholder='Cerca..'
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                    />
-                    <Select
-                        className='order-select'
-                        classNamePrefix='order-select'
-                        value={selectedOrderOption}
-                        onChange={handleOrderChange}
-                        options={orderOptions}
-                        isSearchable={false}
-                    />
-                </section>
-                <ProductList searchTerm={searchTerm} order={order} />
-            </div >
-        </>
-    )
-}
-
-export default ProductPage
+export default ProductPage;

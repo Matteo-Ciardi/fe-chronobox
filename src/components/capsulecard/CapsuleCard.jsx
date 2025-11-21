@@ -52,6 +52,12 @@ export default function CapsuleCard(props) {
 									: "Aggiungi a Wishlist"}
 							</button>
 						</div>
+						<Link
+							to={`/dettagli/${product.slug}`}
+							className="capsule-button"
+						>
+							Dettagli
+						</Link>
 					</div>
 				</div>
 			</div>
