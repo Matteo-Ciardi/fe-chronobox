@@ -87,13 +87,19 @@ const CheckoutPage = () => {
 				total_amount: finalTotal,
 				status: "pending",
 				items: summary.items.map((item) => ({
+					// campi per DB
 					capsule_id: item.id,
 					quantity: item.quantity,
 					unit_price: item.price,
 					shipping_period: shippingDate,
 					letter_content: letterContent,
 					discount_percentage: null,
+
+					// campi extra per EMAIL
+					name: item.name,
+					price: item.price,
 				})),
+
 			};
 
 			const res = await axios.post(
