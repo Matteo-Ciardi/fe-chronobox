@@ -1,6 +1,8 @@
-import { useState } from "react";
-import axios from "axios";
+import { useState, useEffect, useRef } from "react";
 import { useProducts } from "../../context/DefaultContext";
+
+import axios from "axios";
+import dropin from "braintree-web-drop-in";
 
 import BillingForm from "../../components/billingform/BillingForm";
 import ShippingForm from "../../components/shippingform/ShippingForm";
@@ -10,6 +12,8 @@ import OrderSuccessSummary from "../../components/ordersuccess/OrderSuccess";
 
 const CheckoutPage = () => {
 	const { cart, cartTotal, clearCart } = useProducts();
+
+	const dropinContainerRef = useRef(null);
 
 	const [billing, setBilling] = useState({
 		firstName: "",
@@ -32,6 +36,43 @@ const CheckoutPage = () => {
 	const [letterContent, setLetterContent] = useState("");
 	const [submitting, setSubmitting] = useState(false);
 	const [orderSummary, setOrderSummary] = useState(null);
+	const [dropinInstance, setDropinInstance] = useState(null);
+
+	useEffect(() => {
+		let instance; // per teardown nel cleanup
+
+		async function setupBraintree() {
+			try {
+				if (!dropinContainerRef.current) return;
+
+				// 🔹 forza il nodo a essere vuoto prima di creare la Drop-in
+				dropinContainerRef.current.innerHTML = "";
+
+				const res = await axios.get("http://localhost:3000/api/braintree/token");
+				const { clientToken } = res.data;
+
+				instance = await dropin.create({
+					authorization: clientToken,
+					container: dropinContainerRef.current,
+				});
+
+				setDropinInstance(instance);
+			} catch (error) {
+				console.error("Errore setup Braintree:", error);
+				alert("Impossibile inizializzare il pagamento, riprova più tardi.");
+			}
+		}
+
+		setupBraintree();
+
+		return () => {
+			if (instance) {
+				instance.teardown().catch((err) => {
+					console.error("Errore nel teardown di Braintree:", err);
+				});
+			}
+		};
+	}, []);
 
 	const handleBillingChange = (e) => {
 		const { name, value } = e.target;
@@ -46,6 +87,11 @@ const CheckoutPage = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (cart.length === 0) return;
+
+		if (!dropinInstance) {
+			alert("Il sistema di pagamento non è pronto, ricarica la pagina.");
+			return;
+		}
 
 		setSubmitting(true);
 
@@ -77,6 +123,8 @@ const CheckoutPage = () => {
 				total: finalTotal, // prodotti + spedizione
 			};
 
+			const { nonce } = await dropinInstance.requestPaymentMethod();
+
 			// Payload per backend (allineato a tabella orders/capsule_order)
 			const orderPayload = {
 				method_id: 1,
@@ -99,19 +147,20 @@ const CheckoutPage = () => {
 					name: item.name,
 					price: item.price,
 				})),
-
+				paymentNonce: nonce, // usato da orderController.store
 			};
 
 			const res = await axios.post(
 				"http://localhost:3000/api/checkout/orders",
 				orderPayload,
 			);
-
 			console.log("ORDER CREATED:", res.data);
+
 			setOrderSummary(summary);
 			clearCart();
 		} catch (err) {
 			console.error("ORDER ERROR:", err);
+			alert("Pagamento non riuscito. Controlla i dati e riprova.");
 		} finally {
 			setSubmitting(false);
 		}
@@ -149,8 +198,10 @@ const CheckoutPage = () => {
 						onChangeLetterContent={setLetterContent}
 					/>
 
-					<button type="submit" disabled={submitting}>
-						{submitting ? "Invio..." : "Conferma ordine"}
+					<div ref={dropinContainerRef} id="braintree-dropin" />
+
+					<button type="submit" disabled={submitting || !dropinInstance}>
+						{submitting ? "Elaborazione..." : "Paga e completa l'ordine"}
 					</button>
 				</form>
 
