@@ -5,6 +5,7 @@ import { DefaultProvider } from "./context/DefaultContext";
 import CartPage from "./pages/cartpage/Cart";
 import HomePage from "./pages/homepage/HomePage";
 import DetailPage from "./pages/detailpage/DetailPage";
+import WishlistPage from "./pages/wishlistpage/WishlistPage";
 import ProductPage from "./pages/productpage/ProductPage";
 import CheckoutPage from "./pages/checkoutpage/CheckutPage";
 import DefaultLayout from "./layout/DefaultLayout";
@@ -19,6 +20,10 @@ function App() {
 					<Route element={<DefaultLayout />}>
 						<Route index element={<HomePage />} />
 						<Route path="/prodotti" element={<ProductPage />} />
+						<Route path="/chi-siamo" element={<WhoWeArePage />} />
+						<Route path="/contatti" element={<ContactPage />} />
+						<Route path="/dettagli" element={<DetailPage />} />
+						<Route path="/wishlist" element={<WishlistPage />} />
 						<Route
 							path="/dettagli/:slug"
 							element={<DetailPage />}
