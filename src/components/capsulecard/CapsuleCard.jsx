@@ -40,9 +40,6 @@ export default function CapsuleCard(props) {
 							&euro;{product.price}
 						</span>
 						<div className="capsule-buttons">
-							<Link to="/dettagli" className="capsule-button">
-								Dettagli
-							</Link>
 							<button
 								className="capsule-button wishlist-btn"
 								onClick={toggleWishlist}

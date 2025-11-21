@@ -20,14 +20,9 @@ function App() {
 					<Route element={<DefaultLayout />}>
 						<Route index element={<HomePage />} />
 						<Route path="/prodotti" element={<ProductPage />} />
-						<Route path="/chi-siamo" element={<WhoWeArePage />} />
-						<Route path="/contatti" element={<ContactPage />} />
 						<Route path="/dettagli" element={<DetailPage />} />
 						<Route path="/wishlist" element={<WishlistPage />} />
-						<Route
-							path="/dettagli/:slug"
-							element={<DetailPage />}
-						/>
+						<Route path="/dettagli/:slug"element={<DetailPage />}/>
 						<Route path="/carrello" element={<CartPage />} />
 						<Route path="/checkout" element={<CheckoutPage />} />
 					</Route>

@@ -28,6 +28,9 @@ const Navbar = () => {
 						<li>
 							<NavLink to="/wishlist" className="nav-link">
 								Wishlist
+							</NavLink>
+						</li>	
+						<li>
 							<NavLink to="/carrello" className="nav-link">
 								<IoMdCart />
 							</NavLink>

@@ -16,13 +16,7 @@ const WishlistPage = () => {
 		return () =>
 			window.removeEventListener("wishlistUpdate", updateWishlist);
 	}, []);
-
-	const removeFromWishlist = (productId) => {
-		const updated = wishlist.filter((item) => item.id !== productId);
-		setWishlist(updated);
-		localStorage.setItem("wishlist", JSON.stringify(updated));
-	};
-
+	
 	return (
 		<div className="wishlist-page">
 			<h1>La Mia Wishlist</h1>
@@ -33,12 +27,6 @@ const WishlistPage = () => {
 					{wishlist.map((product) => (
 						<div key={product.id} className="wishlist-item">
 							<CapsuleCard product={product} />
-							<button
-								className="remove-btn"
-								onClick={() => removeFromWishlist(product.id)}
-							>
-								Rimuovi
-							</button>
 						</div>
 					))}
 				</div>
