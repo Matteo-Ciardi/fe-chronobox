@@ -1,32 +1,45 @@
-import { useProducts } from "../../context/DefaultContext";
-
+import { useEffect, useState } from "react";
+import axios from "axios";
 import CapsuleCard from "../capsulecard/CapsuleCard";
 
 import "./MostPopularList.css";
 
 export default function MostPopularList() {
-	const { products } = useProducts();
+	const [mostPopular, setMostPopular] = useState([]);
 
-	if (!products || products.length === 0) return null;
+	// Funzione che recupera le capsule più popolari dal backend
+	function fetchMostPopular() {
+		axios
+			.get("http://localhost:3000/api/capsules/most-populars")
+			.then((res) => {
+				setMostPopular(res.data);
+			})
+			.catch((error) => {
+				console.error("Error most popular:", error);
+			});
+	}
 
-	const newArrivals = products.slice(0, 6);
+	// Hook di effetto che chiama la funzione al mounting del componente
+	useEffect(() => {
+		fetchMostPopular();
+	}, []);
 
-	const marqueeItems = [...newArrivals, ...newArrivals];
+	if (!mostPopular || mostPopular.length === 0) return null;
+
+	const marqueeItems = [...mostPopular, ...mostPopular];
 
 	return (
-		<>
-			<div className="marquee-container">
-				<div className="marquee-track">
-					{marqueeItems.map((product, index) => (
-						<div
-							className="marquee-item"
-							key={`${product.id}-${index}`}
-						>
-							<CapsuleCard product={product} />
-						</div>
-					))}
-				</div>
+		<div className="marquee-container">
+			<div className="marquee-track">
+				{marqueeItems.map((product, index) => (
+					<div
+						className="marquee-item"
+						key={`${product.id}-${index}`}
+					>
+						<CapsuleCard product={product} />
+					</div>
+				))}
 			</div>
-		</>
+		</div>
 	);
 }
