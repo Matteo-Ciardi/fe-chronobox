@@ -38,6 +38,10 @@
 	margin-top: 10px;
 }
 
+.capsule-title:hover {
+	color: var(--dusty-taupe);
+}
+
 .capsule-description {
 	color: #6c757d;
 }

@@ -51,8 +51,9 @@ export default function CapsuleCard(props) {
 							</span>
 							<div className="capsule-buttons">
 								<button
+									type="button"
 									className="capsule-button wishlist-btn"
-									onClick={toggleWishlist}
+									onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleWishlist(); }}
 								>
 									{inWishlist
 										? <FaHeart
@@ -61,8 +62,10 @@ export default function CapsuleCard(props) {
 											size='22px' />}
 								</button>
 								<button
+									type="button"
 									className="capsule-button add-to-cart-btn"
-									onClick={() => {
+									onClick={(e) => {
+										e.preventDefault(); e.stopPropagation();
 										addToCart(product);
 										setIsAdding(true);
 										setTimeout(() => setIsAdding(false), 1000);
