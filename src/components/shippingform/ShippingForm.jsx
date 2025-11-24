@@ -2,6 +2,8 @@ const ShippingForm = ({ shipping, onChange }) => {
 	return (
 		<section>
 			<h2>Spedizione</h2>
+
+			<label htmlFor="shippingAddress">Indirizzo spedizione *</label>
 			<input
 				name="address"
 				placeholder="Indirizzo spedizione"
@@ -9,6 +11,8 @@ const ShippingForm = ({ shipping, onChange }) => {
 				onChange={onChange}
 				required
 			/>
+
+			<label htmlFor="shippingCity">Città *</label>
 			<input
 				name="city"
 				placeholder="Città"
@@ -16,6 +20,8 @@ const ShippingForm = ({ shipping, onChange }) => {
 				onChange={onChange}
 				required
 			/>
+
+			<label htmlFor="shippingZip">CAP *</label>
 			<input
 				name="zip"
 				placeholder="CAP"
@@ -23,6 +29,8 @@ const ShippingForm = ({ shipping, onChange }) => {
 				onChange={onChange}
 				required
 			/>
+
+			<label htmlFor="shippingCountry">Paese *</label>
 			<input
 				name="country"
 				placeholder="Paese"
