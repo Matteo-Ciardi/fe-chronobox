@@ -17,39 +17,43 @@ const orderOptions = [
 	{ value: "less_recent", label: "Meno Recenti-Recenti" },
 ];
 
-// Select temi fissi
 const themeOptions = [
-	{ value: "", label: <span><AiOutlineOrderedList /></span> },
-	{ value: "classic", label: "Classic" },
-	{ value: "premium", label: "Premium" },
-	{ value: "eco", label: "Eco" },
-	{ value: "limited", label: "Limited" },
-	{ value: "flavor", label: "Flavor" },
-	{ value: "designer", label: "Designer" },
-	{ value: "coffee", label: "Coffee" },
-	{ value: "tea", label: "Tea" },
-	{ value: "kids", label: "Kids" },
-	{ value: "sport", label: "Sport" },
-	{ value: "gourmet", label: "Gourmet" },
+	"classic", "premium", "eco", "limited", "flavor",
+	"designer", "coffee", "tea", "kids", "sport", "gourmet"
 ];
 
 const ProductPage = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [order, setOrder] = useState("");
-	const [selectedTheme, setSelectedTheme] = useState("");
+	const [selectedThemes, setSelectedThemes] = useState([]);
 	const [products, setProducts] = useState([]);
+	const [minPrice, setMinPrice] = useState(0);
+	const [maxPrice, setMaxPrice] = useState(100);
 
 	// Gestione input
 	const handleSearchChange = (e) => setSearchTerm(e.target.value);
 	const handleOrderChange = (option) => setOrder(option?.value || "");
-	const handleThemeChange = (option) => setSelectedTheme(option?.value || "");
+
+	const handleThemeChange = (theme) => {
+		if (selectedThemes.includes(theme)) {
+			setSelectedThemes(selectedThemes.filter(t => t !== theme));
+		} else {
+			setSelectedThemes([...selectedThemes, theme]);
+		}
+	};
 
 	// Fetch prodotti filtrati
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
 				const response = await axios.get("http://localhost:3000/api/capsules", {
-					params: { search: searchTerm, order: order, theme: selectedTheme },
+					params: {
+						search: searchTerm,
+						order,
+						theme: selectedThemes.join(","),
+						minPrice,
+						maxPrice
+					},
 				});
 				setProducts(Array.isArray(response.data) ? response.data : []);
 			} catch (error) {
@@ -57,7 +61,7 @@ const ProductPage = () => {
 			}
 		};
 		fetchData();
-	}, [searchTerm, order, selectedTheme]);
+	}, [searchTerm, order, selectedThemes, minPrice, maxPrice]);
 
 	return (
 		<div className="product-wrapper">
@@ -68,6 +72,7 @@ const ProductPage = () => {
 					value={searchTerm}
 					onChange={handleSearchChange}
 				/>
+
 				<Select
 					className="order-select"
 					classNamePrefix="order-select"
@@ -76,14 +81,45 @@ const ProductPage = () => {
 					options={orderOptions}
 					isSearchable={false}
 				/>
-				<Select
-					className="theme-select order-select"
-					classNamePrefix="theme-select order-select"
-					value={themeOptions.find(opt => opt.value === selectedTheme) || themeOptions[0]}
-					onChange={handleThemeChange}
-					options={themeOptions}
-					isSearchable={false}
-				/>
+
+				<div className="theme-checkboxes">
+					{themeOptions.map(theme => (
+						<label key={theme}>
+							<input
+								type="checkbox"
+								value={theme}
+								checked={selectedThemes.includes(theme)}
+								onChange={() => handleThemeChange(theme)}
+							/>
+							{theme.charAt(0).toUpperCase() + theme.slice(1)}
+						</label>
+					))}
+				</div>
+
+				<div className="price-slider">
+					<label>Prezzo Min: €{minPrice}</label>
+					<input
+						type="range"
+						min="0"
+						max="100"
+						value={minPrice}
+						onChange={(e) => setMinPrice(Number(e.target.value))}
+					/>
+
+					<label>Prezzo Max: €{maxPrice}</label>
+					<input
+						type="range"
+						min="0"
+						max="100"
+						value={maxPrice}
+						onChange={(e) => setMaxPrice(Number(e.target.value))}
+					/>
+				</div>
+
+				<p className="product-count">
+					{products.length} prodotti trovati
+				</p>
+
 			</section>
 
 			<ProductList products={products} />
