@@ -1,12 +1,12 @@
-// MostPopularList.jsx
+// CapsuleList.jsx
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import CapsuleCard from "../capsulecard/CapsuleCard";
 
-import "./MostPopularList.css";
+import "./CapsuleList.css";
 
-export default function MostPopularList() {
-	const [mostPopular, setMostPopular] = useState([]);
+export default function CapsuleList() {
+	const [newArrivals, setNewArrivals] = useState([]);
 	const trackRef = useRef(null);
 
 	// durata di UN ciclo (0 -> -50%), in secondi
@@ -22,27 +22,26 @@ export default function MostPopularList() {
 		}
 	}, [marqueeDuration]);
 
-	// Funzione che recupera le capsule più popolari dal backend
-	function fetchMostPopular() {
+	// recupera i nuovi arrivi dal backend
+	function fetchNewArrivals() {
 		axios
-			.get("http://localhost:3000/api/capsules/most-populars")
+			.get("http://localhost:3000/api/capsules/new-arrivals")
 			.then((res) => {
-				setMostPopular(res.data);
+				setNewArrivals(res.data);
 			})
 			.catch((error) => {
-				console.error("Error most popular:", error);
+				console.error("Error new arrivals:", error);
 			});
 	}
 
-	// Hook di effetto che chiama la funzione al mounting del componente
 	useEffect(() => {
-		fetchMostPopular();
+		fetchNewArrivals();
 	}, []);
 
-	if (!mostPopular || mostPopular.length === 0) return null;
+	if (!newArrivals || newArrivals.length === 0) return null;
 
 	// lista duplicata per effetto infinito
-	const marqueeItems = [...mostPopular];
+	const marqueeItems = [...newArrivals];
 
 	return (
 		<div className="marquee-container">

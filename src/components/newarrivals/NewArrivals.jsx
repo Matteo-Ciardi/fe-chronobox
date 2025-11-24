@@ -1,5 +1,5 @@
 // import CapsuleCard from "../capsulecard/CapsuleCard";
-import CapsuleList from "../capsulecard/CapsuleList";
+import CapsuleList from "../newarrivalslist/CapsuleList";
 
 import "./NewArrivals.css";
 
