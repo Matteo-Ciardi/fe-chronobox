@@ -19,6 +19,7 @@ function App() {
 				<Routes>
 					<Route element={<DefaultLayout />}>
 						<Route index element={<HomePage />} />
+						<Route path="/home" element={<HomePage />} />
 						<Route path="/prodotti" element={<ProductPage />} />
 						<Route path="/dettagli" element={<DetailPage />} />
 						<Route path="/wishlist" element={<WishlistPage />} />
