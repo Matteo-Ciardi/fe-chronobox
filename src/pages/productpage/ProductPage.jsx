@@ -18,8 +18,8 @@ const orderOptions = [
 ];
 
 const themeOptions = [
-	"classic", "premium", "eco", "limited", "flavor",
-	"designer", "coffee", "tea", "kids", "sport", "gourmet"
+	"Mini", "Tradizioni", "Amore", "Premium", "Cambiamento",
+	"Viaggio", "Classic", "Ricordi"
 ];
 
 const ProductPage = () => {
