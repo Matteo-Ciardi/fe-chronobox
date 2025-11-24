@@ -49,7 +49,7 @@ export default function CapsuleCard(props) {
 
 						<div className="capsule-footer">
 							<span className="capsule-price">
-								&euro;{product.price}
+								&euro;{product.price.toFixed(2)}
 							</span>
 							<div className="capsule-buttons">
 								<button
