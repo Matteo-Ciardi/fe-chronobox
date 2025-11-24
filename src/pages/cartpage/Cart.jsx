@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { useProducts } from "../../context/DefaultContext";
+import ConfirmRemoveAll from "../../components/confirmremoveall/ConfirmRemoveAll";
 import "./Cart.css";
 
 const CartPage = () => {
-	const { cart, updateQuantity, removeFromCart, cartTotal } = useProducts();
+	const { cart, updateQuantity, removeFromCart, cartTotal, clearCart } =
+		useProducts();
 
 	const handleInputChange = (id, value) => {
 		const qty = Number(value);
@@ -26,6 +28,13 @@ const CartPage = () => {
 		(
 			<main className="cart-page">
 				<h1>Il tuo carrello</h1>
+				{cart.length > 0 && (
+					<ConfirmRemoveAll
+						buttonText="Svuota Carrello"
+						confirmMessage="Sei sicuro di voler svuotare il carrello?"
+						onConfirm={clearCart}
+					/>
+				)}
 
 				{cart.length === 0 ? (
 					<p>Il carrello è vuoto.</p>
