@@ -51,8 +51,10 @@ export default function CapsuleCard(props) {
 								onClick={toggleWishlist}
 							>
 								{inWishlist
-									? <FaHeart />
-									: <FaRegHeart />}
+									? <FaHeart
+										size='22px' />
+									: <FaRegHeart
+										size='22px' />}
 							</button>
 							<button
 								className="capsule-button add-to-cart-btn"

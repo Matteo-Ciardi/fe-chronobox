@@ -74,14 +74,18 @@ const Navbar = () => {
 					<ul className="navbar-right">
 						<li className="nav-icon">
 							<NavLink to="/wishlist" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-								<span className="nav-label" ref={wishlistRef}><FaRegHeart
-									size='22px' /></span>
+								<span className="nav-label" ref={wishlistRef}>
+									<FaRegHeart
+										size='22px' />
+								</span>
 							</NavLink>
 						</li>
 						<li className="nav-icon">
 							<NavLink to="/carrello" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-								<span className="nav-label" ref={carrelloRef}><IoMdCart
-									size='25px' /></span>
+								<span className="nav-label" ref={carrelloRef}>
+									<IoMdCart
+										size='25px' />
+								</span>
 							</NavLink>
 						</li>
 					</ul>
