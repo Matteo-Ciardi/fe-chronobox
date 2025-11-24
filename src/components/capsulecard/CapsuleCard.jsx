@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useProducts } from "../../context/DefaultContext";
 
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+
 import "./CapsuleCard.css";
 
 export default function CapsuleCard(props) {
@@ -48,8 +51,8 @@ export default function CapsuleCard(props) {
 								onClick={toggleWishlist}
 							>
 								{inWishlist
-									? "Rimuovi da Wishlist"
-									: "Aggiungi a Wishlist"}
+									? <FaHeart />
+									: <FaRegHeart />}
 							</button>
 							<button
 								className="capsule-button add-to-cart-btn"
