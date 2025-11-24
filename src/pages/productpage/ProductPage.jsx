@@ -64,15 +64,20 @@ const ProductPage = () => {
 	}, [searchTerm, order, selectedThemes, minPrice, maxPrice]);
 
 	return (
+
 		<div className="product-wrapper">
 			<section className="filters">
-				<input
-					type="text"
-					placeholder="Cerca..."
-					value={searchTerm}
-					onChange={handleSearchChange}
-				/>
-
+      <label className="searchbar-label">Cerca prodotti</label>
+			<input
+						className="searchbar"
+						type="text"
+						name="searchbar"
+						placeholder="Cerca.."
+						value={searchTerm}
+						onChange={handleSearchChange}
+					/>
+              
+       <label className="	">Ordina per</label>
 				<Select
 					className="order-select"
 					classNamePrefix="order-select"
@@ -113,6 +118,7 @@ const ProductPage = () => {
 						max="100"
 						value={maxPrice}
 						onChange={(e) => setMaxPrice(Number(e.target.value))}
+
 					/>
 				</div>
 

@@ -14,16 +14,61 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 70%;
+	width: 80%;
 	margin: 0 auto;
 	padding: 20px 0;
+	position: relative;
 }
 
-.navbar-nav {
+.navbar-left {
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
+	width: 10%;
 }
 
+.navbar-right {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 10%;
+}
+
+.nav-links {
+	font-size: 1.1rem;
+}
+
+/* base style for nav links: the visible text/icon is wrapped in .nav-label */
 .nav-link {
-	padding-left: 20px;
+	color: inherit;
+}
+
+.nav-label {
+	display: inline-block;
+	padding: 0 6px;
+	line-height: 1;
+	transition: color 200ms ease;
+}
+
+.nav-icon {
+	margin-left: 20px;
+}
+
+.nav-link.active .nav-label {
+	font-weight: 700;
+	color: var(--accent-color, #fff);
+}
+
+/* moving indicator element (measured in JS) */
+.nav-indicator {
+	position: absolute;
+	height: 3px;
+	bottom: 25px;
+	left: 0;
+	width: 0;
+	background: var(--accent-color, #fff);
+	border-radius: 2px;
+	transition: left 320ms cubic-bezier(.2, .9, .2, 1), width 320ms cubic-bezier(.2, .9, .2, 1), opacity 160ms ease;
+	opacity: 0;
+	pointer-events: none;
 }
