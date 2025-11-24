@@ -8,7 +8,9 @@ import DetailPage from "./pages/detailpage/DetailPage";
 import WishlistPage from "./pages/wishlistpage/WishlistPage";
 import ProductPage from "./pages/productpage/ProductPage";
 import CheckoutPage from "./pages/checkoutpage/CheckutPage";
+import NotFoundPage from "./pages/notfoundpage/NotFoundPage";
 import DefaultLayout from "./layout/DefaultLayout";
+
 
 import "./App.css";
 
@@ -30,6 +32,8 @@ function App() {
 						<Route path="/carrello" element={<CartPage />} />
 						<Route path="/checkout" element={<CheckoutPage />} />
 					</Route>
+
+					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</BrowserRouter>
 		</DefaultProvider>

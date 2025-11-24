@@ -26,7 +26,7 @@ export default function DetailPage() {
 
 	// const products = location.state?.product;
 
-	// ------------------------------------------ test slug -------------------------------------------------------
+	// ------------------------------------------  slug -------------------------------------------------------
 	const { slug } = useParams(); // Recupero slug dall' URL della rotta
 	const [product, setProduct] = useState(null); // Hook di stato per salvare i dati dinamici della capsula dal backend
 
@@ -41,6 +41,10 @@ export default function DetailPage() {
 			})
 			.catch((error) => {
 				console.error("DETAIL ERROR:", error);
+
+				if (error.response?.status === 404) {
+					navigate("/404");  // redirect alla pagina NotFoundPage
+				}
 			})
 			.finally(() => {
 				setLoading(false); // fine caricamento (sia successo che errore)
@@ -57,6 +61,10 @@ export default function DetailPage() {
 			})
 			.catch((error) => {
 				console.error("RELATED ERROR:", error);
+
+				if (error.response?.status === 404) {
+					navigate("/404"); // redirect alla pagina NotFoundPage
+				}
 			});
 	}
 

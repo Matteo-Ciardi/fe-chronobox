@@ -1,0 +1,101 @@
+
+/* CONTAINER PRINCIPALE */
+.notfound-container {
+    min-height: 100vh;
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(180deg, #4b2e25, #3a2620, #2c1b17);
+    color: #f7e8d8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* IMMAGINE PRINCIPALE */
+.notfound-hero {
+    max-width: 420px;
+    width: 85%;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+
+    /* Aggiunta animazione */
+    animation: floatUpDown 3s ease-in-out infinite;
+}
+
+/* Keyframes dell'animazione */
+@keyframes floatUpDown {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0); }
+}
+
+/* TITOLO */
+.notfound-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #f9d9a6;
+}
+
+/* DESCRIZIONE */
+.notfound-text {
+    font-size: 1.7rem;
+    max-width: 700px;
+    margin-bottom: 45px;
+    color: #f2e1d4;
+    line-height: 1.75;
+}
+
+
+/* BOTTONE HOME */
+
+.notfound-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 45px;
+}
+
+.notfound-btn.home {
+    background-color: #c79b6b;
+    color: #ffffff;
+    padding: 18px 45px;
+    border-radius: 18px;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border: 1px solid #dfc29d;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* ICONA HOME */
+.home-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: #ffffff;
+}
+
+.notfound-btn.home:hover {
+    background-color: #d9b78c;
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.30);
+}
+
+
+/* --------------
+    FOOTER TESTO
+----------------- */
+
+.notfound-footnote {
+    margin-top: 30px;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: rgba(255, 236, 215, 0.75);
+    opacity: 0.75;
+    max-width: 650px;
+    line-height: 1.6;
+    text-align: center;
+}
