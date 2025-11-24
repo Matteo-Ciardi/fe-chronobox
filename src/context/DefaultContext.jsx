@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
-import axios from "axios";
+// import axios from "axios";
 
 const DefaultContext = createContext();
 
@@ -18,22 +18,22 @@ const getInitialCart = () => {
 };
 
 const DefaultProvider = ({ children }) => {
-	const [products, setProducts] = useState([]);
+	// const [products, setProducts] = useState([]);
 	const [cart, setCart] = useState(getInitialCart);
 
-	function fetchProducts() {
-		axios
-			.get("http://localhost:3000/api/capsules")
-			.then((res) => {
-				console.log("RESPONSE:", res.data);
-				setProducts(res.data);
-			})
-			.catch((error) => console.error("FETCH ERROR:", error));
-	}
+	// function fetchProducts() {
+	// 	axios
+	// 		.get("http://localhost:3000/api/capsules")
+	// 		.then((res) => {
+	// 			console.log("RESPONSE:", res.data);
+	// 			setProducts(res.data);
+	// 		})
+	// 		.catch((error) => console.error("FETCH ERROR:", error));
+	// }
 
-	useEffect(() => {
-		fetchProducts();
-	}, []);
+	// useEffect(() => {
+	// 	fetchProducts();
+	// }, []);
 
 	// Ogni volta che il carrello cambia, lo salvo in localStorage
 	useEffect(() => {
@@ -109,7 +109,7 @@ const DefaultProvider = ({ children }) => {
 	return (
 		<DefaultContext.Provider
 			value={{
-				products,
+				// products,
 				cart,
 				addToCart,
 				updateQuantity,
