@@ -9,6 +9,7 @@ import ShippingForm from "../../components/shippingform/ShippingForm";
 import CapsuleDetailsForm from "../../components/capsuledetailform/CapsuleDetailForm";
 import CheckoutCartSummary from "../../components/checkoutsummary/CheckoutSummary";
 import OrderSuccessSummary from "../../components/ordersuccess/OrderSuccess";
+import "./CheckoutPage.css";
 
 const CheckoutPage = () => {
 	const { cart, cartTotal, clearCart } = useProducts();
@@ -37,6 +38,8 @@ const CheckoutPage = () => {
 	const [submitting, setSubmitting] = useState(false);
 	const [orderSummary, setOrderSummary] = useState(null);
 	const [dropinInstance, setDropinInstance] = useState(null);
+
+	const [formErrors, setFormErrors] = useState([]);
 
 	useEffect(() => {
 		let instance; // per teardown nel cleanup
@@ -92,9 +95,9 @@ const CheckoutPage = () => {
 		e.preventDefault();
 
 		// Chiamata funzione per validazioni
-		const errors = validateCheckout(); 
+		const errors = validateCheckout();
 		if (errors.length > 0) {
-			alert("Controlla i seguenti errori:\n\n" + errors.join("\n"));
+			setFormErrors(errors);
 			return;
 		}
 
@@ -195,6 +198,18 @@ const CheckoutPage = () => {
 
 			<div className="checkout-layout">
 				<form className="checkout-form" onSubmit={handleSubmit}>
+
+					{/* Box che mostra tutti gli errori di validazione del form*/}
+					{formErrors.length > 0 && (
+						<div className="error-box">
+							<ul>
+								{formErrors.map((err, i) => (
+									<li key={i}>{err}</li>
+								))}
+							</ul>
+						</div>
+					)}
+
 					<BillingForm
 						billing={billing}
 						onChange={handleBillingChange}
@@ -267,10 +282,8 @@ const CheckoutPage = () => {
 		billing.firstName = normalizeName(billing.firstName);
 		billing.lastName = normalizeName(billing.lastName);
 
-		// Nome: obbligatorio, solo lettere, almeno 3 lettere, massimo 30, niente spazi iniziali/finali
-		if (!billing.firstName.trim()) {
-			errors.push("Il nome è obbligatorio.");
-		} else if (!onlyLetters.test(billing.firstName)) {
+		// Nome: solo lettere, almeno 3 lettere, massimo 30, niente spazi iniziali/finali
+		if (!onlyLetters.test(billing.firstName)) {
 			errors.push("Il nome può contenere solo lettere.");
 		} else if (billing.firstName.trim().length < 3) {
 			errors.push("Il nome deve contenere almeno 3 lettere.");
@@ -280,10 +293,8 @@ const CheckoutPage = () => {
 			errors.push("Il nome non può contenere doppi spazi.");
 		}
 
-		// Cognome: obbligatorio, solo lettere, almeno 3 lettere, massimo 30, niente spazi iniziali/finali
-		if (!billing.lastName.trim()) {
-			errors.push("Il cognome è obbligatorio.");
-		} else if (!onlyLetters.test(billing.lastName)) {
+		// Cognome: solo lettere, almeno 3 lettere, massimo 30, niente spazi iniziali/finali
+		if (!onlyLetters.test(billing.lastName)) {
 			errors.push("Il cognome può contenere solo lettere.");
 		} else if (billing.lastName.trim().length < 3) {
 			errors.push("Il cognome deve contenere almeno 3 lettere.");
@@ -293,75 +304,55 @@ const CheckoutPage = () => {
 			errors.push("Il cognome non può contenere doppi spazi.");
 		}
 
-		// Email: obbligatoria, deve essere valida e con provider riconosciuto
-		if (!billing.email.trim()) {
-			errors.push("L'email è obbligatoria.");
-		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(billing.email)) {
+		// Email: deve essere valida e con provider riconosciuto
+		if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(billing.email)) {
 			errors.push("Inserisci un indirizzo email valido.");
 		} else {
 			// Controllo provider email (parte dopo "@")
 			const provider = billing.email.split("@")[1];
 
 			if (!validEmailProviders.includes(provider)) {
-				errors.push("Il provider email non è riconosciuto. Usa Gmail, Outlook, iCloud, Libero, Virgilio, Email o un indirizzo valido.");
+				errors.push("Il provider email non è riconosciuto. Usa Gmail, Outlook, iCloud, Libero, Virgilio o Email");
 			}
 		}
 
-		// Indirizzo fatturazione: obbligatorio
-		if (!billing.address.trim()) {
-			errors.push("L'indirizzo di fatturazione è obbligatorio.");
-		}
-
-		// Città fatturazione: obbligatoria e solo lettere
-		if (!billing.city.trim()) {
-			errors.push("La città di fatturazione è obbligatoria.");
-		} else if (!onlyLetters.test(billing.city)) {
+		// Città fatturazione: solo lettere
+		if (!onlyLetters.test(billing.city)) {
 			errors.push("La città di fatturazione può contenere solo lettere.");
 		}
 
-		// Paese fatturazione: obbligatorio e solo lettere
-		if (!billing.country.trim()) {
-			errors.push("Il paese di fatturazione è obbligatorio.");
-		} else if (!onlyLetters.test(billing.country)) {
+		// Paese fatturazione: solo lettere, minimo 3 caratteri
+		if (!onlyLetters.test(billing.country)) {
 			errors.push("Il paese di fatturazione può contenere solo lettere.");
+		} else if (billing.country.trim().length < 3) {
+			errors.push("Il paese di fatturazione deve contenere almeno 3 lettere.");
 		}
 
-		// CAP fatturazione: obbligatorio, 5 cifre e non negativo
-		if (!billing.zip.trim()) {
-			errors.push("Il CAP di fatturazione è obbligatorio.");
-		} else if (!capRegex.test(billing.zip)) {
+		// CAP fatturazione: 5 cifre e non negativo
+		if (!capRegex.test(billing.zip)) {
 			errors.push("Il CAP di fatturazione deve contenere 5 cifre.");
 		} else if (parseInt(billing.zip) < 0) {
 			errors.push("Il CAP di fatturazione non può essere negativo.");
 		}
 
 		// ------------------------------------------------------
-		// VALIDAZIONE SPEDIZIONE (indirizzo, città, CAP e paese)
+		//  VALIDAZIONE SPEDIZIONE (indirizzo, città, CAP e paese)
 		// ------------------------------------------------------
 
-		// Indirizzo spedizione
-		if (!shipping.address.trim()) {
-			errors.push("L'indirizzo di spedizione è obbligatorio.");
-		}
-
 		// Città spedizione: solo lettere
-		if (!shipping.city.trim()) {
-			errors.push("La città di spedizione è obbligatoria.");
-		} else if (!onlyLetters.test(shipping.city)) {
+		if (!onlyLetters.test(shipping.city)) {
 			errors.push("La città di spedizione può contenere solo lettere.");
 		}
 
-		// Paese spedizione: solo lettere
-		if (!shipping.country.trim()) {
-			errors.push("Il paese di spedizione è obbligatorio.");
-		} else if (!onlyLetters.test(shipping.country)) {
+		// Paese spedizione: solo lettere, minimo 3 caratteri
+		if (!onlyLetters.test(shipping.country)) {
 			errors.push("Il paese di spedizione può contenere solo lettere.");
+		} else if (shipping.country.trim().length < 3) {
+			errors.push("Il paese di spedizione deve contenere almeno 3 lettere.");
 		}
 
 		// CAP spedizione: 5 cifre e non negativo
-		if (!shipping.zip.trim()) {
-			errors.push("Il CAP di spedizione è obbligatorio.");
-		} else if (isNaN(shipping.zip)) {
+		if (isNaN(shipping.zip)) {
 			errors.push("Il CAP di spedizione deve contenere solo numeri.");
 		} else if (parseInt(shipping.zip) < 0) {
 			errors.push("Il CAP di spedizione non può essere negativo.");
@@ -370,12 +361,10 @@ const CheckoutPage = () => {
 		}
 
 		// ------------------------------------------------------
-		// DATA DI SPEDIZIONE (deve essere futura)
+		//  DATA DI SPEDIZIONE (deve essere futura)
 		// ------------------------------------------------------
 
 		if (!shippingDate.trim()) {
-			errors.push("La data di consegna/apertura è obbligatoria.");
-		} else {
 			const selected = new Date(shippingDate);
 			const today = new Date();
 			today.setHours(0, 0, 0, 0);
@@ -387,7 +376,7 @@ const CheckoutPage = () => {
 		}
 
 		// ------------------------------------------------------
-		// CONTENUTO LETTERA (minimo 10 caratteri)
+		//  CONTENUTO LETTERA (minimo 10 caratteri)
 		// ------------------------------------------------------
 
 		if (letterContent.trim().length < 10) {
