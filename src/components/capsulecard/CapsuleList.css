@@ -14,6 +14,11 @@
 	animation: marquee-scroll 80s linear infinite;
 }
 
+/* pausa l'animazione quando si passa il cursore sopra la track (o su una card al suo interno) */
+.marquee-track:hover {
+	animation-play-state: paused;
+}
+
 .marquee-item {
 	/* flex: 0 0 calc(25% - 15px); */
 	/* circa 4 card visibili */
