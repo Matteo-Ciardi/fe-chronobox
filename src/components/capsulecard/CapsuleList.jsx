@@ -44,12 +44,14 @@ export default function CapsuleList() {
 					if (matrix && matrix !== "none") {
 						const values = matrix.match(/matrix\(([-0-9.,\s]+)\)/);
 						if (values) {
-							const parts = values[1].split(',').map(s => parseFloat(s.trim()));
+							const parts = values[1]
+								.split(",")
+								.map((s) => parseFloat(s.trim()));
 							currentX = parts[4];
 						}
 					}
 					// stop CSS animation and animate a small deceleration
-					track.style.animation = 'none';
+					track.style.animation = "none";
 					// ensure the track keeps current transform
 					track.style.transform = `translateX(${currentX}px)`;
 					// allow layout to settle
@@ -57,14 +59,15 @@ export default function CapsuleList() {
 						const decel = 40; // pixels to continue moving before full stop
 						// move a bit more in the same direction (animation moves left => negative)
 						const target = currentX - decel;
-						track.style.transition = 'transform 420ms cubic-bezier(.2,.9,.2,1)';
+						track.style.transition =
+							"transform 420ms cubic-bezier(.2,.9,.2,1)";
 						track.style.transform = `translateX(${target}px)`;
 						// after transition ends, clear transition but keep transform fixed
 						const onEnd = () => {
-							track.removeEventListener('transitionend', onEnd);
-							track.style.transition = '';
+							track.removeEventListener("transitionend", onEnd);
+							track.style.transition = "";
 						};
-						track.addEventListener('transitionend', onEnd);
+						track.addEventListener("transitionend", onEnd);
 					});
 				}}
 				onMouseLeave={() => {
@@ -77,7 +80,9 @@ export default function CapsuleList() {
 					if (matrix && matrix !== "none") {
 						const values = matrix.match(/matrix\(([-0-9.,\s]+)\)/);
 						if (values) {
-							const parts = values[1].split(',').map(s => parseFloat(s.trim()));
+							const parts = values[1]
+								.split(",")
+								.map((s) => parseFloat(s.trim()));
 							currentX = parts[4];
 						}
 					}
@@ -90,8 +95,8 @@ export default function CapsuleList() {
 					const progress = pos / moveWidth; // 0..1
 					const delay = -progress * marqueeDuration;
 					// clear any transition and inline transform, then re-enable animation
-					track.style.transition = '';
-					track.style.transform = '';
+					track.style.transition = "";
+					track.style.transform = "";
 					track.style.animation = `marquee-scroll ${marqueeDuration}s linear infinite`;
 					track.style.animationDelay = `${delay}s`;
 				}}

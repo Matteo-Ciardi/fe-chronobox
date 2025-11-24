@@ -43,7 +43,7 @@ export default function DetailPage() {
 				console.error("DETAIL ERROR:", error);
 
 				if (error.response?.status === 404) {
-					navigate("/404");  // redirect alla pagina NotFoundPage
+					navigate("/404"); // redirect alla pagina NotFoundPage
 				}
 			})
 			.finally(() => {

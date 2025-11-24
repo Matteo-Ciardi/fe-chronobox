@@ -8,7 +8,14 @@ import "./ProductPage.css";
 
 // Select ordinamento
 const orderOptions = [
-	{ value: "", label: <span><AiOutlineOrderedList /></span> },
+	{
+		value: "",
+		label: (
+			<span>
+				<AiOutlineOrderedList />
+			</span>
+		),
+	},
 	{ value: "price_desc", label: "Prezzo Alto-Basso" },
 	{ value: "price_asc", label: "Prezzo Basso-Alto" },
 	{ value: "name_asc", label: "Nome A-Z" },
@@ -18,8 +25,17 @@ const orderOptions = [
 ];
 
 const themeOptions = [
-	"classic", "premium", "eco", "limited", "flavor",
-	"designer", "coffee", "tea", "kids", "sport", "gourmet"
+	"classic",
+	"premium",
+	"eco",
+	"limited",
+	"flavor",
+	"designer",
+	"coffee",
+	"tea",
+	"kids",
+	"sport",
+	"gourmet",
 ];
 
 const ProductPage = () => {
@@ -36,7 +52,7 @@ const ProductPage = () => {
 
 	const handleThemeChange = (theme) => {
 		if (selectedThemes.includes(theme)) {
-			setSelectedThemes(selectedThemes.filter(t => t !== theme));
+			setSelectedThemes(selectedThemes.filter((t) => t !== theme));
 		} else {
 			setSelectedThemes([...selectedThemes, theme]);
 		}
@@ -46,15 +62,18 @@ const ProductPage = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get("http://localhost:3000/api/capsules", {
-					params: {
-						search: searchTerm,
-						order,
-						theme: selectedThemes.join(","),
-						minPrice,
-						maxPrice
+				const response = await axios.get(
+					"http://localhost:3000/api/capsules",
+					{
+						params: {
+							search: searchTerm,
+							order,
+							theme: selectedThemes.join(","),
+							minPrice,
+							maxPrice,
+						},
 					},
-				});
+				);
 				setProducts(Array.isArray(response.data) ? response.data : []);
 			} catch (error) {
 				console.error("Errore nel fetch dei prodotti:", error);
@@ -64,31 +83,33 @@ const ProductPage = () => {
 	}, [searchTerm, order, selectedThemes, minPrice, maxPrice]);
 
 	return (
-
 		<div className="product-wrapper">
 			<section className="filters">
-      <label className="searchbar-label">Cerca prodotti</label>
-			<input
-						className="searchbar"
-						type="text"
-						name="searchbar"
-						placeholder="Cerca.."
-						value={searchTerm}
-						onChange={handleSearchChange}
-					/>
-              
-       <label className="	">Ordina per</label>
+				<label className="searchbar-label">Cerca prodotti</label>
+				<input
+					className="searchbar"
+					type="text"
+					name="searchbar"
+					placeholder="Cerca.."
+					value={searchTerm}
+					onChange={handleSearchChange}
+				/>
+
+				<label className="	">Ordina per</label>
 				<Select
 					className="order-select"
 					classNamePrefix="order-select"
-					value={orderOptions.find(opt => opt.value === order) || orderOptions[0]}
+					value={
+						orderOptions.find((opt) => opt.value === order) ||
+						orderOptions[0]
+					}
 					onChange={handleOrderChange}
 					options={orderOptions}
 					isSearchable={false}
 				/>
 
 				<div className="theme-checkboxes">
-					{themeOptions.map(theme => (
+					{themeOptions.map((theme) => (
 						<label key={theme}>
 							<input
 								type="checkbox"
@@ -118,14 +139,12 @@ const ProductPage = () => {
 						max="100"
 						value={maxPrice}
 						onChange={(e) => setMaxPrice(Number(e.target.value))}
-
 					/>
 				</div>
 
 				<p className="product-count">
 					{products.length} prodotti trovati
 				</p>
-
 			</section>
 
 			<ProductList products={products} />

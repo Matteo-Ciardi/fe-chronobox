@@ -34,7 +34,7 @@ export default function CapsuleCard(props) {
 		<>
 			<Link
 				to={`/dettagli/${product.slug}`}
-			// className="capsule-button"
+				// className="capsule-button"
 			>
 				<div className="container-capsule">
 					<div className="container-image">
@@ -43,7 +43,9 @@ export default function CapsuleCard(props) {
 
 					<div className="container-capsule-body">
 						<h5 className="capsule-title">{product.name}</h5>
-						<p className="capsule-description">{product.description}</p>
+						<p className="capsule-description">
+							{product.description}
+						</p>
 
 						<div className="capsule-footer">
 							<span className="capsule-price">
@@ -53,22 +55,30 @@ export default function CapsuleCard(props) {
 								<button
 									type="button"
 									className="capsule-button wishlist-btn"
-									onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleWishlist(); }}
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										toggleWishlist();
+									}}
 								>
-									{inWishlist
-										? <FaHeart
-											size='22px' />
-										: <FaRegHeart
-											size='22px' />}
+									{inWishlist ? (
+										<FaHeart size="22px" />
+									) : (
+										<FaRegHeart size="22px" />
+									)}
 								</button>
 								<button
 									type="button"
 									className="capsule-button add-to-cart-btn"
 									onClick={(e) => {
-										e.preventDefault(); e.stopPropagation();
+										e.preventDefault();
+										e.stopPropagation();
 										addToCart(product);
 										setIsAdding(true);
-										setTimeout(() => setIsAdding(false), 1000);
+										setTimeout(
+											() => setIsAdding(false),
+											1000,
+										);
 									}}
 									disabled={isAdding}
 								>

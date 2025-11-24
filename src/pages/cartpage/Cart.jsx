@@ -103,7 +103,9 @@ const CartPage = () => {
 									<button
 										type="button"
 										className="cart-item-remove"
-										onClick={() => removeFromCart(item.time)}
+										onClick={() =>
+											removeFromCart(item.time)
+										}
 									>
 										Rimuovi
 									</button>
