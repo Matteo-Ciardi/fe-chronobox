@@ -20,6 +20,7 @@ const getInitialCart = () => {
 const DefaultProvider = ({ children }) => {
 	// const [products, setProducts] = useState([]);
 	const [cart, setCart] = useState(getInitialCart);
+	const [isCartSidebarOpen, setIsCartSidebarOpen] = useState(false);
 
 	// function fetchProducts() {
 	// 	axios
@@ -106,6 +107,9 @@ const DefaultProvider = ({ children }) => {
 
 	const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
+	const openCartSidebar = () => setIsCartSidebarOpen(true);
+	const closeCartSidebar = () => setIsCartSidebarOpen(false);
+
 	return (
 		<DefaultContext.Provider
 			value={{
@@ -117,6 +121,9 @@ const DefaultProvider = ({ children }) => {
 				clearCart,
 				cartTotal,
 				cartCount,
+				isCartSidebarOpen,
+				openCartSidebar,
+				closeCartSidebar,
 			}}
 		>
 			{children}

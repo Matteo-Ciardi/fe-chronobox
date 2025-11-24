@@ -2,6 +2,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { IoMdCart } from "react-icons/io";
 import { FaRegHeart } from "react-icons/fa";
 import { useRef, useEffect, useState } from "react";
+import { useProducts } from "../../context/DefaultContext";
 
 import "./Navbar.css";
 
@@ -13,6 +14,7 @@ const Navbar = () => {
 	const carrelloRef = useRef(null);
 	const indicatorRef = useRef(null);
 	const location = useLocation();
+	const { openCartSidebar } = useProducts();
 	const [indicatorStyle, setIndicatorStyle] = useState({
 		left: 0,
 		width: 0,
@@ -113,16 +115,15 @@ const Navbar = () => {
 							</NavLink>
 						</li>
 						<li className="nav-icon">
-							<NavLink
-								to="/carrello"
-								className={({ isActive }) =>
-									isActive ? "nav-link active" : "nav-link"
-								}
+							<button
+								type="button"
+								className="nav-cart-btn"
+								onClick={openCartSidebar}
+								aria-label="Apri carrello"
+								ref={carrelloRef}
 							>
-								<span className="nav-label" ref={carrelloRef}>
-									<IoMdCart size="25px" />
-								</span>
-							</NavLink>
+								<IoMdCart size="25px" />
+							</button>
 						</li>
 					</ul>
 

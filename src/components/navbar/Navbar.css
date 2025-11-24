@@ -54,6 +54,21 @@
 	margin-left: 20px;
 }
 
+.nav-cart-btn {
+	background: none;
+	border: none;
+	color: inherit;
+	cursor: pointer;
+	padding: 0 6px;
+	display: inline-block;
+	transition: color 200ms ease;
+	line-height: 1;
+}
+
+.nav-cart-btn:hover {
+	color: var(--accent-color, #fff);
+}
+
 .nav-link.active .nav-label {
 	font-weight: 700;
 	color: var(--accent-color, #fff);
