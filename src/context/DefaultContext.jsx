@@ -43,22 +43,35 @@ const DefaultProvider = ({ children }) => {
 	// Aggiungi al carrello
 	const addToCart = (product) => {
 		setCart((prev) => {
-			const existing = prev.find((item) => item.id === product.id);
+			// const existing = prev.find((item) => item.id === product.id);
 
 			const price = product.discounted_price ?? product.price;
 
-			if (existing) {
-				return prev.map((item) =>
-					item.id === product.id
-						? { ...item, quantity: item.quantity + 1 }
-						: item,
-				);
+			// if (existing) {
+			// 	return prev.map((item) =>
+			// 		item.id === product.id
+			// 			? { ...item, quantity: item.quantity + 1 }
+			// 			: item,
+			// 	);
+			// }
+
+			function getCurrentTime() {
+				const now = new Date();
+
+				const hours = now.getHours();
+				const minutes = now.getMinutes();
+				const seconds = now.getSeconds();
+
+				const currentTime = `${hours}:${minutes}:${seconds}`;
+
+				return currentTime;
 			}
 
 			return [
 				...prev,
 				{
 					id: product.id,
+					time: getCurrentTime(),
 					name: product.name,
 					price,
 					image: product.img,
@@ -70,18 +83,18 @@ const DefaultProvider = ({ children }) => {
 	};
 
 	// Imposta una quantità specifica
-	const updateQuantity = (id, quantity) => {
+	const updateQuantity = (time, quantity) => {
 		const safeQty = Math.max(1, quantity);
 		setCart((prev) =>
 			prev.map((item) =>
-				item.id === id ? { ...item, quantity: safeQty } : item,
+				item.time === time ? { ...item, quantity: safeQty } : item,
 			),
 		);
 	};
 
 	// Rimuovi prodotto
-	const removeFromCart = (id) => {
-		setCart((prev) => prev.filter((item) => item.id !== id));
+	const removeFromCart = (time) => {
+		setCart((prev) => prev.filter((item) => item.time !== time));
 	};
 
 	const clearCart = () => setCart([]);

@@ -7,19 +7,19 @@ const CartPage = () => {
 	const { cart, updateQuantity, removeFromCart, cartTotal, clearCart } =
 		useProducts();
 
-	const handleInputChange = (id, value) => {
+	const handleInputChange = (time, value) => {
 		const qty = Number(value);
 		if (Number.isNaN(qty)) return;
-		updateQuantity(id, qty);
+		updateQuantity(time, qty);
 	};
 
-	const increment = (id, currentQty) => {
-		updateQuantity(id, currentQty + 1);
+	const increment = (time, currentQty) => {
+		updateQuantity(time, currentQty + 1);
 	};
 
-	const decrement = (id, currentQty) => {
+	const decrement = (time, currentQty) => {
 		if (currentQty <= 1) return;
-		updateQuantity(id, currentQty - 1);
+		updateQuantity(time, currentQty - 1);
 	};
 
 	return (
@@ -62,7 +62,7 @@ const CartPage = () => {
 											type="button"
 											onClick={() =>
 												decrement(
-													item.id,
+													item.time,
 													item.quantity,
 												)
 											}
@@ -75,7 +75,7 @@ const CartPage = () => {
 											value={item.quantity}
 											onChange={(e) =>
 												handleInputChange(
-													item.id,
+													item.time,
 													e.target.value,
 												)
 											}
@@ -84,7 +84,7 @@ const CartPage = () => {
 											type="button"
 											onClick={() =>
 												increment(
-													item.id,
+													item.time,
 													item.quantity,
 												)
 											}
