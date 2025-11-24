@@ -42,7 +42,7 @@ const CartPage = () => {
 					<>
 						<ul className="cart-list">
 							{cart.map((item) => (
-								<li key={item.id} className="cart-item">
+								<li key={item.time} className="cart-item">
 									<div className="cart-item-info">
 										{item.image && (
 											<img
@@ -103,7 +103,7 @@ const CartPage = () => {
 									<button
 										type="button"
 										className="cart-item-remove"
-										onClick={() => removeFromCart(item.id)}
+										onClick={() => removeFromCart(item.time)}
 									>
 										Rimuovi
 									</button>
