@@ -48,7 +48,9 @@ const CheckoutPage = () => {
 				// 🔹 forza il nodo a essere vuoto prima di creare la Drop-in
 				dropinContainerRef.current.innerHTML = "";
 
-				const res = await axios.get("http://localhost:3000/api/braintree/token");
+				const res = await axios.get(
+					"http://localhost:3000/api/braintree/token",
+				);
 				const { clientToken } = res.data;
 
 				instance = await dropin.create({
@@ -59,7 +61,9 @@ const CheckoutPage = () => {
 				setDropinInstance(instance);
 			} catch (error) {
 				console.error("Errore setup Braintree:", error);
-				alert("Impossibile inizializzare il pagamento, riprova più tardi.");
+				alert(
+					"Impossibile inizializzare il pagamento, riprova più tardi.",
+				);
 			}
 		}
 
@@ -200,8 +204,13 @@ const CheckoutPage = () => {
 
 					<div ref={dropinContainerRef} id="braintree-dropin" />
 
-					<button type="submit" disabled={submitting || !dropinInstance}>
-						{submitting ? "Elaborazione..." : "Paga e completa l'ordine"}
+					<button
+						type="submit"
+						disabled={submitting || !dropinInstance}
+					>
+						{submitting
+							? "Elaborazione..."
+							: "Paga e completa l'ordine"}
 					</button>
 				</form>
 
