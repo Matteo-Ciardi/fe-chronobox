@@ -81,3 +81,17 @@
 .wishlist-btn:hover {
 	background-color: #cc3333;
 }
+
+.add-to-cart-btn {
+	background-color: #28a745;
+}
+
+.add-to-cart-btn:hover {
+	background-color: #218838;
+}
+
+.add-to-cart-btn:disabled {
+	background-color: #6c757d;
+	cursor: not-allowed;
+	opacity: 0.6;
+}

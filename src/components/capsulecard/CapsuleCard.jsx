@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useProducts } from "../../context/DefaultContext";
 
 import "./CapsuleCard.css";
 
 export default function CapsuleCard(props) {
 	const { product } = props;
+	const { addToCart } = useProducts();
 	const [inWishlist, setInWishlist] = useState(() => {
 		const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
 		return wishlist.some((item) => item.id === product.id);
 	});
+	const [isAdding, setIsAdding] = useState(false);
 
 	const toggleWishlist = () => {
 		const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
@@ -47,6 +50,19 @@ export default function CapsuleCard(props) {
 								{inWishlist
 									? "Rimuovi da Wishlist"
 									: "Aggiungi a Wishlist"}
+							</button>
+							<button
+								className="capsule-button add-to-cart-btn"
+								onClick={() => {
+									addToCart(product);
+									setIsAdding(true);
+									setTimeout(() => setIsAdding(false), 1000);
+								}}
+								disabled={isAdding}
+							>
+								{isAdding
+									? "✓ Aggiunto"
+									: "Aggiungi al Carrello"}
 							</button>
 						</div>
 						<Link
