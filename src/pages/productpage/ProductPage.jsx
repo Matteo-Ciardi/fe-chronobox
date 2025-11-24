@@ -43,13 +43,16 @@ const ProductPage = () => {
 		<>
 			<div className="product-wrapper">
 				<section className="filters">
+					<label className="searchbar-label">Cerca prodotti</label>
 					<input
+						className="searchbar"
 						type="text"
 						name="searchbar"
 						placeholder="Cerca.."
 						value={searchTerm}
 						onChange={handleSearchChange}
 					/>
+					<label className="	">Ordina per</label>
 					<Select
 						className="order-select"
 						classNamePrefix="order-select"
