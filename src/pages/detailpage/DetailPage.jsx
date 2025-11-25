@@ -21,7 +21,6 @@ export default function DetailPage() {
 	const [showModal, setShowModal] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState(null);
 	const [letterText, setLetterText] = useState("");
-	const [imagePreview, setImagePreview] = useState(null);
 
 	const navigate = useNavigate();
 	const { addToCart } = useProducts();
@@ -126,23 +125,12 @@ export default function DetailPage() {
 		window.dispatchEvent(new Event("wishlistUpdate"));
 	};
 
-	const handleFileChange = (e) => {
-		const file = e.target.files[0];
-		if (file) {
-			const reader = new FileReader();
-			reader.onload = () => setImagePreview(reader.result);
-			reader.readAsDataURL(file);
-		}
-	};
-
 	const handleCustomizeAddToCart = () => {
 		addToCart(selectedProduct, {
 			letterContent: letterText,
-			uploadedImage: imagePreview,
 		});
 		setShowModal(false);
 		setLetterText("");
-		setImagePreview(null);
 		setSelectedProduct(null);
 	};
 
@@ -387,22 +375,6 @@ export default function DetailPage() {
 
 						<div className="modal-content">
 							<div className="form-group">
-								<label>Carica un'immagine:</label>
-								<input
-									type="file"
-									accept="image/*"
-									onChange={handleFileChange}
-								/>
-								{imagePreview && (
-									<img
-										src={imagePreview}
-										alt="Preview"
-										className="image-preview"
-									/>
-								)}
-							</div>
-
-							<div className="form-group">
 								<label>Testo della lettera:</label>
 								<textarea
 									value={letterText}
@@ -423,6 +395,7 @@ export default function DetailPage() {
 							<button
 								className="modal-add-btn"
 								onClick={handleCustomizeAddToCart}
+								disabled={!letterText.trim()}
 							>
 								Aggiungi al Carrello
 							</button>
@@ -431,7 +404,6 @@ export default function DetailPage() {
 								onClick={() => {
 									setShowModal(false);
 									setLetterText("");
-									setImagePreview(null);
 									setSelectedProduct(null);
 								}}
 							>

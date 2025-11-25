@@ -15,7 +15,6 @@ export default function CapsuleCard(props) {
 	});
 	const [showModal, setShowModal] = useState(false);
 	const [letterText, setLetterText] = useState("");
-	const [imagePreview, setImagePreview] = useState(null);
 
 	const toggleWishlist = () => {
 		const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
@@ -30,23 +29,12 @@ export default function CapsuleCard(props) {
 		window.dispatchEvent(new Event("wishlistUpdate"));
 	};
 
-	const handleFileChange = (e) => {
-		const file = e.target.files[0];
-		if (file) {
-			const reader = new FileReader();
-			reader.onload = () => setImagePreview(reader.result);
-			reader.readAsDataURL(file);
-		}
-	};
-
 	const handleAddToCart = () => {
 		addToCart(product, {
 			letterContent: letterText,
-			uploadedImage: imagePreview,
 		});
 		setShowModal(false);
 		setLetterText("");
-		setImagePreview(null);
 	};
 
 	if (!product) return null;
@@ -125,7 +113,6 @@ export default function CapsuleCard(props) {
 						onClick={() => {
 							setShowModal(false);
 							setLetterText("");
-							setImagePreview(null);
 						}}
 					>
 						<div
@@ -134,21 +121,6 @@ export default function CapsuleCard(props) {
 						>
 							<h3>Personalizza la tua capsula</h3>
 							<div className="modal-content">
-								<div className="form-group">
-									<label>Carica un'immagine:</label>
-									<input
-										type="file"
-										accept="image/*"
-										onChange={handleFileChange}
-									/>
-									{imagePreview && (
-										<img
-											src={imagePreview}
-											alt="Preview"
-											className="image-preview"
-										/>
-									)}
-								</div>
 								<div className="form-group">
 									<label>Testo della lettera:</label>
 									<textarea
@@ -169,6 +141,7 @@ export default function CapsuleCard(props) {
 								<button
 									className="modal-add-btn"
 									onClick={handleAddToCart}
+									disabled={!letterText.trim()}
 								>
 									Aggiungi al Carrello
 								</button>
@@ -177,7 +150,6 @@ export default function CapsuleCard(props) {
 									onClick={() => {
 										setShowModal(false);
 										setLetterText("");
-										setImagePreview(null);
 									}}
 								>
 									Annulla
