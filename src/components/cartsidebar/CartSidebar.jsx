@@ -101,7 +101,7 @@ const CartSidebar = ({ isOpen, onClose }) => {
 												-
 											</button>
 											<input
-												type="number"
+												type="text"
 												min="1"
 												value={item.quantity}
 												onChange={(e) =>

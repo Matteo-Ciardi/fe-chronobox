@@ -112,6 +112,7 @@
 	margin-bottom: 12px;
 	border: 1px solid var(--dusty-taupe);
 	backdrop-filter: blur(10px);
+	box-shadow: 0px 0px 10px 1px black;
 }
 
 .cart-sidebar-item-info {
@@ -226,6 +227,7 @@
 	margin-top: 16px;
 	transition: background 200ms ease;
 	cursor: pointer;
+	box-shadow: 0px 0px 10px 1px black;
 }
 
 .cart-sidebar-checkout-btn:hover {
@@ -241,10 +243,11 @@
 	text-decoration: none;
 	border-radius: 8px;
 	font-weight: 500;
-	margin-top: 8px;
+	margin-top: 15px;
 	transition: background 200ms ease;
 	cursor: pointer;
 	font-size: 0.95rem;
+	box-shadow: 0px 0px 10px 1px black;
 }
 
 .cart-sidebar-view-btn:hover {
