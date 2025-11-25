@@ -55,7 +55,6 @@
 	color: #000000;
 }
 
-
 .original-price {
 	text-decoration: line-through;
 	color: #888;
@@ -71,7 +70,6 @@
 	color: black;
 	font-weight: bold;
 }
-
 
 .capsule-buttons {
 	display: flex;

@@ -17,7 +17,7 @@ export default function MostPopularList() {
 		if (trackRef.current) {
 			trackRef.current.style.setProperty(
 				"--marquee-duration",
-				`${marqueeDuration}s`
+				`${marqueeDuration}s`,
 			);
 		}
 	}, [marqueeDuration]);

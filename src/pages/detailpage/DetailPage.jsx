@@ -65,10 +65,10 @@ export default function DetailPage() {
 				const initialWishlistStates = {};
 				res.data.forEach((product) => {
 					const wishlist = JSON.parse(
-						localStorage.getItem("wishlist") || "[]"
+						localStorage.getItem("wishlist") || "[]",
 					);
 					initialWishlistStates[product.id] = wishlist.some(
-						(item) => item.id === product.id
+						(item) => item.id === product.id,
 					);
 				});
 				setWishlistStates(initialWishlistStates);
@@ -206,9 +206,20 @@ export default function DetailPage() {
 
 				<div className="amore-info">
 					<h1>{product.name}</h1>
-					<p className="amore-price">
-						{(product.discounted_price.toFixed(2) ?? product.price.toFixed(2)) + " €"}
-					</p>
+					{product.discounted_price ? (
+						<>
+							<span className="original-price">
+								&euro;{product.price.toFixed(2)}
+							</span>
+							<span className="discounted-price">
+								&euro;{product.discounted_price.toFixed(2)}
+							</span>
+						</>
+					) : (
+						<span className="normal-price">
+							&euro;{product.price.toFixed(2)}
+						</span>
+					)}
 
 					<h2 className="amore-section-title">Descrizione</h2>
 
@@ -299,9 +310,20 @@ export default function DetailPage() {
 					>
 						<img src={item.img} alt={item.name} />
 						<h3>{item.name}</h3>
-						<p className="amore-related-price">
-							{(item.discounted_price.toFixed(2) ?? item.price.toFixed(2)) + " €"}
-						</p>
+						{item.discounted_price ? (
+							<>
+								<span className="original-price">
+									&euro;{item.price.toFixed(2)}
+								</span>
+								<span className="discounted-price">
+									&euro;{item.discounted_price.toFixed(2)}
+								</span>
+							</>
+						) : (
+							<span className="normal-price">
+								&euro;{item.price.toFixed(2)}
+							</span>
+						)}
 
 						<div className="amore-related-buttons">
 							<button

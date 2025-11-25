@@ -22,7 +22,10 @@ const DefaultLayout = () => {
 				<Footer />
 			</footer>
 
-			<CartSidebar isOpen={isCartSidebarOpen} onClose={closeCartSidebar} />
+			<CartSidebar
+				isOpen={isCartSidebarOpen}
+				onClose={closeCartSidebar}
+			/>
 		</>
 	);
 };

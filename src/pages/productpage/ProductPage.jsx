@@ -13,9 +13,7 @@ const orderOptions = [
 		value: "",
 		label: (
 			<span>
-				<AiOutlineOrderedList
-					className="select-icon"
-				/>
+				<AiOutlineOrderedList className="select-icon" />
 				Ordina per..
 			</span>
 		),
@@ -29,14 +27,14 @@ const orderOptions = [
 ];
 
 const themeOptions = [
-	"Mini", 
-  "Tradizioni", 
-  "Amore", 
-  "Premium", 
-  "Cambiamento",
-	"Viaggio", 
-  "Classic", 
-  "Ricordi"
+	"Mini",
+	"Tradizioni",
+	"Amore",
+	"Premium",
+	"Cambiamento",
+	"Viaggio",
+	"Classic",
+	"Ricordi",
 ];
 
 const ProductPage = () => {
@@ -68,14 +66,17 @@ const ProductPage = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get("http://localhost:3000/api/capsules", {
-					params: {
-						search: searchTerm,
-						order,
-						theme: selectedThemes.join(","),
-						minPrice,
-						maxPrice,
-						onSale: onSaleOnly,
+				const response = await axios.get(
+					"http://localhost:3000/api/capsules",
+					{
+						params: {
+							search: searchTerm,
+							order,
+							theme: selectedThemes.join(","),
+							minPrice,
+							maxPrice,
+							onSale: onSaleOnly,
+						},
 					},
 				);
 				setProducts(Array.isArray(response.data) ? response.data : []);

@@ -198,7 +198,6 @@ const CheckoutPage = () => {
 
 			<div className="checkout-layout">
 				<form className="checkout-form" onSubmit={handleSubmit}>
-
 					{/* Box che mostra tutti gli errori di validazione del form*/}
 					{formErrors.length > 0 && (
 						<div className="error-box">
@@ -254,9 +253,8 @@ const CheckoutPage = () => {
 		return str
 			.trim()
 			.replace(/\s+/g, " ") // sostituisce doppi spazi
-			.replace(/(^\w|[\s'\-]\w)/g, c => c.toUpperCase()); // rende maiuscole iniziali
+			.replace(/(^\w|[\s'\-]\w)/g, (c) => c.toUpperCase()); // rende maiuscole iniziali
 	}
-
 
 	// Funzione che controlla tutti i campi di input
 	function validateCheckout() {
@@ -270,8 +268,16 @@ const CheckoutPage = () => {
 
 		// Lista di provider email considerati validi
 		const validEmailProviders = [
-			"gmail.com", "outlook.com", "hotmail.com", "live.com",
-			"yahoo.com", "icloud.com", "libero.it", "virgilio.it", "email.it", "pec.it"
+			"gmail.com",
+			"outlook.com",
+			"hotmail.com",
+			"live.com",
+			"yahoo.com",
+			"icloud.com",
+			"libero.it",
+			"virgilio.it",
+			"email.it",
+			"pec.it",
 		];
 
 		// -----------------------------------------------------------
@@ -312,7 +318,9 @@ const CheckoutPage = () => {
 			const provider = billing.email.split("@")[1];
 
 			if (!validEmailProviders.includes(provider)) {
-				errors.push("Il provider email non è riconosciuto. Usa Gmail, Outlook, iCloud, Libero, Virgilio o Email");
+				errors.push(
+					"Il provider email non è riconosciuto. Usa Gmail, Outlook, iCloud, Libero, Virgilio o Email",
+				);
 			}
 		}
 
@@ -325,7 +333,9 @@ const CheckoutPage = () => {
 		if (!onlyLetters.test(billing.country)) {
 			errors.push("Il paese di fatturazione può contenere solo lettere.");
 		} else if (billing.country.trim().length < 3) {
-			errors.push("Il paese di fatturazione deve contenere almeno 3 lettere.");
+			errors.push(
+				"Il paese di fatturazione deve contenere almeno 3 lettere.",
+			);
 		}
 
 		// CAP fatturazione: 5 cifre e non negativo
@@ -348,7 +358,9 @@ const CheckoutPage = () => {
 		if (!onlyLetters.test(shipping.country)) {
 			errors.push("Il paese di spedizione può contenere solo lettere.");
 		} else if (shipping.country.trim().length < 3) {
-			errors.push("Il paese di spedizione deve contenere almeno 3 lettere.");
+			errors.push(
+				"Il paese di spedizione deve contenere almeno 3 lettere.",
+			);
 		}
 
 		// CAP spedizione: 5 cifre e non negativo
@@ -380,7 +392,9 @@ const CheckoutPage = () => {
 		// ------------------------------------------------------
 
 		if (letterContent.trim().length < 10) {
-			errors.push("Il contenuto della lettera deve contenere almeno 10 caratteri.");
+			errors.push(
+				"Il contenuto della lettera deve contenere almeno 10 caratteri.",
+			);
 		}
 
 		// ------------------------------------------------------
@@ -393,8 +407,6 @@ const CheckoutPage = () => {
 
 		return errors;
 	}
-
-
 };
 
 export default CheckoutPage;
