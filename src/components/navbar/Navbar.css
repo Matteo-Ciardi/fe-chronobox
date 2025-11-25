@@ -63,10 +63,46 @@
 	display: inline-block;
 	transition: color 200ms ease;
 	line-height: 1;
+	position: relative;
 }
 
 .nav-cart-btn:hover {
 	color: var(--accent-color, #fff);
+}
+
+/* Cart badge */
+.cart-badge {
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	background: #ff0000;
+	color: #fff;
+	font-size: 0.7rem;
+	font-weight: 700;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 2px solid var(--clay-soil, #1a1a1f);
+	animation: badgePop 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes badgePop {
+	0% {
+		transform: scale(0.5);
+		opacity: 0;
+	}
+
+	50% {
+		transform: scale(1.15);
+	}
+
+	100% {
+		transform: scale(1);
+		opacity: 1;
+	}
 }
 
 .nav-link.active .nav-label {
