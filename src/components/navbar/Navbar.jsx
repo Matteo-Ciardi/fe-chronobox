@@ -14,7 +14,7 @@ const Navbar = () => {
 	const carrelloRef = useRef(null);
 	const indicatorRef = useRef(null);
 	const location = useLocation();
-	const { openCartSidebar } = useProducts();
+	const { openCartSidebar, cartCount } = useProducts();
 	const [indicatorStyle, setIndicatorStyle] = useState({
 		left: 0,
 		width: 0,
@@ -123,6 +123,11 @@ const Navbar = () => {
 								ref={carrelloRef}
 							>
 								<IoMdCart size="25px" />
+								{cartCount > 0 && (
+									<span className="cart-badge">
+										{cartCount}
+									</span>
+								)}
 							</button>
 						</li>
 					</ul>

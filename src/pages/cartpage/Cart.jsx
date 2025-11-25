@@ -44,6 +44,7 @@ const CartPage = () => {
 							{cart.map((item) => (
 								<li key={item.time} className="cart-item">
 									<div className="cart-item-info">
+										<div className="thumb-container">
 										{item.image && (
 											<img
 												src={item.image}
@@ -51,6 +52,7 @@ const CartPage = () => {
 												className="cart-item-thumb"
 											/>
 										)}
+										</div>
 										<div>
 											<h2>{item.name}</h2>
 											<p>{item.price.toFixed(2)} €</p>

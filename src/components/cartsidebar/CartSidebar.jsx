@@ -7,6 +7,9 @@ const CartSidebar = ({ isOpen, onClose }) => {
 	const { cart, updateQuantity, removeFromCart, cartTotal, clearCart } =
 		useProducts();
 
+	// Calcola il totale dei prodotti localmente dal cart array
+	const cartItemCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+
 	const handleInputChange = (time, value) => {
 		const qty = Number(value);
 		if (Number.isNaN(qty)) return;
@@ -33,6 +36,9 @@ const CartSidebar = ({ isOpen, onClose }) => {
 			<aside className={`cart-sidebar ${isOpen ? "is-open" : ""}`}>
 				<div className="cart-sidebar-header">
 					<h2>Il tuo carrello</h2>
+					{cartItemCount > 0 && (
+						<span className="cart-sidebar-count">{cartItemCount}</span>
+					)}
 					<button
 						type="button"
 						className="cart-sidebar-close"

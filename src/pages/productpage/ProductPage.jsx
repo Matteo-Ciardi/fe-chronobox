@@ -153,6 +153,18 @@ const ProductPage = () => {
 					({products.length} prodotti trovati)
 				</p>
 
+				<div className="sale-checkbox">
+					<label className="checkbox-label">
+						<input
+							className="checkbox"
+							type="checkbox"
+							checked={onSaleOnly}
+							onChange={handleOnSaleChange}
+						/>
+						In offerta
+					</label>
+				</div>
+
 				<div className="theme-checkboxes">
 					<label className="filter-label">Filtra per</label>
 					{themeOptions.map((theme) => (
