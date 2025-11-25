@@ -333,7 +333,7 @@ export default function DetailPage() {
 												setShowModal(true);
 											}}
 										>
-											Aggiungi al Carrello
+											Personalizza
 										</button>
 									</div>
 								</div>
