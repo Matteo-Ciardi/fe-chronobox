@@ -1,60 +1,72 @@
+import './OrderSuccess.css'
+
 const OrderSuccessSummary = ({ summary }) => {
 	return (
 		<main>
-			<h1>Ordine completato</h1>
-			<p>Ordine avvenuto con successo!</p>
+			<div className="wrapper">
+				<div className='order-complete-card'>
+					<section className='section-end'>
+						<h1 className='section-title-main'>Ordine completato</h1>
+						<p>Ordine avvenuto con successo!</p>
+					</section>
 
-			<section>
-				<h2>Dati cliente</h2>
-				<p>{summary.customer_name}</p>
-				<p>{summary.customer_email}</p>
-			</section>
+					<section className='section-end'>
+						<h2 className='section-title'>Dati cliente</h2>
+						<p>{summary.customer_name}</p>
+						<p>{summary.customer_email}</p>
+					</section>
 
-			<section>
-				<h2>Indirizzo di fatturazione</h2>
-				<p>{summary.billing.address}</p>
-				<p>
-					{summary.billing.zip} {summary.billing.city}
-				</p>
-				<p>{summary.billing.country}</p>
-			</section>
+					<section className='section-end'>
+						<h2 className='section-title'>Indirizzo di fatturazione</h2>
+						<p>
+							{summary.billing.address}
+						</p>
+						<p>
+							{summary.billing.zip}
+						</p>
+						<p>{summary.billing.city}</p>
+						<p>{summary.billing.country}</p>
+					</section>
 
-			{/* <section>
-				<h2>Indirizzo di spedizione</h2>
-				<p>{summary.shipping.address}</p>
-				<p>
-					{summary.shipping.zip} {summary.shipping.city}
-				</p>
-				<p>{summary.shipping.country}</p>
-			</section> */}
+					<section className='section-end'>
+						<h2 className='section-title'>Dettagli capsula</h2>
+						<p>Data di consegna/apertura: {summary.shippingDate}</p>
+						<p>Lettera:</p>
+						<p>{summary.letterContent}</p>
+					</section>
 
-			<section>
-				<h2>Dettagli capsula</h2>
-				<p>Data di consegna/apertura: {summary.shippingDate}</p>
-				<p>Lettera:</p>
-				<p>{summary.letterContent}</p>
-			</section>
+					<section className='product-recap'>
+						<h2 className='section-title'>Riepilogo prodotti</h2>
+						<div>
+							<ul>
+								{summary.items.map((item) => (
+									<li key={item.id} className='checkout-row'>
+										<p>{item.name} × {item.quantity} —{" "}</p>
+										<p className='price'>{item.subtotal.toFixed(2)} €</p>
+									</li>
+								))}
+							</ul>
+						</div>
+						<div className='checkout-row'>
+							<p>Totale prodotti: </p>
+							<p className='price'>
+								{summary.productsTotal.toFixed(2)} €
+							</p>
+						</div>
+						<p className='checkout-row'>
+							<p>Spedizione:{" "}</p>
+							<p className='price'>{summary.shippingCost > 0
+								? `${summary.shippingCost.toFixed(2)} €`
+								: "Gratis"}</p>
+						</p>
 
-			<section>
-				<h2>Riepilogo prodotti</h2>
-				<ul>
-					{summary.items.map((item) => (
-						<li key={item.id}>
-							{item.name} × {item.quantity} —{" "}
-							{item.subtotal.toFixed(2)} €
-						</li>
-					))}
-				</ul>
-				<p>Totale prodotti: {summary.productsTotal.toFixed(2)} €</p>
-				<p>
-					Spedizione:{" "}
-					{summary.shippingCost > 0
-						? `${summary.shippingCost.toFixed(2)} €`
-						: "Gratis"}
-				</p>
-
-				<p>Totale ordine: {summary.total.toFixed(2)} €</p>
-			</section>
+						<p className='checkout-row-total'>
+							<p>Totale ordine: </p>
+							<p className='price'>{summary.total.toFixed(2)} €</p>
+						</p>
+					</section>
+				</div>
+			</div>
 		</main>
 	);
 };
