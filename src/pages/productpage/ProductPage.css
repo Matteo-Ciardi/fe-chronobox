@@ -33,7 +33,7 @@
 	padding: 10px 12px;
 	width: 100%;
 	border: 1px solid #ddd;
-	border-radius: 6px;
+	border-radius: 50px;
 	box-sizing: border-box;
 }
 
@@ -132,5 +132,6 @@
 .product-count {
 	font-size: 0.9rem;
 	margin-top: 5px;
+	margin-left: 15px;
 	color: rgb(183, 183, 183);
 }
