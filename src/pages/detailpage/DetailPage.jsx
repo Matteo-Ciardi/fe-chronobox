@@ -131,7 +131,7 @@ export default function DetailPage() {
 	};
 
 	// Carosello per relatedProducts
-	const cardsPerView = 5;
+	const cardsPerView = 4;
 	const maxIndex = Math.max(0, relatedProducts.length - cardsPerView);
 
 	const handleCarouselPrev = () => {
@@ -315,27 +315,55 @@ export default function DetailPage() {
 							key={item.slug}
 							onClick={() => navigate(`/dettagli/${item.slug}`)}
 						>
-							<img src={item.img} alt={item.name} />
-							<h3>{item.name}</h3>
-							{item.discounted_price ? (
-								<>
-									<span className="original-price">
-										&euro;{item.price.toFixed(2)}
-									</span>
-									<span className="discounted-price">
-										&euro;{item.discounted_price.toFixed(2)}
-									</span>
-								</>
-							) : (
-								<span className="normal-price">
-									&euro;{item.price.toFixed(2)}
-								</span>
-							)}
+							<div className="detail-image">
+								<img src={item.img} alt={item.name} />
+							</div>
+
+							<div className="container-capsule-body">
+								<h3>{item.name}</h3>
+								<p className="capsule-description">
+									{product.description}
+								</p>
+
+
+								<div className="capsule-footer">
+									<div className="capsule-price">
+										{item.discounted_price ? (
+											<>
+												<span className="original-price">
+													&euro;{item.price.toFixed(2)}
+												</span>
+												<span className="discounted-price">
+													&euro;{item.discounted_price.toFixed(2)}
+												</span>
+											</>
+										) : (
+											<span className="normal-price">
+												&euro;{item.price.toFixed(2)}
+											</span>
+										)}
+									</div>
+									<button
+										type="button"
+										className="amore-related-cart-btn"
+										onClick={(e) => {
+											e.preventDefault();
+											e.stopPropagation();
+											handleRelatedAddToCart(item);
+										}}
+										disabled={addingStates[item.id]}
+									>
+										{addingStates[item.id]
+											? "✓ Aggiunto"
+											: "Aggiungi al Carrello"}
+									</button>
+								</div>
+							</div>
 
 							<div className="amore-related-buttons">
 								<button
 									type="button"
-									className="amore-related-wishlist-btn"
+									className="capsule-button wishlist-btn"
 									onClick={(e) => {
 										e.preventDefault();
 										e.stopPropagation();
@@ -344,39 +372,27 @@ export default function DetailPage() {
 									aria-label="Aggiungi a wishlist"
 								>
 									{wishlistStates[item.id] ? (
-										<FaHeart size="18px" />
+										<FaHeart size="22px" />
 									) : (
-										<FaRegHeart size="18px" />
+										<FaRegHeart size="22px" />
 									)}
-								</button>
-								<button
-									type="button"
-									className="amore-related-cart-btn"
-									onClick={(e) => {
-										e.preventDefault();
-										e.stopPropagation();
-										handleRelatedAddToCart(item);
-									}}
-									disabled={addingStates[item.id]}
-								>
-									{addingStates[item.id]
-										? "✓ Aggiunto"
-										: "Aggiungi al Carrello"}
 								</button>
 							</div>
 						</div>
 					))}
 				</div>
-				{relatedProducts.length > cardsPerView && (
-					<button
-						className="amore-carousel-arrow amore-carousel-arrow-right"
-						onClick={handleCarouselNext}
-						disabled={carouselIndex === maxIndex}
-						aria-label="Prodotti successivi"
-					>
-						❯
-					</button>
-				)}
+				{
+					relatedProducts.length > cardsPerView && (
+						<button
+							className="amore-carousel-arrow amore-carousel-arrow-right"
+							onClick={handleCarouselNext}
+							disabled={carouselIndex === maxIndex}
+							aria-label="Prodotti successivi"
+						>
+							❯
+						</button>
+					)
+				}
 			</div>
 		</div>
 	);
