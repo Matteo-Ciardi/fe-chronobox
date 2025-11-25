@@ -148,3 +148,107 @@
 	margin-left: 360px;
 	font-size: 2rem;
 }
+
+
+
+/* ============================================
+   CARD GRID (DESKTOP) – FIX AGGIUNTO
+============================================ */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.product-card {
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+
+
+/* ============================================
+   TABLET - max-width 768px
+============================================ */
+@media (max-width: 768px) {
+
+	.product-wrapper {
+		flex-direction: column;
+		width: 95%;
+	}
+
+	/* Filtri ordinati e ben distribuiti */
+	.filters {
+		width: 100%;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 15px 20px;
+		align-items: center;
+	}
+
+	.searchbar-wrapper {
+		width: 100%;
+	}
+
+	.order-select {
+		width: 48%;
+	}
+
+	.theme-checkboxes {
+		width: 100%;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 10px 20px;
+	}
+
+	.price-slider {
+		width: 100%;
+	}
+
+	.product-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+
+
+/* ============================================
+   MOBILE - max-width 430px
+============================================ */
+@media (max-width: 430px) {
+
+	.product-wrapper {
+		width: 100%;
+		padding: 0 10px;
+	}
+
+	.filters {
+		flex-direction: column;
+		width: 100%;
+		align-items: flex-start;
+		gap: 15px;
+	}
+
+	.order-select {
+		width: 100%;
+	}
+
+	.theme-checkboxes {
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.product-list {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+    }
+
+	.no-products-message {
+		width: 100%;
+		text-align: center;
+	}
+}
