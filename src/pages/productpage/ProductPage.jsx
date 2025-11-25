@@ -29,23 +29,21 @@ const orderOptions = [
 ];
 
 const themeOptions = [
-	"classic",
-	"premium",
-	"eco",
-	"limited",
-	"flavor",
-	"designer",
-	"coffee",
-	"tea",
-	"kids",
-	"sport",
-	"gourmet",
+	"Mini", 
+  "Tradizioni", 
+  "Amore", 
+  "Premium", 
+  "Cambiamento",
+	"Viaggio", 
+  "Classic", 
+  "Ricordi"
 ];
 
 const ProductPage = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [order, setOrder] = useState("");
 	const [selectedThemes, setSelectedThemes] = useState([]);
+	const [onSaleOnly, setOnSaleOnly] = useState(false); // nuova checkbox
 	const [products, setProducts] = useState([]);
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(100);
@@ -56,26 +54,28 @@ const ProductPage = () => {
 
 	const handleThemeChange = (theme) => {
 		if (selectedThemes.includes(theme)) {
-			setSelectedThemes(selectedThemes.filter((t) => t !== theme));
+			setSelectedThemes([]);
 		} else {
-			setSelectedThemes([...selectedThemes, theme]);
+			setSelectedThemes([theme]);
 		}
+	};
+
+	const handleOnSaleChange = () => {
+		setOnSaleOnly(!onSaleOnly);
 	};
 
 	// Fetch prodotti filtrati
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				const response = await axios.get(
-					"http://localhost:3000/api/capsules",
-					{
-						params: {
-							search: searchTerm,
-							order,
-							theme: selectedThemes.join(","),
-							minPrice,
-							maxPrice,
-						},
+				const response = await axios.get("http://localhost:3000/api/capsules", {
+					params: {
+						search: searchTerm,
+						order,
+						theme: selectedThemes.join(","),
+						minPrice,
+						maxPrice,
+						onSale: onSaleOnly,
 					},
 				);
 				setProducts(Array.isArray(response.data) ? response.data : []);
@@ -84,7 +84,7 @@ const ProductPage = () => {
 			}
 		};
 		fetchData();
-	}, [searchTerm, order, selectedThemes, minPrice, maxPrice]);
+	}, [searchTerm, order, selectedThemes, minPrice, maxPrice, onSaleOnly]);
 
 	return (
 		<div className="product-wrapper">
@@ -121,6 +121,18 @@ const ProductPage = () => {
 					))}
 				</div>
 
+				{/* Checkbox prodotti in promozione */}
+				<div className="sale-checkbox">
+					<label>
+						<input
+							type="checkbox"
+							checked={onSaleOnly}
+							onChange={handleOnSaleChange}
+						/>
+						Solo prodotti in promozione
+					</label>
+				</div>
+
 				<div className="price-slider">
 					<RangeSlider
 						minValue={minPrice}
@@ -131,7 +143,6 @@ const ProductPage = () => {
 						max={100}
 					/>
 				</div>
-
 
 				<Select
 					className="order-select"
@@ -146,9 +157,12 @@ const ProductPage = () => {
 				/>
 			</section>
 
-			<ProductList products={products} />
+			{products.length > 0 ? (
+				<ProductList products={products} />
+			) : (
+				<p className="no-products-message">Nessun prodotto trovato.</p>
+			)}
 		</div>
 	);
 };
-
 export default ProductPage;

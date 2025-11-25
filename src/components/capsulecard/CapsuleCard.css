@@ -55,6 +55,24 @@
 	color: #000000;
 }
 
+
+.original-price {
+	text-decoration: line-through;
+	color: #888;
+	margin-right: 8px;
+}
+
+.discounted-price {
+	color: red;
+	font-weight: bold;
+}
+
+.normal-price {
+	color: black;
+	font-weight: bold;
+}
+
+
 .capsule-buttons {
 	display: flex;
 	gap: 8px;
