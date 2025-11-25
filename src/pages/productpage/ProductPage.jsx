@@ -101,6 +101,10 @@ const ProductPage = () => {
 					<label className="searchbar-label">Cerca prodotti</label>
 				</div>
 
+				<p className="product-count">
+					({products.length} prodotti trovati)
+				</p>
+
 				<div className="theme-checkboxes">
 					<label className="filter-label">Filtra per</label>
 					{themeOptions.map((theme) => (
@@ -128,9 +132,6 @@ const ProductPage = () => {
 					/>
 				</div>
 
-				<p className="product-count">
-					{products.length} prodotti trovati
-				</p>
 
 				<Select
 					className="order-select"
