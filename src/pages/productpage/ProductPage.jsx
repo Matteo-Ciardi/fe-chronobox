@@ -12,7 +12,10 @@ const orderOptions = [
 		value: "",
 		label: (
 			<span>
-				<AiOutlineOrderedList />
+				<AiOutlineOrderedList
+					className="select-icon"
+				/>
+				Ordina per..
 			</span>
 		),
 	},
@@ -85,17 +88,18 @@ const ProductPage = () => {
 	return (
 		<div className="product-wrapper">
 			<section className="filters">
-				<label className="searchbar-label">Cerca prodotti</label>
-				<input
-					className="searchbar"
-					type="text"
-					name="searchbar"
-					placeholder="Cerca.."
-					value={searchTerm}
-					onChange={handleSearchChange}
-				/>
+				<div className="searchbar-wrapper">
+					<input
+						className="searchbar"
+						type="text"
+						name="searchbar"
+						placeholder=" "
+						value={searchTerm}
+						onChange={handleSearchChange}
+					/>
+					<label className="searchbar-label">Cerca prodotti</label>
+				</div>
 
-				<label className="	">Ordina per</label>
 				<Select
 					className="order-select"
 					classNamePrefix="order-select"
@@ -109,9 +113,11 @@ const ProductPage = () => {
 				/>
 
 				<div className="theme-checkboxes">
+					<label className="filter-label">Filtra per</label>
 					{themeOptions.map((theme) => (
-						<label key={theme}>
+						<label key={theme} className="checkbox-label">
 							<input
+								className="checkbox"
 								type="checkbox"
 								value={theme}
 								checked={selectedThemes.includes(theme)}
