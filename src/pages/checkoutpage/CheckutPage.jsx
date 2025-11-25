@@ -136,7 +136,7 @@ const CheckoutPage = () => {
 				billing_address: `${billing.address}, ${billing.zip} ${billing.city}, ${billing.country}`,
 				total_amount: finalTotal,
 				status: "pending",
-				items: summary.items.map((item) => ({
+				items: cart.map((item) => ({
 					// campi per DB
 					capsule_id: item.id,
 					quantity: item.quantity,

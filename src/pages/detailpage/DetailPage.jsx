@@ -16,7 +16,7 @@ export default function DetailPage() {
 	const [relatedProducts, setRelatedProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [wishlistStates, setWishlistStates] = useState({});
-	const [addingStates, setAddingStates] = useState({});
+
 	const [carouselIndex, setCarouselIndex] = useState(0);
 	const [showModal, setShowModal] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState(null);
@@ -96,8 +96,8 @@ export default function DetailPage() {
 	};
 
 	const handleAddToCart = () => {
-		addToCart(product);
-		navigate("/carrello");
+		setSelectedProduct(product);
+		setShowModal(true);
 	};
 
 	const cardsPerView = 4;
@@ -203,7 +203,7 @@ export default function DetailPage() {
 					<p className="amore-description">{product.description}</p>
 
 					<button className="amore-btn" onClick={handleAddToCart}>
-						Aggiungi al carrello
+						Personalizza
 					</button>
 				</div>
 			</div>
@@ -325,11 +325,12 @@ export default function DetailPage() {
 
 										<button
 											type="button"
-											className="amore-related-cart-btn"
+											className="amore-btn"
 											onClick={(e) => {
 												e.preventDefault();
 												e.stopPropagation();
-												addToCart(item);
+												setSelectedProduct(item);
+												setShowModal(true);
 											}}
 										>
 											Aggiungi al Carrello
