@@ -1,0 +1,47 @@
+/* BillingForm.css */
+.billing-form {
+  margin-bottom: 30px;
+}
+
+.billing-form h2 {
+  margin-bottom: 20px;
+  color: var(--deep-mocha);
+  border-bottom: 2px solid var(--mauve-bark);
+  display: inline-block;
+  padding-bottom: 5px;
+  font-size: 1.4rem;
+}
+
+.billing-form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.billing-form label {
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: var(--dark-coffee);
+}
+
+.billing-form input[type="text"],
+.billing-form input[type="email"],
+.billing-form input[type="number"] {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--dusty-taupe);
+  background-color: var(--powder-petal);
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.billing-form input:focus {
+  outline: none;
+  border-color: var(--clay-soil);
+  box-shadow: 0 0 5px var(--clay-soil);
+}
+
+.billing-form input::placeholder {
+  color: var(--mauve-bark);
+  opacity: 0.7;
+}
