@@ -216,33 +216,16 @@ export default function DetailPage() {
 							</span>
 						</>
 					) : (
-						<span className="normal-price">
+						<span className="big-price">
 							&euro;{product.price.toFixed(2)}
 						</span>
 					)}
-
-					<h2 className="amore-section-title">Descrizione</h2>
 
 					<p className="amore-description">{product.description}</p>
 
 					<button className="amore-btn" onClick={handleAddToCart}>
 						Aggiungi al carrello
 					</button>
-
-					<div className="amore-feature-box">
-						<div className="amore-feature">
-							<strong>Dimensioni</strong>
-							<span>{product.dimension}</span>
-						</div>
-						<div className="amore-feature">
-							<strong>Materiale</strong>
-							<span>{product.material}</span>
-						</div>
-						<div className="amore-feature">
-							<strong>Peso</strong>
-							<span>{product.weight} g</span>
-						</div>
-					</div>
 				</div>
 			</div>
 

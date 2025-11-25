@@ -45,16 +45,11 @@
 	/* color: black; */
 }
 
-.amore-price {
-	font-size: 24px;
-	font-weight: bold;
-	margin-bottom: 20px;
-}
-
 .amore-description {
 	font-size: 16px;
 	line-height: 1.6;
-	margin-bottom: 20px;
+	margin-bottom: 170px;
+	margin-top: 20px;
 }
 
 .amore-btn {
@@ -66,7 +61,7 @@
 	border-radius: 8px;
 	font-size: 16px;
 	cursor: pointer;
-	margin-bottom: 25px;
+	/* margin-bottom: 25px; */
 	box-shadow: 0px 0px 10px 2px rgb(0, 0, 0);
 }
 
@@ -132,10 +127,6 @@
 	font-weight: 600;
 }
 
-/* .amore-spec-value {
-	color: #555;
-} */
-
 /* cosa puoi conservare */
 .amore-icons-row {
 	width: 100%;
@@ -149,15 +140,15 @@
 }
 
 .amore-icon-box {
-	background: #ffffff;
+	background: var(--powder-petal);
+	backdrop-filter: blur(10px);
 	border-radius: 12px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-	padding: 10px;
+	box-shadow: 0px 0px 10px 1px black;
+	padding: 20px;
 	text-align: center;
 	display: flex;
 	flex-direction: column;
 	gap: 4px;
-	color: #000000;
 }
 
 .amore-icon-image {
@@ -172,12 +163,12 @@
 
 .amore-icon-title {
 	font-weight: 600;
-	font-size: 15px;
+	font-size: 1.5rem;
 }
 
 .amore-icon-caption {
-	font-size: 13px;
-	color: #666;
+	font-size: 1rem;
+	color: #ffffff;
 }
 
 /* correlati */
@@ -312,4 +303,9 @@
 .amore-variant-btn.active {
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 	transform: translateY(-1px);
+}
+
+.big-price {
+	font-weight: 600;
+	font-size: 2rem;
 }
