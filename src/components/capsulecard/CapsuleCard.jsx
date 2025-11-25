@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import ReactDOM from "react-dom";
 import { useProducts } from "../../context/DefaultContext";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 
@@ -15,7 +16,6 @@ export default function CapsuleCard(props) {
 	const [showModal, setShowModal] = useState(false);
 	const [letterText, setLetterText] = useState("");
 	const [imagePreview, setImagePreview] = useState(null);
-	const [isAdding, setIsAdding] = useState(false);
 
 	const toggleWishlist = () => {
 		const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
@@ -103,22 +103,14 @@ export default function CapsuleCard(props) {
 								</button>
 								<button
 									type="button"
-									className="capsule-button add-to-cart-btn"
+									className="capsule-button customize-btn"
 									onClick={(e) => {
 										e.preventDefault();
 										e.stopPropagation();
-										addToCart(product);
-										setIsAdding(true);
-										setTimeout(
-											() => setIsAdding(false),
-											1000,
-										);
+										setShowModal(true);
 									}}
-									disabled={isAdding}
 								>
-									{isAdding
-										? "✓ Aggiunto"
-										: "Aggiungi al Carrello"}
+									Personalizza
 								</button>
 							</div>
 						</div>
@@ -126,64 +118,75 @@ export default function CapsuleCard(props) {
 				</div>
 			</Link>
 
-			{showModal && (
-				<div className="customize-modal-overlay">
-					<div className="customize-modal">
-						<h3>Personalizza la tua capsula</h3>
-						<div className="modal-content">
-							<div className="form-group">
-								<label>Carica un'immagine:</label>
-								<input
-									type="file"
-									accept="image/*"
-									onChange={handleFileChange}
-								/>
-								{imagePreview && (
-									<img
-										src={imagePreview}
-										alt="Preview"
-										className="image-preview"
+			{showModal &&
+				ReactDOM.createPortal(
+					<div
+						className="customize-modal-overlay"
+						onClick={() => {
+							setShowModal(false);
+							setLetterText("");
+							setImagePreview(null);
+						}}
+					>
+						<div
+							className="customize-modal"
+							onClick={(e) => e.stopPropagation()}
+						>
+							<h3>Personalizza la tua capsula</h3>
+							<div className="modal-content">
+								<div className="form-group">
+									<label>Carica un'immagine:</label>
+									<input
+										type="file"
+										accept="image/*"
+										onChange={handleFileChange}
 									/>
-								)}
-							</div>
-							<div className="form-group">
-								<label>Testo della lettera:</label>
-								<textarea
-									value={letterText}
-									onChange={(e) =>
-										setLetterText(e.target.value)
-									}
-									placeholder="Scrivi il tuo messaggio..."
-									rows="4"
-									maxLength="3000"
-								/>
-								<div className="char-counter">
-									{letterText.length}/3000 caratteri
+									{imagePreview && (
+										<img
+											src={imagePreview}
+											alt="Preview"
+											className="image-preview"
+										/>
+									)}
+								</div>
+								<div className="form-group">
+									<label>Testo della lettera:</label>
+									<textarea
+										value={letterText}
+										onChange={(e) =>
+											setLetterText(e.target.value)
+										}
+										placeholder="Scrivi il tuo messaggio..."
+										rows="4"
+										maxLength="3000"
+									/>
+									<div className="char-counter">
+										{letterText.length}/3000 caratteri
+									</div>
 								</div>
 							</div>
+							<div className="modal-buttons">
+								<button
+									className="modal-add-btn"
+									onClick={handleAddToCart}
+								>
+									Aggiungi al Carrello
+								</button>
+								<button
+									className="modal-cancel-btn"
+									onClick={() => {
+										setShowModal(false);
+										setLetterText("");
+										setImagePreview(null);
+									}}
+								>
+									Annulla
+								</button>
+							</div>
 						</div>
-						<div className="modal-buttons">
-							<button
-								className="modal-add-btn"
-								onClick={handleAddToCart}
-								disabled={!letterText.trim()}
-							>
-								Personalizza
-							</button>
-							<button
-								className="modal-cancel-btn"
-								onClick={() => {
-									setShowModal(false);
-									setLetterText("");
-									setImagePreview(null);
-								}}
-							>
-								Annulla
-							</button>
-						</div>
-					</div>
-				</div>
-			)}
+					</div>,
+					document.body,
+				)}
 		</>
 	);
 }

@@ -21,7 +21,10 @@ export default function DetailPage() {
 	const [relatedProducts, setRelatedProducts] = useState([]);
 	const [loading, setLoading] = useState(true); // Hook di stato per salvare lo stato della risposta API
 	const [wishlistStates, setWishlistStates] = useState({}); // stato wishlist per relatedProducts
-	const [addingStates, setAddingStates] = useState({}); // stato adding per relatedProducts
+	const [showModal, setShowModal] = useState(false);
+	const [selectedProduct, setSelectedProduct] = useState(null);
+	const [letterText, setLetterText] = useState("");
+	const [imagePreview, setImagePreview] = useState(null);
 
 	// const location = useLocation();
 	const navigate = useNavigate();
@@ -124,11 +127,6 @@ export default function DetailPage() {
 		transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)`,
 	};
 
-	const handleAddToCart = () => {
-		addToCart(product);
-		navigate("/carrello");
-	};
-
 	// Gestire wishlist per relatedProducts
 	const toggleRelatedWishlist = (productId, product) => {
 		const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
@@ -149,19 +147,24 @@ export default function DetailPage() {
 		window.dispatchEvent(new Event("wishlistUpdate"));
 	};
 
-	// Gestire add to cart per relatedProducts
-	const handleRelatedAddToCart = (relatedProduct) => {
-		addToCart(relatedProduct);
-		setAddingStates((prev) => ({
-			...prev,
-			[relatedProduct.id]: true,
-		}));
-		setTimeout(() => {
-			setAddingStates((prev) => ({
-				...prev,
-				[relatedProduct.id]: false,
-			}));
-		}, 1000);
+	const handleFileChange = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.onload = () => setImagePreview(reader.result);
+			reader.readAsDataURL(file);
+		}
+	};
+
+	const handleCustomizeAddToCart = () => {
+		addToCart(selectedProduct, {
+			letterContent: letterText,
+			uploadedImage: imagePreview,
+		});
+		setShowModal(false);
+		setLetterText("");
+		setImagePreview(null);
+		setSelectedProduct(null);
 	};
 
 	// COSA PUOI CONSERVARE
@@ -189,177 +192,259 @@ export default function DetailPage() {
 	];
 
 	return (
-		<div className="amore-container">
-			<div className="amore-content">
-				<div
-					className="amore-image-box"
-					onMouseMove={handleMouseMove}
-					onMouseLeave={handleMouseLeave}
-				>
-					<img
-						src={product.img}
-						alt={product.name}
-						className="amore-image"
-						style={imgStyle}
-					/>
-				</div>
-
-				<div className="amore-info">
-					<h1>{product.name}</h1>
-					{product.discounted_price ? (
-						<>
-							<span className="original-price">
-								&euro;{product.price.toFixed(2)}
-							</span>
-							<span className="discounted-price">
-								&euro;{product.discounted_price.toFixed(2)}
-							</span>
-						</>
-					) : (
-						<span className="normal-price">
-							&euro;{product.price.toFixed(2)}
-						</span>
-					)}
-
-					<h2 className="amore-section-title">Descrizione</h2>
-
-					<p className="amore-description">{product.description}</p>
-
-					<button className="amore-btn" onClick={handleAddToCart}>
-						Aggiungi al carrello
-					</button>
-
-					<div className="amore-feature-box">
-						<div className="amore-feature">
-							<strong>Dimensioni</strong>
-							<span>{product.dimension}</span>
-						</div>
-						<div className="amore-feature">
-							<strong>Materiale</strong>
-							<span>{product.material}</span>
-						</div>
-						<div className="amore-feature">
-							<strong>Peso</strong>
-							<span>{product.weight} g</span>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			{/* SPECIFICHE TECNICHE */}
-			<h2 className="amore-section-title">Specifiche tecniche</h2>
-			<div className="amore-specs">
-				<div className="amore-spec-row">
-					<span className="amore-spec-label">Peso</span>
-					<span className="amore-spec-value">{product.weight} g</span>
-				</div>
-				<div className="amore-spec-row">
-					<span className="amore-spec-label">Capacità</span>
-					<span className="amore-spec-value">
-						{product.capacity} litri
-					</span>
-				</div>
-				<div className="amore-spec-row">
-					<span className="amore-spec-label">
-						Materiale principale
-					</span>
-					<span className="amore-spec-value">{product.material}</span>
-				</div>
-				<div className="amore-spec-row">
-					<span className="amore-spec-label">Resistenza</span>
-					<span className="amore-spec-value">
-						{product.resistance}
-					</span>
-				</div>
-				<div className="amore-spec-row">
-					<span className="amore-spec-label">Garanzia</span>
-					<span className="amore-spec-value">
-						{product.warrenty} anno
-					</span>
-				</div>
-			</div>
-
-			<h2 className="amore-section-title">Cosa puoi conservare</h2>
-			<div className="amore-icons-row">
-				{itemsToStore.map((item) => (
-					<div className="amore-icon-box" key={item.title}>
-						<img
-							src={item.image}
-							alt={item.title}
-							className="amore-icon-image"
-						/>
-						<p className="amore-icon-title">{item.title}</p>
-						<p className="amore-icon-caption">{item.caption}</p>
-					</div>
-				))}
-			</div>
-
-			<h2 className="amore-section-title amore-related-title">
-				Potrebbe interessarti anche
-			</h2>
-			<div className="amore-related-row">
-				{relatedProducts.length === 0 && (
-					<p>Nessun prodotto correlato disponibile.</p>
-				)}
-
-				{relatedProducts.map((item) => (
+		<>
+			<div className="amore-container">
+				<div className="amore-content">
 					<div
-						className="amore-related-card"
-						key={item.slug}
-						onClick={() => navigate(`/dettagli/${item.slug}`)}
+						className="amore-image-box"
+						onMouseMove={handleMouseMove}
+						onMouseLeave={handleMouseLeave}
 					>
-						<img src={item.img} alt={item.name} />
-						<h3>{item.name}</h3>
-						{item.discounted_price ? (
+						<img
+							src={product.img}
+							alt={product.name}
+							className="amore-image"
+							style={imgStyle}
+						/>
+					</div>
+
+					<div className="amore-info">
+						<h1>{product.name}</h1>
+						{product.discounted_price ? (
 							<>
 								<span className="original-price">
-									&euro;{item.price.toFixed(2)}
+									&euro;{product.price.toFixed(2)}
 								</span>
 								<span className="discounted-price">
-									&euro;{item.discounted_price.toFixed(2)}
+									&euro;{product.discounted_price.toFixed(2)}
 								</span>
 							</>
 						) : (
 							<span className="normal-price">
-								&euro;{item.price.toFixed(2)}
+								&euro;{product.price.toFixed(2)}
 							</span>
 						)}
 
-						<div className="amore-related-buttons">
-							<button
-								type="button"
-								className="amore-related-wishlist-btn"
-								onClick={(e) => {
-									e.preventDefault();
-									e.stopPropagation();
-									toggleRelatedWishlist(item.id, item);
-								}}
-								aria-label="Aggiungi a wishlist"
-							>
-								{wishlistStates[item.id] ? (
-									<FaHeart size="18px" />
-								) : (
-									<FaRegHeart size="18px" />
-								)}
-							</button>
-							<button
-								type="button"
-								className="amore-related-cart-btn"
-								onClick={(e) => {
-									e.preventDefault();
-									e.stopPropagation();
-									handleRelatedAddToCart(item);
-								}}
-								disabled={addingStates[item.id]}
-							>
-								{addingStates[item.id]
-									? "✓ Aggiunto"
-									: "Aggiungi al Carrello"}
-							</button>
+						<h2 className="amore-section-title">Descrizione</h2>
+
+						<p className="amore-description">
+							{product.description}
+						</p>
+
+						<button
+							className="amore-btn"
+							onClick={() => {
+								setSelectedProduct(product);
+								setShowModal(true);
+							}}
+						>
+							Personalizza
+						</button>
+
+						<div className="amore-feature-box">
+							<div className="amore-feature">
+								<strong>Dimensioni</strong>
+								<span>{product.dimension}</span>
+							</div>
+							<div className="amore-feature">
+								<strong>Materiale</strong>
+								<span>{product.material}</span>
+							</div>
+							<div className="amore-feature">
+								<strong>Peso</strong>
+								<span>{product.weight} g</span>
+							</div>
 						</div>
 					</div>
-				))}
+				</div>
+
+				{/* SPECIFICHE TECNICHE */}
+				<h2 className="amore-section-title">Specifiche tecniche</h2>
+				<div className="amore-specs">
+					<div className="amore-spec-row">
+						<span className="amore-spec-label">Peso</span>
+						<span className="amore-spec-value">
+							{product.weight} g
+						</span>
+					</div>
+					<div className="amore-spec-row">
+						<span className="amore-spec-label">Capacità</span>
+						<span className="amore-spec-value">
+							{product.capacity} litri
+						</span>
+					</div>
+					<div className="amore-spec-row">
+						<span className="amore-spec-label">
+							Materiale principale
+						</span>
+						<span className="amore-spec-value">
+							{product.material}
+						</span>
+					</div>
+					<div className="amore-spec-row">
+						<span className="amore-spec-label">Resistenza</span>
+						<span className="amore-spec-value">
+							{product.resistance}
+						</span>
+					</div>
+					<div className="amore-spec-row">
+						<span className="amore-spec-label">Garanzia</span>
+						<span className="amore-spec-value">
+							{product.warrenty} anno
+						</span>
+					</div>
+				</div>
+
+				<h2 className="amore-section-title">Cosa puoi conservare</h2>
+				<div className="amore-icons-row">
+					{itemsToStore.map((item) => (
+						<div className="amore-icon-box" key={item.title}>
+							<img
+								src={item.image}
+								alt={item.title}
+								className="amore-icon-image"
+							/>
+							<p className="amore-icon-title">{item.title}</p>
+							<p className="amore-icon-caption">{item.caption}</p>
+						</div>
+					))}
+				</div>
+
+				<h2 className="amore-section-title amore-related-title">
+					Potrebbe interessarti anche
+				</h2>
+				<div className="amore-related-row">
+					{relatedProducts.length === 0 && (
+						<p>Nessun prodotto correlato disponibile.</p>
+					)}
+
+					{relatedProducts.map((item) => (
+						<div
+							className="amore-related-card"
+							key={item.slug}
+							onClick={() => navigate(`/dettagli/${item.slug}`)}
+						>
+							<img src={item.img} alt={item.name} />
+							<h3>{item.name}</h3>
+							{item.discounted_price ? (
+								<>
+									<span className="original-price">
+										&euro;{item.price.toFixed(2)}
+									</span>
+									<span className="discounted-price">
+										&euro;{item.discounted_price.toFixed(2)}
+									</span>
+								</>
+							) : (
+								<span className="normal-price">
+									&euro;{item.price.toFixed(2)}
+								</span>
+							)}
+
+							<div className="amore-related-buttons">
+								<button
+									type="button"
+									className="amore-related-wishlist-btn"
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										toggleRelatedWishlist(item.id, item);
+									}}
+									aria-label="Aggiungi a wishlist"
+								>
+									{wishlistStates[item.id] ? (
+										<FaHeart size="18px" />
+									) : (
+										<FaRegHeart size="18px" />
+									)}
+								</button>
+								<button
+									type="button"
+									className="amore-related-customize-btn"
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										setSelectedProduct(item);
+										setShowModal(true);
+									}}
+								>
+									Personalizza
+								</button>
+							</div>
+						</div>
+					))}
+				</div>
+
+				{showModal && selectedProduct && (
+					<div
+						className="customize-modal-overlay"
+						onClick={() => {
+							setShowModal(false);
+							setLetterText("");
+							setImagePreview(null);
+							setSelectedProduct(null);
+						}}
+					>
+						<div
+							className="customize-modal"
+							onClick={(e) => e.stopPropagation()}
+						>
+							<h3>Personalizza la tua capsula</h3>
+							<div className="modal-content">
+								<div className="form-group">
+									<label>Carica un'immagine:</label>
+									<input
+										type="file"
+										accept="image/*"
+										onChange={handleFileChange}
+									/>
+									{imagePreview && (
+										<img
+											src={imagePreview}
+											alt="Preview"
+											className="image-preview"
+										/>
+									)}
+								</div>
+								<div className="form-group">
+									<label>Testo della lettera:</label>
+									<textarea
+										value={letterText}
+										onChange={(e) =>
+											setLetterText(e.target.value)
+										}
+										placeholder="Scrivi il tuo messaggio..."
+										rows="4"
+										maxLength="3000"
+									/>
+									<div className="char-counter">
+										{letterText.length}/3000 caratteri
+									</div>
+								</div>
+							</div>
+							<div className="modal-buttons">
+								<button
+									className="modal-add-btn"
+									onClick={handleCustomizeAddToCart}
+								>
+									Aggiungi al Carrello
+								</button>
+								<button
+									className="modal-cancel-btn"
+									onClick={() => {
+										setShowModal(false);
+										setLetterText("");
+										setImagePreview(null);
+										setSelectedProduct(null);
+									}}
+								>
+									Annulla
+								</button>
+							</div>
+						</div>
+					</div>
+				)}
 			</div>
-		</div>
+		</>
 	);
 }
