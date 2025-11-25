@@ -34,7 +34,7 @@ export default function CapsuleCard(props) {
 		<>
 			<Link
 				to={`/dettagli/${product.slug}`}
-				// className="capsule-button"
+			// className="capsule-button"
 			>
 				<div className="container-capsule">
 					<div className="container-image">
