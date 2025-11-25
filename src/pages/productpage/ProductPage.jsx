@@ -106,6 +106,18 @@ const ProductPage = () => {
 					({products.length} prodotti trovati)
 				</p>
 
+				<div className="sale-checkbox">
+					<label className="checkbox-label">
+						<input
+							className="checkbox"
+							type="checkbox"
+							checked={onSaleOnly}
+							onChange={handleOnSaleChange}
+						/>
+						In offerta
+					</label>
+				</div>
+
 				<div className="theme-checkboxes">
 					<label className="filter-label">Filtra per</label>
 					{themeOptions.map((theme) => (
@@ -123,16 +135,6 @@ const ProductPage = () => {
 				</div>
 
 				{/* Checkbox prodotti in promozione */}
-				<div className="sale-checkbox">
-					<label>
-						<input
-							type="checkbox"
-							checked={onSaleOnly}
-							onChange={handleOnSaleChange}
-						/>
-						Solo prodotti in promozione
-					</label>
-				</div>
 
 				<div className="price-slider">
 					<RangeSlider
