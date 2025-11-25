@@ -5,7 +5,6 @@ import axios from "axios";
 import dropin from "braintree-web-drop-in";
 
 import BillingForm from "../../components/billingform/BillingForm";
-import ShippingForm from "../../components/shippingform/ShippingForm";
 import CapsuleDetailsForm from "../../components/capsuledetailform/CapsuleDetailForm";
 import CheckoutCartSummary from "../../components/checkoutsummary/CheckoutSummary";
 import OrderSuccessSummary from "../../components/ordersuccess/OrderSuccess";
@@ -20,13 +19,6 @@ const CheckoutPage = () => {
 		firstName: "",
 		lastName: "",
 		email: "",
-		address: "",
-		city: "",
-		zip: "",
-		country: "",
-	});
-
-	const [shipping, setShipping] = useState({
 		address: "",
 		city: "",
 		zip: "",
@@ -86,13 +78,10 @@ const CheckoutPage = () => {
 		setBilling((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleShippingChange = (e) => {
-		const { name, value } = e.target;
-		setShipping((prev) => ({ ...prev, [name]: value }));
-	};
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		setFormErrors([]);
 
 		// Chiamata funzione per validazioni
 		const errors = validateCheckout();
@@ -123,7 +112,6 @@ const CheckoutPage = () => {
 				customer_name: `${billing.firstName} ${billing.lastName}`,
 				customer_email: billing.email,
 				billing: { ...billing },
-				shipping: { ...shipping },
 				shippingDate,
 				letterContent,
 				items: cart.map((item) => ({
@@ -145,7 +133,6 @@ const CheckoutPage = () => {
 				method_id: 1,
 				customer_name: summary.customer_name,
 				customer_email: summary.customer_email,
-				shipping_address: `${shipping.address}, ${shipping.zip} ${shipping.city}, ${shipping.country}`,
 				billing_address: `${billing.address}, ${billing.zip} ${billing.city}, ${billing.country}`,
 				total_amount: finalTotal,
 				status: "pending",
@@ -155,7 +142,7 @@ const CheckoutPage = () => {
 					quantity: item.quantity,
 					unit_price: item.price,
 					shipping_period: shippingDate,
-					letter_content: letterContent,
+					letter_content: item.letterContent || "",
 					discount_percentage: null,
 
 					// campi extra per EMAIL
@@ -213,10 +200,6 @@ const CheckoutPage = () => {
 						billing={billing}
 						onChange={handleBillingChange}
 					/>
-					<ShippingForm
-						shipping={shipping}
-						onChange={handleShippingChange}
-					/>
 					<CapsuleDetailsForm
 						shippingDate={shippingDate}
 						onChangeShippingDate={setShippingDate}
@@ -253,7 +236,7 @@ const CheckoutPage = () => {
 		return str
 			.trim()
 			.replace(/\s+/g, " ") // sostituisce doppi spazi
-			.replace(/(^\w|[\s'\-]\w)/g, (c) => c.toUpperCase()); // rende maiuscole iniziali
+			.replace(/(^\w|[\s'-]\w)/g, (c) => c.toUpperCase()); // rende maiuscole iniziali
 	}
 
 	// Funzione che controlla tutti i campi di input
@@ -346,55 +329,20 @@ const CheckoutPage = () => {
 		}
 
 		// ------------------------------------------------------
-		//  VALIDAZIONE SPEDIZIONE (indirizzo, città, CAP e paese)
-		// ------------------------------------------------------
-
-		// Città spedizione: solo lettere
-		if (!onlyLetters.test(shipping.city)) {
-			errors.push("La città di spedizione può contenere solo lettere.");
-		}
-
-		// Paese spedizione: solo lettere, minimo 3 caratteri
-		if (!onlyLetters.test(shipping.country)) {
-			errors.push("Il paese di spedizione può contenere solo lettere.");
-		} else if (shipping.country.trim().length < 3) {
-			errors.push(
-				"Il paese di spedizione deve contenere almeno 3 lettere.",
-			);
-		}
-
-		// CAP spedizione: 5 cifre e non negativo
-		if (isNaN(shipping.zip)) {
-			errors.push("Il CAP di spedizione deve contenere solo numeri.");
-		} else if (parseInt(shipping.zip) < 0) {
-			errors.push("Il CAP di spedizione non può essere negativo.");
-		} else if (!capRegex.test(shipping.zip)) {
-			errors.push("Il CAP di spedizione deve contenere 5 cifre.");
-		}
-
-		// ------------------------------------------------------
 		//  DATA DI SPEDIZIONE (deve essere futura)
 		// ------------------------------------------------------
 
-		if (!shippingDate.trim()) {
-			const selected = new Date(shippingDate);
+		if (shippingDate.trim()) {
+			const [year, month, day] = shippingDate.split("-").map(Number);
+			const selected = new Date(year, month - 1, day); // mese 0-based
 			const today = new Date();
-			today.setHours(0, 0, 0, 0);
+			today.setHours(0, 0, 0, 0); // mezzanotte
 
-			// Controllo che la data sia futura
 			if (selected <= today) {
 				errors.push("La data deve essere futura.");
 			}
-		}
-
-		// ------------------------------------------------------
-		//  CONTENUTO LETTERA (minimo 10 caratteri)
-		// ------------------------------------------------------
-
-		if (letterContent.trim().length < 10) {
-			errors.push(
-				"Il contenuto della lettera deve contenere almeno 10 caratteri.",
-			);
+		} else {
+			errors.push("Inserisci una data di spedizione.");
 		}
 
 		// ------------------------------------------------------

@@ -56,6 +56,12 @@ const CartPage = () => {
 										<div>
 											<h2>{item.name}</h2>
 											<p>{item.price.toFixed(2)} €</p>
+											{item.letterContent && (
+												<div className="cart-item-letter">
+													<strong>Lettera:</strong>{" "}
+													{item.letterContent}
+												</div>
+											)}
 										</div>
 									</div>
 

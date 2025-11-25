@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import ReactDOM from "react-dom";
 import { useProducts } from "../../context/DefaultContext";
-
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 import "./CapsuleCard.css";
 
@@ -14,7 +13,9 @@ export default function CapsuleCard(props) {
 		const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
 		return wishlist.some((item) => item.id === product.id);
 	});
-	const [isAdding, setIsAdding] = useState(false);
+	const [showModal, setShowModal] = useState(false);
+	const [letterText, setLetterText] = useState("");
+	const [imagePreview, setImagePreview] = useState(null);
 
 	const toggleWishlist = () => {
 		const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
@@ -29,13 +30,30 @@ export default function CapsuleCard(props) {
 		window.dispatchEvent(new Event("wishlistUpdate"));
 	};
 
+	const handleFileChange = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.onload = () => setImagePreview(reader.result);
+			reader.readAsDataURL(file);
+		}
+	};
+
+	const handleAddToCart = () => {
+		addToCart(product, {
+			letterContent: letterText,
+			uploadedImage: imagePreview,
+		});
+		setShowModal(false);
+		setLetterText("");
+		setImagePreview(null);
+	};
+
 	if (!product) return null;
+
 	return (
 		<>
-			<Link
-				to={`/dettagli/${product.slug}`}
-			// className="capsule-button"
-			>
+			<Link to={`/dettagli/${product.slug}`}>
 				<div className="container-capsule">
 					<div className="container-image">
 						<img src={`${product.img}`} alt={product.imgAlt} />
@@ -85,28 +103,90 @@ export default function CapsuleCard(props) {
 								</button>
 								<button
 									type="button"
-									className="capsule-button add-to-cart-btn"
+									className="capsule-button customize-btn"
 									onClick={(e) => {
 										e.preventDefault();
 										e.stopPropagation();
-										addToCart(product);
-										setIsAdding(true);
-										setTimeout(
-											() => setIsAdding(false),
-											1000,
-										);
+										setShowModal(true);
 									}}
-									disabled={isAdding}
 								>
-									{isAdding
-										? "✓ Aggiunto"
-										: "Aggiungi al Carrello"}
+									Personalizza
 								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</Link>
+
+			{showModal &&
+				ReactDOM.createPortal(
+					<div
+						className="customize-modal-overlay"
+						onClick={() => {
+							setShowModal(false);
+							setLetterText("");
+							setImagePreview(null);
+						}}
+					>
+						<div
+							className="customize-modal"
+							onClick={(e) => e.stopPropagation()}
+						>
+							<h3>Personalizza la tua capsula</h3>
+							<div className="modal-content">
+								<div className="form-group">
+									<label>Carica un'immagine:</label>
+									<input
+										type="file"
+										accept="image/*"
+										onChange={handleFileChange}
+									/>
+									{imagePreview && (
+										<img
+											src={imagePreview}
+											alt="Preview"
+											className="image-preview"
+										/>
+									)}
+								</div>
+								<div className="form-group">
+									<label>Testo della lettera:</label>
+									<textarea
+										value={letterText}
+										onChange={(e) =>
+											setLetterText(e.target.value)
+										}
+										placeholder="Scrivi il tuo messaggio..."
+										rows="4"
+										maxLength="3000"
+									/>
+									<div className="char-counter">
+										{letterText.length}/3000 caratteri
+									</div>
+								</div>
+							</div>
+							<div className="modal-buttons">
+								<button
+									className="modal-add-btn"
+									onClick={handleAddToCart}
+								>
+									Aggiungi al Carrello
+								</button>
+								<button
+									className="modal-cancel-btn"
+									onClick={() => {
+										setShowModal(false);
+										setLetterText("");
+										setImagePreview(null);
+									}}
+								>
+									Annulla
+								</button>
+							</div>
+						</div>
+					</div>,
+					document.body,
+				)}
 		</>
 	);
 }

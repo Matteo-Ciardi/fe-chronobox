@@ -255,3 +255,17 @@
         font-size: 28px;
     }
 }
+
+.cart-item-letter {
+	margin-top: 10px;
+	font-size: 14px;
+	color: #555;
+	max-height: 100px;
+	overflow-y: auto;
+	border: 1px solid #ddd;
+	padding: 5px;
+	border-radius: 4px;
+	background: #f9f9f9;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}

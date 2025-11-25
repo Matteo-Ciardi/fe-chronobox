@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { AiOutlineOrderedList } from "react-icons/ai";
 import Select from "react-select";
 import axios from "axios";
@@ -38,13 +39,27 @@ const themeOptions = [
 ];
 
 const ProductPage = () => {
-	const [searchTerm, setSearchTerm] = useState("");
-	const [order, setOrder] = useState("");
-	const [selectedThemes, setSelectedThemes] = useState([]);
-	const [onSaleOnly, setOnSaleOnly] = useState(false); // nuova checkbox
+	const [searchParams, setSearchParams] = useSearchParams();
+	const initialSearch = searchParams.get("search") || "";
+	const initialOrder = searchParams.get("order") || "";
+	const initialThemeParam = searchParams.get("theme") || "";
+	const initialSelectedThemes =
+		initialThemeParam === "" ? [] : initialThemeParam.split(",");
+	const initialOnSale =
+		(searchParams.get("onSale") || "") === "true" ||
+		(searchParams.get("onSale") || "") === "1";
+	const initialMinPrice = Number(searchParams.get("minPrice")) || 0;
+	const initialMaxPrice = Number(searchParams.get("maxPrice")) || 100;
+
+	const [searchTerm, setSearchTerm] = useState(() => initialSearch);
+	const [order, setOrder] = useState(() => initialOrder);
+	const [selectedThemes, setSelectedThemes] = useState(
+		() => initialSelectedThemes,
+	);
+	const [onSaleOnly, setOnSaleOnly] = useState(() => initialOnSale);
 	const [products, setProducts] = useState([]);
-	const [minPrice, setMinPrice] = useState(0);
-	const [maxPrice, setMaxPrice] = useState(100);
+	const [minPrice, setMinPrice] = useState(() => initialMinPrice);
+	const [maxPrice, setMaxPrice] = useState(() => initialMaxPrice);
 
 	// Gestione input
 	const handleSearchChange = (e) => setSearchTerm(e.target.value);
@@ -61,6 +76,38 @@ const ProductPage = () => {
 	const handleOnSaleChange = () => {
 		setOnSaleOnly(!onSaleOnly);
 	};
+
+	useEffect(() => {
+		const params = Object.fromEntries([...searchParams.entries()]);
+
+		if (params.search !== undefined) setSearchTerm(params.search);
+		if (params.order !== undefined) setOrder(params.order);
+		if (params.theme !== undefined)
+			setSelectedThemes(
+				params.theme === "" ? [] : params.theme.split(","),
+			);
+		if (params.onSale !== undefined)
+			setOnSaleOnly(params.onSale === "true" || params.onSale === "1");
+		if (params.minPrice !== undefined)
+			setMinPrice(Number(params.minPrice) || 0);
+		if (params.maxPrice !== undefined)
+			setMaxPrice(Number(params.maxPrice) || 100);
+	}, [searchParams]);
+
+	useEffect(() => {
+		const params = {};
+		if (searchTerm) params.search = searchTerm;
+		if (order) params.order = order;
+		if (selectedThemes.length > 0) params.theme = selectedThemes.join(",");
+		if (onSaleOnly) params.onSale = "true";
+		if (minPrice !== undefined && minPrice !== null)
+			params.minPrice = String(minPrice);
+		if (maxPrice !== undefined && maxPrice !== null)
+			params.maxPrice = String(maxPrice);
+
+		setSearchParams(params, { replace: true });
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [searchTerm, order, selectedThemes, minPrice, maxPrice, onSaleOnly]);
 
 	// Fetch prodotti filtrati
 	useEffect(() => {
@@ -134,7 +181,16 @@ const ProductPage = () => {
 					))}
 				</div>
 
-				{/* Checkbox prodotti in promozione */}
+				<div className="sale-checkbox">
+					<label>
+						<input
+							type="checkbox"
+							checked={onSaleOnly}
+							onChange={handleOnSaleChange}
+						/>
+						Solo prodotti in promozione
+					</label>
+				</div>
 
 				<div className="price-slider">
 					<RangeSlider
