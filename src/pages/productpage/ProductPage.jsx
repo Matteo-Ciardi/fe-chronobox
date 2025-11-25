@@ -4,6 +4,7 @@ import Select from "react-select";
 import axios from "axios";
 
 import ProductList from "../../components/productlist/ProductList";
+import RangeSlider from "../../components/rangeslider/RangeSlider";
 import "./ProductPage.css";
 
 // Select ordinamento
@@ -100,18 +101,6 @@ const ProductPage = () => {
 					<label className="searchbar-label">Cerca prodotti</label>
 				</div>
 
-				<Select
-					className="order-select"
-					classNamePrefix="order-select"
-					value={
-						orderOptions.find((opt) => opt.value === order) ||
-						orderOptions[0]
-					}
-					onChange={handleOrderChange}
-					options={orderOptions}
-					isSearchable={false}
-				/>
-
 				<div className="theme-checkboxes">
 					<label className="filter-label">Filtra per</label>
 					{themeOptions.map((theme) => (
@@ -129,28 +118,31 @@ const ProductPage = () => {
 				</div>
 
 				<div className="price-slider">
-					<label>Prezzo Min: €{minPrice}</label>
-					<input
-						type="range"
-						min="0"
-						max="100"
-						value={minPrice}
-						onChange={(e) => setMinPrice(Number(e.target.value))}
-					/>
-
-					<label>Prezzo Max: €{maxPrice}</label>
-					<input
-						type="range"
-						min="0"
-						max="100"
-						value={maxPrice}
-						onChange={(e) => setMaxPrice(Number(e.target.value))}
+					<RangeSlider
+						minValue={minPrice}
+						maxValue={maxPrice}
+						onMinChange={setMinPrice}
+						onMaxChange={setMaxPrice}
+						min={0}
+						max={100}
 					/>
 				</div>
 
 				<p className="product-count">
 					{products.length} prodotti trovati
 				</p>
+
+				<Select
+					className="order-select"
+					classNamePrefix="order-select"
+					value={
+						orderOptions.find((opt) => opt.value === order) ||
+						orderOptions[0]
+					}
+					onChange={handleOrderChange}
+					options={orderOptions}
+					isSearchable={false}
+				/>
 			</section>
 
 			<ProductList products={products} />

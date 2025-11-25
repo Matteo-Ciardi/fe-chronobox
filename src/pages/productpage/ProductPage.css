@@ -14,7 +14,6 @@
 /* Floating label pattern for searchbar */
 .searchbar-wrapper {
 	position: relative;
-	margin-bottom: 20px;
 }
 
 .searchbar-label {
@@ -31,7 +30,6 @@
 }
 
 .searchbar {
-	margin-bottom: 0;
 	padding: 10px 12px;
 	width: 100%;
 	border: 1px solid #ddd;
@@ -106,14 +104,17 @@
 }
 
 .filter-label {
-	font-size: 0.9rem
+	font-size: 0.9rem;
+	border-bottom: 1px solid var(--dusty-taupe);
+	padding-bottom: 4px;
+	margin-bottom: 10px;
 }
 
 .theme-checkboxes {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin-top: 20px;
+	margin: 40px 0;
 }
 
 .checkbox {
@@ -125,5 +126,5 @@
 }
 
 .checkbox-label {
-	font-size: 1.3rem;
+	font-size: 1.2rem;
 }
