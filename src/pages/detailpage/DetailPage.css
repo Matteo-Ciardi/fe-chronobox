@@ -325,185 +325,230 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
-  .amore-container {
-    padding: 50px 16px;
-  }
-  .amore-content {
-    max-width: 960px;
-    gap: 40px;
-  }
-  .amore-image {
-    width: 360px;
-  }
-  .amore-info h1 {
-    font-size: 34px;
-  }
-  .amore-description {
-    margin-bottom: 120px;
-  }
-  .amore-specs {
-    width: 85%;
-  }
-  .amore-icons-row {
-    max-width: 960px;
-    gap: 16px;
-  }
-  .amore-related-card {
-    flex: 0 0 300px;
-    height: 520px;
-  }
-  .amore-related-card img {
-    height: 300px;
-  }
+	.amore-container {
+		padding: 50px 16px;
+	}
+
+	.amore-content {
+		max-width: 960px;
+		gap: 40px;
+	}
+
+	.amore-image {
+		width: 360px;
+	}
+
+	.amore-info h1 {
+		font-size: 34px;
+	}
+
+	.amore-description {
+		margin-bottom: 120px;
+	}
+
+	.amore-specs {
+		width: 85%;
+	}
+
+	.amore-icons-row {
+		max-width: 960px;
+		gap: 16px;
+	}
+
+	.amore-related-card {
+		flex: 0 0 300px;
+		height: 520px;
+	}
+
+	.amore-related-card img {
+		height: 300px;
+	}
 }
 
 @media (max-width: 768px) {
-  .amore-container {
-    padding: 40px 20px;
-  }
-  .amore-content {
-    flex-direction: column;
-    gap: 24px;
-    align-items: center;
-  }
-  .amore-image {
-    width: 320px;
-  }
-  .amore-info {
-    text-align: center;
-  }
-  .amore-info h1 {
-    font-size: clamp(1.6rem, 4vw, 2rem);
-  }
-  .amore-description {
-    font-size: 15px;
-    margin-bottom: 30px;
-  }
-  .amore-btn {
-    width: 100%;
-    max-width: 300px;
-  }
-  .amore-section-title {
-    font-size: 22px;
-    text-align: center;
-  }
-  .amore-specs {
-    width: 100%;
-    max-width: 500px;
-  }
-  .amore-icons-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-  .amore-carousel-container {
-    gap: 10px;
-    padding: 0 8px;
-  }
-  .amore-carousel-arrow {
-    width: 36px;
-    height: 36px;
-    font-size: 1rem;
-    flex-shrink: 0;
-  }
-  .amore-related-row {
-    max-width: 560px;
-  }
-  .amore-related-card {
-    flex: 0 0 260px;
-    height: 480px;
-  }
-  .amore-related-card img {
-    height: 260px;
-  }
-  .amore-related-card h3 {
-    font-size: 1.05rem;
-  }
-  .amore-related-card .container-capsule-body {
-    padding: 14px;
-  }
-  .capsule-description {
-    font-size: 0.9rem;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-  }
+	.amore-container {
+		padding: 40px 20px;
+	}
+
+	.amore-content {
+		flex-direction: column;
+		gap: 24px;
+		align-items: center;
+	}
+
+	.amore-image {
+		width: 320px;
+	}
+
+	.amore-info {
+		text-align: center;
+	}
+
+	.amore-info h1 {
+		font-size: clamp(1.6rem, 4vw, 2rem);
+	}
+
+	.amore-description {
+		font-size: 15px;
+		margin-bottom: 30px;
+	}
+
+	.amore-btn {
+		width: 100%;
+		max-width: 300px;
+	}
+
+	.amore-section-title {
+		font-size: 22px;
+		text-align: center;
+	}
+
+	.amore-specs {
+		width: 100%;
+		max-width: 500px;
+	}
+
+	.amore-icons-row {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 14px;
+	}
+
+	.amore-carousel-container {
+		gap: 10px;
+		padding: 0 8px;
+	}
+
+	.amore-carousel-arrow {
+		width: 36px;
+		height: 36px;
+		font-size: 1rem;
+		flex-shrink: 0;
+	}
+
+	.amore-related-row {
+		max-width: 560px;
+	}
+
+	.amore-related-card {
+		flex: 0 0 260px;
+		height: 480px;
+	}
+
+	.amore-related-card img {
+		height: 260px;
+	}
+
+	.amore-related-card h3 {
+		font-size: 1.05rem;
+	}
+
+	.amore-related-card .container-capsule-body {
+		padding: 14px;
+	}
+
+	.capsule-description {
+		font-size: 0.9rem;
+		-webkit-line-clamp: 3;
+		line-clamp: 3;
+	}
 }
 
 @media (max-width: 430px) {
-  .amore-container {
-    padding: 30px 16px;
-  }
-  .amore-content {
-    gap: 20px;
-  }
-  .amore-image {
-    width: 280px;
-  }
-  .amore-info h1 {
-    font-size: clamp(1.4rem, 5vw, 1.8rem);
-  }
-  .amore-description {
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-  .amore-btn {
-    width: 100%;
-    max-width: 100%;
-    padding: 12px 18px;
-    font-size: 15px;
-  }
-  .amore-section-title {
-    font-size: 20px;
-  }
-  .amore-specs {
-    width: 100%;
-  }
-  .amore-spec-row {
-    font-size: 14px;
-  }
-  .amore-icons-row {
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding: 0 12px;
-  }
-  .amore-icon-box {
-    padding: 16px;
-  }
-  .amore-icon-title {
-    font-size: 1.3rem;
-  }
-  .amore-icon-caption {
-    font-size: 0.95rem;
-  }
-  .amore-carousel-container {
-    gap: 6px;
-    padding: 0 4px;
-  }
-  .amore-carousel-arrow {
-    width: 32px;
-    height: 32px;
-    font-size: 0.9rem;
-    flex-shrink: 0;
-  }
-  .amore-related-row {
-    max-width: 280px;
-  }
-  .amore-related-card {
-    flex: 0 0 260px;
-    height: 460px;
-  }
-  .amore-related-card img {
-    height: 240px;
-  }
-  .amore-related-card h3 {
-    font-size: 1rem;
-    margin-bottom: 6px;
-  }
-  .amore-related-card .container-capsule-body {
-    padding: 12px;
-  }
-  .capsule-description {
-    font-size: 0.88rem;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-  }
+	.amore-container {
+		padding: 30px 16px;
+	}
+
+	.amore-content {
+		gap: 20px;
+	}
+
+	.amore-image {
+		width: 280px;
+	}
+
+	.amore-info h1 {
+		font-size: clamp(1.4rem, 5vw, 1.8rem);
+	}
+
+	.amore-description {
+		font-size: 14px;
+		margin-bottom: 20px;
+	}
+
+	.amore-btn {
+		width: 100%;
+		max-width: 100%;
+		padding: 12px 18px;
+		font-size: 15px;
+	}
+
+	.amore-section-title {
+		font-size: 20px;
+	}
+
+	.amore-specs {
+		width: 100%;
+	}
+
+	.amore-spec-row {
+		font-size: 14px;
+	}
+
+	.amore-icons-row {
+		grid-template-columns: 1fr;
+		gap: 12px;
+		padding: 0 12px;
+	}
+
+	.amore-icon-box {
+		padding: 16px;
+	}
+
+	.amore-icon-title {
+		font-size: 1.3rem;
+	}
+
+	.amore-icon-caption {
+		font-size: 0.95rem;
+	}
+
+	.amore-carousel-container {
+		gap: 6px;
+		padding: 0 4px;
+	}
+
+	.amore-carousel-arrow {
+		width: 32px;
+		height: 32px;
+		font-size: 0.9rem;
+		flex-shrink: 0;
+	}
+
+	.amore-related-row {
+		max-width: 280px;
+	}
+
+	.amore-related-card {
+		flex: 0 0 260px;
+		height: 460px;
+	}
+
+	.amore-related-card img {
+		height: 240px;
+	}
+
+	.amore-related-card h3 {
+		font-size: 1rem;
+		margin-bottom: 6px;
+	}
+
+	.amore-related-card .container-capsule-body {
+		padding: 12px;
+	}
+
+	.capsule-description {
+		font-size: 0.88rem;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+	}
 }
