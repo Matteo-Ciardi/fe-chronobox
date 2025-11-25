@@ -34,6 +34,43 @@
 	/* opzionale, se vuoi limitare la larghezza */
 }
 
+/* Tablet */
+@media (max-width: 1024px) {
+	.marquee-track {
+		gap: 16px;
+	}
+
+	.marquee-item {
+		width: 300px;
+	}
+}
+
+/* Tablet piccolo */
+@media (max-width: 768px) {
+	.marquee-track {
+		gap: 14px;
+	}
+
+	.marquee-item {
+		width: 260px;
+	}
+}
+
+/* Mobile */
+@media (max-width: 430px) {
+	.marquee-container {
+		padding: 20px 0;
+	}
+
+	.marquee-track {
+		gap: 12px;
+	}
+
+	.marquee-item {
+		width: 220px;
+	}
+}
+
 /* animazione continua da 0 a -50% (lista duplicata) */
 @keyframes marquee-scroll {
 	from {
