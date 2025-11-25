@@ -22,6 +22,7 @@ export default function DetailPage() {
 	const [loading, setLoading] = useState(true); // Hook di stato per salvare lo stato della risposta API
 	const [wishlistStates, setWishlistStates] = useState({}); // stato wishlist per relatedProducts
 	const [addingStates, setAddingStates] = useState({}); // stato adding per relatedProducts
+	const [carouselIndex, setCarouselIndex] = useState(0); // stato per il carousel delle related products
 
 	// const location = useLocation();
 	const navigate = useNavigate();
@@ -127,6 +128,18 @@ export default function DetailPage() {
 	const handleAddToCart = () => {
 		addToCart(product);
 		navigate("/carrello");
+	};
+
+	// Carosello per relatedProducts
+	const cardsPerView = 5;
+	const maxIndex = Math.max(0, relatedProducts.length - cardsPerView);
+
+	const handleCarouselPrev = () => {
+		setCarouselIndex((prev) => Math.max(0, prev - 1));
+	};
+
+	const handleCarouselNext = () => {
+		setCarouselIndex((prev) => Math.min(maxIndex, prev + 1));
 	};
 
 	// Gestire wishlist per relatedProducts
@@ -280,68 +293,90 @@ export default function DetailPage() {
 			<h2 className="amore-section-title amore-related-title">
 				Potrebbe interessarti anche
 			</h2>
-			<div className="amore-related-row">
-				{relatedProducts.length === 0 && (
-					<p>Nessun prodotto correlato disponibile.</p>
-				)}
-
-				{relatedProducts.map((item) => (
-					<div
-						className="amore-related-card"
-						key={item.slug}
-						onClick={() => navigate(`/dettagli/${item.slug}`)}
+			<div className="amore-carousel-container">
+				{relatedProducts.length > cardsPerView && (
+					<button
+						className="amore-carousel-arrow amore-carousel-arrow-left"
+						onClick={handleCarouselPrev}
+						disabled={carouselIndex === 0}
+						aria-label="Prodotti precedenti"
 					>
-						<img src={item.img} alt={item.name} />
-						<h3>{item.name}</h3>
-						{item.discounted_price ? (
-							<>
-								<span className="original-price">
+						❮
+					</button>
+				)}
+				<div className="amore-related-row">
+					{relatedProducts.length === 0 && (
+						<p>Nessun prodotto correlato disponibile.</p>
+					)}
+
+					{relatedProducts.slice(carouselIndex, carouselIndex + cardsPerView).map((item) => (
+						<div
+							className="amore-related-card"
+							key={item.slug}
+							onClick={() => navigate(`/dettagli/${item.slug}`)}
+						>
+							<img src={item.img} alt={item.name} />
+							<h3>{item.name}</h3>
+							{item.discounted_price ? (
+								<>
+									<span className="original-price">
+										&euro;{item.price.toFixed(2)}
+									</span>
+									<span className="discounted-price">
+										&euro;{item.discounted_price.toFixed(2)}
+									</span>
+								</>
+							) : (
+								<span className="normal-price">
 									&euro;{item.price.toFixed(2)}
 								</span>
-								<span className="discounted-price">
-									&euro;{item.discounted_price.toFixed(2)}
-								</span>
-							</>
-						) : (
-							<span className="normal-price">
-								&euro;{item.price.toFixed(2)}
-							</span>
-						)}
+							)}
 
-						<div className="amore-related-buttons">
-							<button
-								type="button"
-								className="amore-related-wishlist-btn"
-								onClick={(e) => {
-									e.preventDefault();
-									e.stopPropagation();
-									toggleRelatedWishlist(item.id, item);
-								}}
-								aria-label="Aggiungi a wishlist"
-							>
-								{wishlistStates[item.id] ? (
-									<FaHeart size="18px" />
-								) : (
-									<FaRegHeart size="18px" />
-								)}
-							</button>
-							<button
-								type="button"
-								className="amore-related-cart-btn"
-								onClick={(e) => {
-									e.preventDefault();
-									e.stopPropagation();
-									handleRelatedAddToCart(item);
-								}}
-								disabled={addingStates[item.id]}
-							>
-								{addingStates[item.id]
-									? "✓ Aggiunto"
-									: "Aggiungi al Carrello"}
-							</button>
+							<div className="amore-related-buttons">
+								<button
+									type="button"
+									className="amore-related-wishlist-btn"
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										toggleRelatedWishlist(item.id, item);
+									}}
+									aria-label="Aggiungi a wishlist"
+								>
+									{wishlistStates[item.id] ? (
+										<FaHeart size="18px" />
+									) : (
+										<FaRegHeart size="18px" />
+									)}
+								</button>
+								<button
+									type="button"
+									className="amore-related-cart-btn"
+									onClick={(e) => {
+										e.preventDefault();
+										e.stopPropagation();
+										handleRelatedAddToCart(item);
+									}}
+									disabled={addingStates[item.id]}
+								>
+									{addingStates[item.id]
+										? "✓ Aggiunto"
+										: "Aggiungi al Carrello"}
+								</button>
+							</div>
 						</div>
-					</div>
-				))}
+					))}
+				</div>
+				{relatedProducts.length > cardsPerView && (
+					<button
+						className="amore-carousel-arrow amore-carousel-arrow-right"
+						onClick={handleCarouselNext}
+						disabled={carouselIndex === maxIndex}
+						aria-label="Prodotti successivi"
+					>
+						❯
+					</button>
+				)}
 			</div>
 		</div>
 	);

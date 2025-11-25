@@ -193,19 +193,54 @@
 	margin-top: 20px;
 }
 
-.amore-related-row {
-	width: 80%;
-	max-width: 900px;
+.amore-carousel-container {
 	display: flex;
+	align-items: center;
 	justify-content: center;
-	gap: 30px;
-	flex-wrap: wrap;
+	gap: 16px;
 	margin-bottom: 40px;
+	width: 100%;
+}
+
+.amore-carousel-arrow {
+	flex-shrink: 0;
+	width: 40px;
+	height: 40px;
+	background: #000;
+	color: #fff;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	font-size: 1.2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 150ms ease;
+}
+
+.amore-carousel-arrow:hover:not(:disabled) {
+	background: #333;
+	transform: scale(1.08);
+}
+
+.amore-carousel-arrow:disabled {
+	background: #ccc;
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+.amore-related-row {
+	display: flex;
+	gap: 30px;
+	overflow: hidden;
+	width: 100%;
+	max-width: 1200px;
+	justify-content: center;
 }
 
 .amore-related-card {
-	flex: 1;
-	max-width: 260px;
+	flex: 0 0 calc(20% - 24px);
+	min-width: 200px;
 	background: #ffffff;
 	border-radius: 12px;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
