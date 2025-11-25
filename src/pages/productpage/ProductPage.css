@@ -142,3 +142,9 @@
 	margin-left: 15px;
 	color: rgb(184, 184, 184);
 }
+
+.no-products-message {
+	margin-top: 50px;
+	margin-left: 360px;
+	font-size: 2rem;
+}

@@ -208,7 +208,7 @@ const ProductPage = () => {
 			{products.length > 0 ? (
 				<ProductList products={products} />
 			) : (
-				<p className="no-products-message">Nessun prodotto trovato.</p>
+				<p className="no-products-message">Nessun prodotto trovato</p>
 			)}
 		</div>
 	);
