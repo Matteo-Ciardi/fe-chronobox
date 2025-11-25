@@ -1,0 +1,36 @@
+/* Box Validazioni */
+.error-box {
+	background: #fce9dd;
+	border-left: 5px solid #d37a4a;
+	padding: 20px 25px;
+	margin: 20px 0 30px;
+	border-radius: 12px;
+	color: #5a2d21;
+	max-width: 700px;
+	font-size: 1rem;
+	line-height: 1.5;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+	animation: fadeIn 0.3s ease-out;
+}
+
+.error-box ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+
+.error-box li::before {
+	content: "⚠️ ";
+	margin-right: 6px;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(-5px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}

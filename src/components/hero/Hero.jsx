@@ -3,6 +3,7 @@ import { BsBoxSeam } from "react-icons/bs";
 import { IoShieldOutline } from "react-icons/io5";
 
 import "./Hero.css";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
 	return (
@@ -19,12 +20,11 @@ const Hero = () => {
 					<p className="subtitle">Conserva ciò che conta davvero</p>
 
 					<div className="hero-buttons">
-						<button className="hero-btn">
-							Acquista una capsula
-						</button>
-						<button className="hero-btn">
-							Scopri come funziona
-						</button>
+						<Link to="/prodotti">
+							<button className="hero-btn">
+								Scegli una capsula
+							</button>
+						</Link>
 					</div>
 				</div>
 

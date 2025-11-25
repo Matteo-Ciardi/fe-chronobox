@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useProducts } from "../../context/DefaultContext";
 import { /*useLocation ,*/ useNavigate } from "react-router-dom";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 import "./DetailPage.css";
 
@@ -19,6 +20,8 @@ export default function DetailPage() {
 
 	const [relatedProducts, setRelatedProducts] = useState([]);
 	const [loading, setLoading] = useState(true); // Hook di stato per salvare lo stato della risposta API
+	const [wishlistStates, setWishlistStates] = useState({}); // stato wishlist per relatedProducts
+	const [addingStates, setAddingStates] = useState({}); // stato adding per relatedProducts
 
 	// const location = useLocation();
 	const navigate = useNavigate();
@@ -26,7 +29,7 @@ export default function DetailPage() {
 
 	// const products = location.state?.product;
 
-	// ------------------------------------------ test slug -------------------------------------------------------
+	// ------------------------------------------  slug -------------------------------------------------------
 	const { slug } = useParams(); // Recupero slug dall' URL della rotta
 	const [product, setProduct] = useState(null); // Hook di stato per salvare i dati dinamici della capsula dal backend
 
@@ -41,6 +44,10 @@ export default function DetailPage() {
 			})
 			.catch((error) => {
 				console.error("DETAIL ERROR:", error);
+
+				if (error.response?.status === 404) {
+					navigate("/404"); // redirect alla pagina NotFoundPage
+				}
 			})
 			.finally(() => {
 				setLoading(false); // fine caricamento (sia successo che errore)
@@ -54,9 +61,24 @@ export default function DetailPage() {
 			.then((res) => {
 				console.log("RELATED:", res.data);
 				setRelatedProducts(res.data);
+				// Inizializza gli stati di wishlist per ogni prodotto
+				const initialWishlistStates = {};
+				res.data.forEach((product) => {
+					const wishlist = JSON.parse(
+						localStorage.getItem("wishlist") || "[]",
+					);
+					initialWishlistStates[product.id] = wishlist.some(
+						(item) => item.id === product.id,
+					);
+				});
+				setWishlistStates(initialWishlistStates);
 			})
 			.catch((error) => {
 				console.error("RELATED ERROR:", error);
+
+				if (error.response?.status === 404) {
+					navigate("/404"); // redirect alla pagina NotFoundPage
+				}
 			});
 	}
 
@@ -107,6 +129,41 @@ export default function DetailPage() {
 		navigate("/carrello");
 	};
 
+	// Gestire wishlist per relatedProducts
+	const toggleRelatedWishlist = (productId, product) => {
+		const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+		let newWishlist;
+		const isInWishlist = wishlist.some((item) => item.id === productId);
+
+		if (isInWishlist) {
+			newWishlist = wishlist.filter((item) => item.id !== productId);
+		} else {
+			newWishlist = [...wishlist, product];
+		}
+
+		localStorage.setItem("wishlist", JSON.stringify(newWishlist));
+		setWishlistStates((prev) => ({
+			...prev,
+			[productId]: !isInWishlist,
+		}));
+		window.dispatchEvent(new Event("wishlistUpdate"));
+	};
+
+	// Gestire add to cart per relatedProducts
+	const handleRelatedAddToCart = (relatedProduct) => {
+		addToCart(relatedProduct);
+		setAddingStates((prev) => ({
+			...prev,
+			[relatedProduct.id]: true,
+		}));
+		setTimeout(() => {
+			setAddingStates((prev) => ({
+				...prev,
+				[relatedProduct.id]: false,
+			}));
+		}, 1000);
+	};
+
 	// COSA PUOI CONSERVARE
 	const itemsToStore = [
 		{
@@ -149,9 +206,20 @@ export default function DetailPage() {
 
 				<div className="amore-info">
 					<h1>{product.name}</h1>
-					<p className="amore-price">
-						{(product.discounted_price ?? product.price) + " €"}
-					</p>
+					{product.discounted_price ? (
+						<>
+							<span className="original-price">
+								&euro;{product.price.toFixed(2)}
+							</span>
+							<span className="discounted-price">
+								&euro;{product.discounted_price.toFixed(2)}
+							</span>
+						</>
+					) : (
+						<span className="normal-price">
+							&euro;{product.price.toFixed(2)}
+						</span>
+					)}
 
 					<h2 className="amore-section-title">Descrizione</h2>
 
@@ -242,12 +310,53 @@ export default function DetailPage() {
 					>
 						<img src={item.img} alt={item.name} />
 						<h3>{item.name}</h3>
-						<p className="amore-related-price">
-							{(item.discounted_price ?? item.price) + " €"}
-						</p>
-						<button className="btn-related-price">
-							Vai alla pagina
-						</button>
+						{item.discounted_price ? (
+							<>
+								<span className="original-price">
+									&euro;{item.price.toFixed(2)}
+								</span>
+								<span className="discounted-price">
+									&euro;{item.discounted_price.toFixed(2)}
+								</span>
+							</>
+						) : (
+							<span className="normal-price">
+								&euro;{item.price.toFixed(2)}
+							</span>
+						)}
+
+						<div className="amore-related-buttons">
+							<button
+								type="button"
+								className="amore-related-wishlist-btn"
+								onClick={(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									toggleRelatedWishlist(item.id, item);
+								}}
+								aria-label="Aggiungi a wishlist"
+							>
+								{wishlistStates[item.id] ? (
+									<FaHeart size="18px" />
+								) : (
+									<FaRegHeart size="18px" />
+								)}
+							</button>
+							<button
+								type="button"
+								className="amore-related-cart-btn"
+								onClick={(e) => {
+									e.preventDefault();
+									e.stopPropagation();
+									handleRelatedAddToCart(item);
+								}}
+								disabled={addingStates[item.id]}
+							>
+								{addingStates[item.id]
+									? "✓ Aggiunto"
+									: "Aggiungi al Carrello"}
+							</button>
+						</div>
 					</div>
 				))}
 			</div>

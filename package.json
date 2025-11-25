@@ -15,6 +15,7 @@
 		"braintree-web-drop-in": "^1.46.0",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
+		"react-hot-toast": "^2.6.0",
 		"react-icons": "^5.5.0",
 		"react-router-dom": "^7.9.6",
 		"react-select": "^5.10.2"

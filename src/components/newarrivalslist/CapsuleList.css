@@ -1,6 +1,6 @@
-/* MostPopularList.css */
+/* CapsuleList.css */
 
-/* contenitore visibile: mostra ad es. 4 card alla volta */
+/* contenitore visibile */
 .marquee-container {
 	width: 100%;
 	overflow: hidden;
@@ -23,6 +23,9 @@
 	animation-play-state: paused;
 }
 
+/* NON usiamo più :hover per la pausa,
+   il controllo è solo via classe .is-paused */
+
 /* card singola nel marquee */
 .marquee-item {
 	flex: 0 0 auto;
@@ -31,7 +34,7 @@
 	/* opzionale, se vuoi limitare la larghezza */
 }
 
-/* animazione continua da 0 a -50% (perché abbiamo duplicato la lista) */
+/* animazione continua da 0 a -50% (lista duplicata) */
 @keyframes marquee-scroll {
 	from {
 		transform: translateX(0);
