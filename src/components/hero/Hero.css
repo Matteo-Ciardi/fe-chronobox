@@ -10,12 +10,16 @@
 	font-size: 6rem;
 	padding-top: 100px;
 	text-align: center;
+	color: var(--desert-sand);
+	text-shadow: 10px 10px 10px #000000;
 }
 
 .subtitle {
 	text-align: center;
 	font-size: 1.8rem;
 	padding: 40px;
+	color: var(--desert-sand);
+	text-shadow: 2px 2px 1px #000000;
 }
 
 .hero-buttons {
@@ -62,4 +66,10 @@
 
 .features-content {
 	font-size: 1.3rem;
+}
+
+
+.hero-bg-content {
+	color: var(--desert-sand);
+	text-shadow: 10px 10px 10px #000000;
 }
