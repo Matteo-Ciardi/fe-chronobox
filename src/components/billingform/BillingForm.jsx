@@ -1,7 +1,7 @@
 const BillingForm = ({ billing, onChange }) => {
 	return (
 		<section>
-			<h2>Fatturazione</h2>
+			<h2>Spedizione</h2>
 
 			<label htmlFor="firstName">Nome *</label>
 			<input
