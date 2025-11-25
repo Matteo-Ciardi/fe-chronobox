@@ -53,7 +53,9 @@ const ProductPage = () => {
 
 	const [searchTerm, setSearchTerm] = useState(() => initialSearch);
 	const [order, setOrder] = useState(() => initialOrder);
-	const [selectedThemes, setSelectedThemes] = useState(() => initialSelectedThemes);
+	const [selectedThemes, setSelectedThemes] = useState(
+		() => initialSelectedThemes,
+	);
 	const [onSaleOnly, setOnSaleOnly] = useState(() => initialOnSale);
 	const [products, setProducts] = useState([]);
 	const [minPrice, setMinPrice] = useState(() => initialMinPrice);
@@ -92,15 +94,16 @@ const ProductPage = () => {
 			setMaxPrice(Number(params.maxPrice) || 100);
 	}, [searchParams]);
 
-
 	useEffect(() => {
 		const params = {};
 		if (searchTerm) params.search = searchTerm;
 		if (order) params.order = order;
 		if (selectedThemes.length > 0) params.theme = selectedThemes.join(",");
 		if (onSaleOnly) params.onSale = "true";
-		if (minPrice !== undefined && minPrice !== null) params.minPrice = String(minPrice);
-		if (maxPrice !== undefined && maxPrice !== null) params.maxPrice = String(maxPrice);
+		if (minPrice !== undefined && minPrice !== null)
+			params.minPrice = String(minPrice);
+		if (maxPrice !== undefined && maxPrice !== null)
+			params.maxPrice = String(maxPrice);
 
 		setSearchParams(params, { replace: true });
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -165,7 +168,7 @@ const ProductPage = () => {
 						</label>
 					))}
 				</div>
-				
+
 				<div className="sale-checkbox">
 					<label>
 						<input

@@ -155,7 +155,7 @@ const CheckoutPage = () => {
 					quantity: item.quantity,
 					unit_price: item.price,
 					shipping_period: shippingDate,
-					letter_content: letterContent,
+					letter_content: item.letterContent || "",
 					discount_percentage: null,
 
 					// campi extra per EMAIL

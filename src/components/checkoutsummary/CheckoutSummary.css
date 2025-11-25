@@ -1,0 +1,9 @@
+.summary-item-letter {
+	font-size: 12px;
+	color: #666;
+	margin-top: 5px;
+	font-style: italic;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	max-width: 200px;
+}
