@@ -37,7 +37,7 @@
 }
 
 .remove-all-btn {
-	background: #ff4444;
+	background: var(--mauve-bark);
 	color: white;
 	border: none;
 	padding: 10px 20px;
