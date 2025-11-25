@@ -41,7 +41,7 @@ const DefaultProvider = ({ children }) => {
 	}, [cart]);
 
 	// Aggiungi al carrello
-	const addToCart = (product) => {
+	const addToCart = (product, customData = {}) => {
 		setCart((prev) => {
 			// const existing = prev.find((item) => item.id === product.id);
 
@@ -77,6 +77,7 @@ const DefaultProvider = ({ children }) => {
 					image: product.img,
 					slug: product.slug,
 					quantity: 1,
+					...customData,
 				},
 			];
 		});

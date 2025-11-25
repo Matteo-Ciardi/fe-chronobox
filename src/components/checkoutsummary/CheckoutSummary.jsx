@@ -18,10 +18,18 @@ const CheckoutCartSummary = () => {
 			<h2>Riepilogo ordine</h2>
 			<ul className="summary-list">
 				{cart.map((item) => (
-					<li key={item.id} className="summary-item">
+					<li key={item.time} className="summary-item">
 						<div>
 							<span>{item.name}</span>
 							<span>× {item.quantity}</span>
+							{item.letterContent && (
+								<div className="summary-item-letter">
+									Lettera:{" "}
+									{item.letterContent.length > 50
+										? `${item.letterContent.substring(0, 50)}...`
+										: item.letterContent}
+								</div>
+							)}
 						</div>
 						<div>{(item.price * item.quantity).toFixed(2)} €</div>
 					</li>

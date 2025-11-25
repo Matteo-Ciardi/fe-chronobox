@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useProducts } from "../../context/DefaultContext";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 import "./CapsuleCard.css";
 
@@ -11,7 +12,9 @@ export default function CapsuleCard(props) {
 		const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
 		return wishlist.some((item) => item.id === product.id);
 	});
-	const [isAdding, setIsAdding] = useState(false);
+	const [showModal, setShowModal] = useState(false);
+	const [letterText, setLetterText] = useState("");
+	const [imagePreview, setImagePreview] = useState(null);
 
 	const toggleWishlist = () => {
 		const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
@@ -24,6 +27,25 @@ export default function CapsuleCard(props) {
 		localStorage.setItem("wishlist", JSON.stringify(newWishlist));
 		setInWishlist(!inWishlist);
 		window.dispatchEvent(new Event("wishlistUpdate"));
+	};
+
+	const handleFileChange = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			const reader = new FileReader();
+			reader.onload = () => setImagePreview(reader.result);
+			reader.readAsDataURL(file);
+		}
+	};
+
+	const handleAddToCart = () => {
+		addToCart(product, {
+			letterContent: letterText,
+			uploadedImage: imagePreview,
+		});
+		setShowModal(false);
+		setLetterText("");
+		setImagePreview(null);
 	};
 
 	if (!product) return null;
@@ -47,22 +69,13 @@ export default function CapsuleCard(props) {
 								className="capsule-button wishlist-btn"
 								onClick={toggleWishlist}
 							>
-								{inWishlist
-									? "Rimuovi da Wishlist"
-									: "Aggiungi a Wishlist"}
+								{inWishlist ? <FaHeart /> : <FaRegHeart />}
 							</button>
 							<button
 								className="capsule-button add-to-cart-btn"
-								onClick={() => {
-									addToCart(product);
-									setIsAdding(true);
-									setTimeout(() => setIsAdding(false), 1000);
-								}}
-								disabled={isAdding}
+								onClick={() => setShowModal(true)}
 							>
-								{isAdding
-									? "✓ Aggiunto"
-									: "Aggiungi al Carrello"}
+								Personalizza
 							</button>
 						</div>
 						<Link
@@ -74,6 +87,64 @@ export default function CapsuleCard(props) {
 					</div>
 				</div>
 			</div>
+			{showModal && (
+				<div className="customize-modal-overlay">
+					<div className="customize-modal">
+						<h3>Personalizza la tua capsula</h3>
+						<div className="modal-content">
+							<div className="form-group">
+								<label>Carica un'immagine:</label>
+								<input
+									type="file"
+									accept="image/*"
+									onChange={handleFileChange}
+								/>
+								{imagePreview && (
+									<img
+										src={imagePreview}
+										alt="Preview"
+										className="image-preview"
+									/>
+								)}
+							</div>
+							<div className="form-group">
+								<label>Testo della lettera:</label>
+								<textarea
+									value={letterText}
+									onChange={(e) =>
+										setLetterText(e.target.value)
+									}
+									placeholder="Scrivi il tuo messaggio..."
+									rows="4"
+									maxLength="3000"
+								/>
+								<div className="char-counter">
+									{letterText.length}/3000 caratteri
+								</div>
+							</div>
+						</div>
+						<div className="modal-buttons">
+							<button
+								className="modal-add-btn"
+								onClick={handleAddToCart}
+								disabled={!letterText.trim()}
+							>
+								Personalizza
+							</button>
+							<button
+								className="modal-cancel-btn"
+								onClick={() => {
+									setShowModal(false);
+									setLetterText("");
+									setImagePreview(null);
+								}}
+							>
+								Annulla
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
 		</>
 	);
 }
