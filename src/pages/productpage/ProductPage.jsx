@@ -4,11 +4,22 @@ import Select from "react-select";
 import axios from "axios";
 
 import ProductList from "../../components/productlist/ProductList";
+import RangeSlider from "../../components/rangeslider/RangeSlider";
 import "./ProductPage.css";
 
 // Select ordinamento
 const orderOptions = [
-	{ value: "", label: <span><AiOutlineOrderedList /></span> },
+	{
+		value: "",
+		label: (
+			<span>
+				<AiOutlineOrderedList
+					className="select-icon"
+				/>
+				Ordina per..
+			</span>
+		),
+	},
 	{ value: "price_desc", label: "Prezzo Alto-Basso" },
 	{ value: "price_asc", label: "Prezzo Basso-Alto" },
 	{ value: "name_asc", label: "Nome A-Z" },
@@ -18,8 +29,14 @@ const orderOptions = [
 ];
 
 const themeOptions = [
-	"Mini", "Tradizioni", "Amore", "Premium", "Cambiamento",
-	"Viaggio", "Classic", "Ricordi"
+	"Mini", 
+  "Tradizioni", 
+  "Amore", 
+  "Premium", 
+  "Cambiamento",
+	"Viaggio", 
+  "Classic", 
+  "Ricordi"
 ];
 
 const ProductPage = () => {
@@ -60,7 +77,7 @@ const ProductPage = () => {
 						maxPrice,
 						onSale: onSaleOnly,
 					},
-				});
+				);
 				setProducts(Array.isArray(response.data) ? response.data : []);
 			} catch (error) {
 				console.error("Errore nel fetch dei prodotti:", error);
@@ -72,30 +89,28 @@ const ProductPage = () => {
 	return (
 		<div className="product-wrapper">
 			<section className="filters">
-				<label className="searchbar-label">Cerca prodotti</label>
-				<input
-					className="searchbar"
-					type="text"
-					name="searchbar"
-					placeholder="Cerca.."
-					value={searchTerm}
-					onChange={handleSearchChange}
-				/>
+				<div className="searchbar-wrapper">
+					<input
+						className="searchbar"
+						type="text"
+						name="searchbar"
+						placeholder=" "
+						value={searchTerm}
+						onChange={handleSearchChange}
+					/>
+					<label className="searchbar-label">Cerca prodotti</label>
+				</div>
 
-				<label>Ordina per</label>
-				<Select
-					className="order-select"
-					classNamePrefix="order-select"
-					value={orderOptions.find(opt => opt.value === order) || orderOptions[0]}
-					onChange={handleOrderChange}
-					options={orderOptions}
-					isSearchable={false}
-				/>
+				<p className="product-count">
+					({products.length} prodotti trovati)
+				</p>
 
 				<div className="theme-checkboxes">
-					{themeOptions.map(theme => (
-						<label key={theme}>
+					<label className="filter-label">Filtra per</label>
+					{themeOptions.map((theme) => (
+						<label key={theme} className="checkbox-label">
 							<input
+								className="checkbox"
 								type="checkbox"
 								value={theme}
 								checked={selectedThemes.includes(theme)}
@@ -119,29 +134,27 @@ const ProductPage = () => {
 				</div>
 
 				<div className="price-slider">
-					<label>Prezzo Min: €{minPrice}</label>
-					<input
-						type="range"
-						min="0"
-						max="100"
-						value={minPrice}
-						onChange={(e) => setMinPrice(Number(e.target.value))}
-					/>
-
-					<label>Prezzo Max: €{maxPrice}</label>
-					<input
-						type="range"
-						min="0"
-						max="100"
-						value={maxPrice}
-						onChange={(e) => setMaxPrice(Number(e.target.value))}
+					<RangeSlider
+						minValue={minPrice}
+						maxValue={maxPrice}
+						onMinChange={setMinPrice}
+						onMaxChange={setMaxPrice}
+						min={0}
+						max={100}
 					/>
 				</div>
 
-				<p className="product-count">
-					{products.length} prodotti trovati
-				</p>
-
+				<Select
+					className="order-select"
+					classNamePrefix="order-select"
+					value={
+						orderOptions.find((opt) => opt.value === order) ||
+						orderOptions[0]
+					}
+					onChange={handleOrderChange}
+					options={orderOptions}
+					isSearchable={false}
+				/>
 			</section>
 
 			{products.length > 0 ? (

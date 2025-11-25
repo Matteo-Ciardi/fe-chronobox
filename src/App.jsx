@@ -11,7 +11,6 @@ import CheckoutPage from "./pages/checkoutpage/CheckutPage";
 import NotFoundPage from "./pages/notfoundpage/NotFoundPage";
 import DefaultLayout from "./layout/DefaultLayout";
 
-
 import "./App.css";
 
 function App() {
@@ -31,9 +30,8 @@ function App() {
 						/>
 						<Route path="/carrello" element={<CartPage />} />
 						<Route path="/checkout" element={<CheckoutPage />} />
+						<Route path="*" element={<NotFoundPage />} />
 					</Route>
-
-					<Route path="*" element={<NotFoundPage />} />
 				</Routes>
 			</BrowserRouter>
 		</DefaultProvider>

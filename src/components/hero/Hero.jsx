@@ -22,7 +22,7 @@ const Hero = () => {
 					<div className="hero-buttons">
 						<Link to="/prodotti">
 							<button className="hero-btn">
-								Acquista una capsula
+								Scegli una capsula
 							</button>
 						</Link>
 					</div>

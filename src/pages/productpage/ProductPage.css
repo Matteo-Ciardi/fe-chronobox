@@ -5,23 +5,55 @@
 }
 
 .filters {
-	margin-top: 20px;
+	margin-top: 55px;
 	margin-right: 20px;
 	display: flex;
 	flex-direction: column;
 }
 
+/* Floating label pattern for searchbar */
+.searchbar-wrapper {
+	position: relative;
+}
+
 .searchbar-label {
 	font-size: 0.9rem;
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #999;
+	pointer-events: none;
+	transition: all 200ms ease;
+	padding: 0 4px;
+	z-index: 1;
 }
 
 .searchbar {
-	margin-bottom: 20px;
-	padding: 10px;
+	padding: 10px 12px;
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 50px;
+	box-sizing: border-box;
 }
 
-.select-label {
-	font-size: 0.9rem;
+.searchbar:focus {
+	outline: none;
+	border-color: var(--desert-sand);
+	box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Quando l'input ha valore, sposta il label in alto */
+.searchbar:not(:placeholder-shown)~.searchbar-label,
+.searchbar-wrapper:focus-within .searchbar-label {
+	top: -8px;
+	font-size: 1rem;
+	font-weight: 800;
+	color: var(--dusty-taupe);
+}
+
+.select-icon {
+	margin-right: 10px;
 }
 
 /* contenitore generale */
@@ -69,4 +101,37 @@
 .order-select__option--is-selected {
 	background-color: #ff0000;
 	color: #000000;
+}
+
+.filter-label {
+	font-size: 0.9rem;
+	border-bottom: 1px solid var(--dusty-taupe);
+	padding-bottom: 4px;
+	margin-bottom: 10px;
+}
+
+.theme-checkboxes {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 40px 0 10px 0;
+}
+
+.checkbox {
+	margin: 10px 10px 0 0;
+	width: 15px;
+	height: 15px;
+	accent-color: var(--dusty-taupe);
+	border-radius: 50%;
+}
+
+.checkbox-label {
+	font-size: 1.2rem;
+}
+
+.product-count {
+	font-size: 0.9rem;
+	margin-top: 5px;
+	margin-left: 15px;
+	color: rgb(183, 183, 183);
 }
