@@ -18,14 +18,15 @@ const orderOptions = [
 ];
 
 const themeOptions = [
-	"classic", "premium", "eco", "limited", "flavor",
-	"designer", "coffee", "tea", "kids", "sport", "gourmet"
+	"Mini", "Tradizioni", "Amore", "Premium", "Cambiamento",
+	"Viaggio", "Classic", "Ricordi"
 ];
 
 const ProductPage = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [order, setOrder] = useState("");
 	const [selectedThemes, setSelectedThemes] = useState([]);
+	const [onSaleOnly, setOnSaleOnly] = useState(false); // nuova checkbox
 	const [products, setProducts] = useState([]);
 	const [minPrice, setMinPrice] = useState(0);
 	const [maxPrice, setMaxPrice] = useState(100);
@@ -36,10 +37,14 @@ const ProductPage = () => {
 
 	const handleThemeChange = (theme) => {
 		if (selectedThemes.includes(theme)) {
-			setSelectedThemes(selectedThemes.filter(t => t !== theme));
+			setSelectedThemes([]);
 		} else {
-			setSelectedThemes([...selectedThemes, theme]);
+			setSelectedThemes([theme]);
 		}
+	};
+
+	const handleOnSaleChange = () => {
+		setOnSaleOnly(!onSaleOnly);
 	};
 
 	// Fetch prodotti filtrati
@@ -52,7 +57,8 @@ const ProductPage = () => {
 						order,
 						theme: selectedThemes.join(","),
 						minPrice,
-						maxPrice
+						maxPrice,
+						onSale: onSaleOnly,
 					},
 				});
 				setProducts(Array.isArray(response.data) ? response.data : []);
@@ -61,23 +67,22 @@ const ProductPage = () => {
 			}
 		};
 		fetchData();
-	}, [searchTerm, order, selectedThemes, minPrice, maxPrice]);
+	}, [searchTerm, order, selectedThemes, minPrice, maxPrice, onSaleOnly]);
 
 	return (
-
 		<div className="product-wrapper">
 			<section className="filters">
-      <label className="searchbar-label">Cerca prodotti</label>
-			<input
-						className="searchbar"
-						type="text"
-						name="searchbar"
-						placeholder="Cerca.."
-						value={searchTerm}
-						onChange={handleSearchChange}
-					/>
-              
-       <label className="	">Ordina per</label>
+				<label className="searchbar-label">Cerca prodotti</label>
+				<input
+					className="searchbar"
+					type="text"
+					name="searchbar"
+					placeholder="Cerca.."
+					value={searchTerm}
+					onChange={handleSearchChange}
+				/>
+
+				<label>Ordina per</label>
 				<Select
 					className="order-select"
 					classNamePrefix="order-select"
@@ -101,6 +106,18 @@ const ProductPage = () => {
 					))}
 				</div>
 
+				{/* Checkbox prodotti in promozione */}
+				<div className="sale-checkbox">
+					<label>
+						<input
+							type="checkbox"
+							checked={onSaleOnly}
+							onChange={handleOnSaleChange}
+						/>
+						Solo prodotti in promozione
+					</label>
+				</div>
+
 				<div className="price-slider">
 					<label>Prezzo Min: €{minPrice}</label>
 					<input
@@ -118,7 +135,6 @@ const ProductPage = () => {
 						max="100"
 						value={maxPrice}
 						onChange={(e) => setMaxPrice(Number(e.target.value))}
-
 					/>
 				</div>
 
@@ -128,9 +144,12 @@ const ProductPage = () => {
 
 			</section>
 
-			<ProductList products={products} />
+			{products.length > 0 ? (
+				<ProductList products={products} />
+			) : (
+				<p className="no-products-message">Nessun prodotto trovato.</p>
+			)}
 		</div>
 	);
 };
-
 export default ProductPage;

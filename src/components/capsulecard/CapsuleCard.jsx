@@ -46,9 +46,17 @@ export default function CapsuleCard(props) {
 						<p className="capsule-description">{product.description}</p>
 
 						<div className="capsule-footer">
-							<span className="capsule-price">
-								&euro;{product.price}
-							</span>
+							<div className="capsule-price">
+								{product.discounted_price
+									? (
+										<>
+											<span className="original-price">&euro;{product.price}</span>
+											<span className="discounted-price">&euro;{product.discounted_price}</span>
+										</>
+									)
+									: <span className="normal-price">&euro;{product.price}</span>
+								}
+							</div>
 							<div className="capsule-buttons">
 								<button
 									type="button"
