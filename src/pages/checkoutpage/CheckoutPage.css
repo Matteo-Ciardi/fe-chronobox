@@ -1,83 +1,84 @@
 .checkout-page {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
+	max-width: 1200px;
+	margin: 40px auto;
+	padding: 0 20px;
 }
 
 .checkout-page h1 {
-  text-align: center;
-  margin-bottom: 30px;
+	text-align: center;
+	margin-bottom: 30px;
 }
 
 .checkout-layout {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 30px;
 }
 
 .checkout-form {
-  flex: 1 1 500px;
-  background-color: var(--desert-sand-2);
-  padding: 25px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+	flex: 1 1 500px;
+	background-color: var(--desert-sand-2);
+	padding: 25px;
+	border-radius: 15px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 #braintree-dropin {
-  margin: 20px 0;
+	margin: 20px 0;
 }
 
 .checkout-form button {
-  background-color: var(--espresso);
-  color: white;
-  padding: 12px 25px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+	background-color: var(--espresso);
+	color: white;
+	padding: 12px 25px;
+	border: none;
+	border-radius: 10px;
+	font-size: 1rem;
+	cursor: pointer;
+	transition:
+		background 0.3s,
+		transform 0.2s;
 }
 
 .checkout-form button:hover:not(:disabled) {
-  background-color: var(--dark-coffee);
-  transform: translateY(-2px);
+	background-color: var(--dark-coffee);
+	transform: translateY(-2px);
 }
 
 .checkout-form button:disabled {
-  background-color: var(--dusty-taupe);
-  cursor: not-allowed;
+	background-color: var(--dusty-taupe);
+	cursor: not-allowed;
 }
 
 .checkout-layout > .checkout-cart-summary {
-  flex: 0 0 350px;
-  background-color: var(--desert-sand);
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+	flex: 0 0 350px;
+	background-color: var(--desert-sand);
+	padding: 20px;
+	border-radius: 12px;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
 }
 
 /* Box errori */
 .error-box {
-  background: var(--powder-petal);
-  border-left: 5px solid var(--clay-soil);
-  padding: 20px 25px;
-  margin: 20px 0 30px;
-  border-radius: 12px;
-  color: var(--deep-mocha);
-  max-width: 700px;
-  font-size: 1rem;
-  line-height: 1.5;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  animation: fadeIn 0.3s ease-out;
+	background: var(--powder-petal);
+	border-left: 5px solid var(--clay-soil);
+	padding: 20px 25px;
+	margin: 20px 0 30px;
+	border-radius: 12px;
+	color: var(--deep-mocha);
+	max-width: 700px;
+	font-size: 1rem;
+	line-height: 1.5;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+	animation: fadeIn 0.3s ease-out;
 }
 
 .error-box ul {
-  list-style-type: none;
-  padding-left: 0;
+	list-style-type: none;
+	padding-left: 0;
 }
 
 .error-box li::before {
-  content: "⚠️ ";
-  margin-right: 6px;
+	content: "⚠️ ";
+	margin-right: 6px;
 }
-

@@ -1,5 +1,5 @@
 import { useProducts } from "../../context/DefaultContext";
-import './CheckoutSummary.css'
+import "./CheckoutSummary.css";
 const CheckoutCartSummary = () => {
 	const { cart, cartTotal } = useProducts();
 
@@ -22,7 +22,9 @@ const CheckoutCartSummary = () => {
 					<li key={item.time} className="summary-item">
 						<div className="item-details">
 							<span className="item-name">{item.name}</span>
-							<span className="item-quantity">× {item.quantity}</span>
+							<span className="item-quantity">
+								× {item.quantity}
+							</span>
 							{item.letterContent && (
 								<div className="summary-item-letter">
 									Lettera:{" "}
@@ -32,7 +34,9 @@ const CheckoutCartSummary = () => {
 								</div>
 							)}
 						</div>
-						<div className="item-total">{(item.price * item.quantity).toFixed(2)} €</div>
+						<div className="item-total">
+							{(item.price * item.quantity).toFixed(2)} €
+						</div>
 					</li>
 				))}
 			</ul>
@@ -44,7 +48,11 @@ const CheckoutCartSummary = () => {
 
 			<div className="summary-row">
 				<span>Costi di spedizione:</span>
-				<span>{shippingCost > 0 ? `+ ${shippingCost.toFixed(2)} €` : "0 €"}</span>
+				<span>
+					{shippingCost > 0
+						? `+ ${shippingCost.toFixed(2)} €`
+						: "0 €"}
+				</span>
 			</div>
 
 			<div className="summary-total">

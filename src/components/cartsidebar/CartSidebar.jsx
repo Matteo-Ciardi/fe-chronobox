@@ -37,7 +37,9 @@ const CartSidebar = ({ isOpen, onClose }) => {
 				<div className="cart-sidebar-header">
 					<h2>Il tuo carrello</h2>
 					{cartItemCount > 0 && (
-						<span className="cart-sidebar-count">{cartItemCount}</span>
+						<span className="cart-sidebar-count">
+							{cartItemCount}
+						</span>
 					)}
 					<button
 						type="button"

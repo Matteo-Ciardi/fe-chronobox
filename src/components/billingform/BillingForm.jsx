@@ -1,4 +1,4 @@
-import './BillingForm.css'
+import "./BillingForm.css";
 
 const BillingForm = ({ billing, onChange }) => {
 	return (
@@ -100,4 +100,3 @@ const BillingForm = ({ billing, onChange }) => {
 };
 
 export default BillingForm;
-

@@ -1,34 +1,36 @@
 .capsule-form section {
-  margin-bottom: 25px;
+	margin-bottom: 25px;
 }
 
 .capsule-form h2 {
-  margin-bottom: 15px;
-  color: var(--deep-mocha);
-  border-bottom: 2px solid var(--mauve-bark);
-  display: inline-block;
-  padding-bottom: 5px;
+	margin-bottom: 15px;
+	color: var(--deep-mocha);
+	border-bottom: 2px solid var(--mauve-bark);
+	display: inline-block;
+	padding-bottom: 5px;
 }
 
 .capsule-form label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
+	display: block;
+	margin-bottom: 8px;
+	font-weight: 500;
 }
 
 .capsule-form input[type="date"] {
-  width: 100%;
-  padding: 10px 12px;
-  margin-bottom: 15px;
-  border-radius: 8px;
-  border: 1px solid var(--dusty-taupe);
-  font-size: 1rem;
-  background-color: var(--powder-petal);
-  transition: border 0.3s, box-shadow 0.3s;
+	width: 100%;
+	padding: 10px 12px;
+	margin-bottom: 15px;
+	border-radius: 8px;
+	border: 1px solid var(--dusty-taupe);
+	font-size: 1rem;
+	background-color: var(--powder-petal);
+	transition:
+		border 0.3s,
+		box-shadow 0.3s;
 }
 
 .capsule-form input:focus {
-  outline: none;
-  border-color: var(--clay-soil);
-  box-shadow: 0 0 5px var(--clay-soil);
+	outline: none;
+	border-color: var(--clay-soil);
+	box-shadow: 0 0 5px var(--clay-soil);
 }

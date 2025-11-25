@@ -46,7 +46,7 @@
 }
 
 /* Quando l'input ha valore, sposta il label in alto */
-.searchbar:not(:placeholder-shown)~.searchbar-label,
+.searchbar:not(:placeholder-shown) ~ .searchbar-label,
 .searchbar-wrapper:focus-within .searchbar-label {
 	top: -1px;
 	font-size: 0.9rem;

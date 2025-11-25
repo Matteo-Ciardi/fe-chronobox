@@ -45,13 +45,13 @@ const CartPage = () => {
 								<li key={item.time} className="cart-item">
 									<div className="cart-item-info">
 										<div className="thumb-container">
-										{item.image && (
-											<img
-												src={item.image}
-												alt={item.name}
-												className="cart-item-thumb"
-											/>
-										)}
+											{item.image && (
+												<img
+													src={item.image}
+													alt={item.name}
+													className="cart-item-thumb"
+												/>
+											)}
 										</div>
 										<div>
 											<h2>{item.name}</h2>

@@ -1,4 +1,4 @@
-import './CapsuleDetailForm.css'
+import "./CapsuleDetailForm.css";
 
 const CapsuleDetailsForm = ({ shippingDate, onChangeShippingDate }) => {
 	return (
@@ -6,7 +6,9 @@ const CapsuleDetailsForm = ({ shippingDate, onChangeShippingDate }) => {
 			<h2>Dettagli capsula</h2>
 
 			<div className="form-group">
-				<label htmlFor="shippingDate">Data di consegna/apertura *</label>
+				<label htmlFor="shippingDate">
+					Data di consegna/apertura *
+				</label>
 				<input
 					id="shippingDate"
 					type="date"
