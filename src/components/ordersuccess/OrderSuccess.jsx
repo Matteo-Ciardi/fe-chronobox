@@ -19,14 +19,14 @@ const OrderSuccessSummary = ({ summary }) => {
 				<p>{summary.billing.country}</p>
 			</section>
 
-			<section>
+			{/* <section>
 				<h2>Indirizzo di spedizione</h2>
 				<p>{summary.shipping.address}</p>
 				<p>
 					{summary.shipping.zip} {summary.shipping.city}
 				</p>
 				<p>{summary.shipping.country}</p>
-			</section>
+			</section> */}
 
 			<section>
 				<h2>Dettagli capsula</h2>
