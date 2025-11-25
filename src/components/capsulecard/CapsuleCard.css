@@ -238,3 +238,170 @@
 .modal-cancel-btn:hover {
 	background: #5a6268;
 }
+
+/* Responsive adjustments for marquee cards */
+@media (max-width: 1024px) {
+	.container-capsule {
+		height: 520px;
+	}
+
+	.container-image img {
+		height: 300px;
+	}
+
+	.container-capsule-body {
+		padding: 12px;
+	}
+
+	.container-capsule-body h5 {
+		font-size: 1.1rem;
+		margin-bottom: 8px;
+	}
+
+	.capsule-description {
+		font-size: 0.9rem;
+		-webkit-line-clamp: 3;
+		line-clamp: 3;
+		margin-bottom: 8px;
+	}
+
+	.capsule-footer {
+		height: 56px;
+	}
+
+	.capsule-price {
+		font-size: 1.5em;
+	}
+
+	.discounted-price {
+		font-size: 1.8rem;
+		margin-right: 8px;
+	}
+
+	.original-price {
+		font-size: 1rem;
+	}
+
+	.capsule-button {
+		padding: 7px 12px;
+		font-size: 13px;
+	}
+
+	.customize-btn {
+		font-size: 0.95rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.container-capsule {
+		height: 480px;
+	}
+
+	.container-image img {
+		height: 260px;
+	}
+
+	.container-capsule-body {
+		padding: 10px;
+	}
+
+	.container-capsule-body h5 {
+		font-size: 1rem;
+		margin-bottom: 6px;
+	}
+
+	.capsule-description {
+		font-size: 0.88rem;
+		-webkit-line-clamp: 3;
+		line-clamp: 3;
+		margin-bottom: 6px;
+	}
+
+	.capsule-footer {
+		height: 54px;
+		align-items: center;
+	}
+
+	.capsule-buttons {
+		gap: 6px;
+	}
+
+	.capsule-button {
+		padding: 6px 11px;
+		font-size: 12px;
+	}
+
+	.customize-btn {
+		font-size: 0.9rem;
+	}
+
+	.wishlist-btn {
+		top: 10px;
+	}
+}
+
+@media (max-width: 430px) {
+	.container-capsule {
+		height: 440px;
+	}
+
+	.container-image img {
+		height: 220px;
+	}
+
+	.container-capsule-body {
+		padding: 8px;
+	}
+
+	.container-capsule-body h5 {
+		font-size: 0.95rem;
+		margin-bottom: 6px;
+	}
+
+	.capsule-description {
+		font-size: 0.85rem;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		margin-bottom: 6px;
+	}
+
+	.capsule-footer {
+		height: auto;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 8px;
+	}
+
+	.capsule-price {
+		font-size: 1.3em;
+	}
+
+	.discounted-price {
+		font-size: 1.6rem;
+		margin-right: 6px;
+	}
+
+	.original-price {
+		font-size: 0.95rem;
+	}
+
+	.capsule-buttons {
+		width: 100%;
+		justify-content: space-between;
+		gap: 8px;
+	}
+
+	.capsule-button {
+		flex: 1 1 auto;
+		padding: 8px 10px;
+		font-size: 12px;
+	}
+
+	.customize-btn {
+		font-size: 0.9rem;
+	}
+
+	.wishlist-btn {
+		top: 8px;
+	}
+}

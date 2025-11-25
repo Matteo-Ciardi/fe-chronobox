@@ -64,11 +64,28 @@ const Navbar = () => {
 		return () => clearTimeout(t);
 	}, []);
 
+	// Stato menu mobile
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const toggleMobileMenu = () => setMobileMenuOpen(prev => !prev);
+	const closeMobileMenu = () => setMobileMenuOpen(false);
+
 	return (
 		<nav className="navbar">
 			<div className="container">
 				<div className="navbar-container" ref={containerRef}>
-					<ul className="navbar-left">
+					<button
+						className={`hamburger ${mobileMenuOpen ? 'is-open' : ''}`}
+						onClick={toggleMobileMenu}
+						aria-label="Menu"
+						aria-expanded={mobileMenuOpen}
+						type="button"
+					>
+						<span className="hamburger-box">
+							<span className="hamburger-inner"></span>
+						</span>
+					</button>
+
+					<ul className={`navbar-left ${mobileMenuOpen ? 'open' : ''}`} onClick={closeMobileMenu}>
 						<li className="nav-links">
 							<NavLink
 								to="/"
