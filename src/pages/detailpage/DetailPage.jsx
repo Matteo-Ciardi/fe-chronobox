@@ -1,14 +1,15 @@
-import { useState, useEffect } from "react";
 import { useProducts } from "../../context/DefaultContext";
-import { useNavigate, useParams } from "react-router-dom";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
 import axios from "axios";
 
 import "./DetailPage.css";
 
-import lettereImg from "../../assets/img/lettere.jpeg";
 import fotoImg from "../../assets/img/foto.jpg";
 import ricordiImg from "../../assets/img/oggetti.jpg";
+import lettereImg from "../../assets/img/lettere.jpeg";
 import documentiImg from "../../assets/img/documenti.jpg";
 
 export default function DetailPage() {
@@ -200,11 +201,11 @@ export default function DetailPage() {
 						</span>
 					)}
 
-					<p className="amore-description">{product.description}</p>
-
 					<button className="amore-btn" onClick={handleAddToCart}>
 						Personalizza
 					</button>
+
+					<p className="amore-description">{product.description}</p>
 				</div>
 			</div>
 
@@ -237,7 +238,7 @@ export default function DetailPage() {
 				<div className="amore-spec-row">
 					<span className="amore-spec-label">Garanzia</span>
 					<span className="amore-spec-value">
-						{product.warrenty} anno
+						{product.warrenty} anno/i
 					</span>
 				</div>
 			</div>
@@ -325,7 +326,7 @@ export default function DetailPage() {
 
 										<button
 											type="button"
-											className="amore-btn"
+											className="amore-btn-card"
 											onClick={(e) => {
 												e.preventDefault();
 												e.stopPropagation();

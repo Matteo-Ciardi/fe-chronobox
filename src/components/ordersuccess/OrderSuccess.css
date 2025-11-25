@@ -1,50 +1,52 @@
 .wrapper {
-    width: 70%;
-    margin: 0 auto 80px;
-    display: flex;
-    justify-content: center;
+	width: 70%;
+	margin: 0 auto 80px;
+	display: flex;
+	justify-content: center;
 }
 
 .order-complete-card {
-    background-color: var(--dusty-taupe);
-    padding: 30px;
+	background-color: var(--dusty-taupe);
+	border-radius: 10px;
+	box-shadow: 0px 0px 10px 1px black;
+	padding: 30px;
 }
 
 .section-end {
-    border-bottom: 1px solid white;
-    padding-bottom: 10px;
+	border-bottom: 1px solid white;
+	padding-bottom: 10px;
 }
 
 .section-title {
-    margin-top: 20px;
-    font-size: 1.3rem;
-    margin-bottom: 5px;
-    color: var(--deep-mocha);
+	margin-top: 20px;
+	font-size: 1.3rem;
+	margin-bottom: 5px;
+	color: var(--deep-mocha);
 }
 
 .section-title-main {
-    margin-top: 20px;
-    font-size: 1.8rem;
-    color: var(--deep-mocha);
+	margin-top: 20px;
+	font-size: 1.8rem;
+	color: var(--deep-mocha);
 }
 
 .checkout-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
 }
 
 .checkout-row-total {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    font-weight: 600;
-    font-size: 1.3rem;
-    border-top: 1px solid white;
-    padding-top: 5px;
-    margin-top: 25px;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 10px;
+	font-weight: 600;
+	font-size: 1.3rem;
+	border-top: 1px solid white;
+	padding-top: 5px;
+	margin-top: 25px;
 }
 
 .price {
-    font-weight: 600;
+	font-weight: 600;
 }

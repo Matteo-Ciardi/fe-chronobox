@@ -39,10 +39,14 @@
 }
 
 /* info a destra */
+.amore-info {
+	display: flex;
+	flex-direction: column;
+}
+
 .amore-info h1 {
 	font-size: 40px;
 	margin-bottom: 10px;
-	/* color: black; */
 }
 
 .amore-description {
@@ -53,19 +57,33 @@
 }
 
 .amore-btn {
-	background-color: #007bff;
+	background-color: var(--mauve-bark);
 	color: #fff;
 	border: none;
 	padding: 14px 24px;
 	border-radius: 8px;
-	font-size: 16px;
+	font-size: 1rem;
 	cursor: pointer;
-	/* margin-bottom: 25px; */
+	margin-top: 30px;
 	box-shadow: 0px 0px 10px 2px rgb(0, 0, 0);
 }
 
+.amore-btn-card {
+	background-color: var(--mauve-bark);
+	color: #fff;
+	border: none;
+	padding: 14px 24px;
+	border-radius: 8px;
+	font-size: 1rem;
+	cursor: pointer;
+}
+
+.amore-btn-card:hover {
+	background-color: var(--dusty-taupe);
+}
+
 .amore-btn:hover {
-	background-color: #0056b3;
+	background-color: var(--dusty-taupe);
 }
 
 /* caratteristiche */
@@ -295,6 +313,7 @@
 .amore-related-cart-btn:hover {
 	background: var(--dusty-taupe);
 }
+
 .amore-related-wishlist-btn {
 	background-color: var(--dusty-taupe);
 	position: absolute;
@@ -405,12 +424,12 @@
 }
 
 .modal-add-btn {
-	background: #28a745;
+	background: var(--mauve-bark) !important;
 	color: white;
 }
 
 .modal-add-btn:hover:not(:disabled) {
-	background: #218838;
+	background: var(--dusty-taupe) !important;
 }
 
 .modal-add-btn:disabled {

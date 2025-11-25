@@ -34,7 +34,7 @@ const WishlistPage = () => {
 				/>
 			)}
 			{wishlist.length === 0 ? (
-				<p>La tua wishlist è vuota.</p>
+				<p className="empty-message">La tua wishlist è vuota.</p>
 			) : (
 				<div className="wishlist-items">
 					{wishlist.map((product) => (

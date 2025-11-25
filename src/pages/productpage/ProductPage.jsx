@@ -181,17 +181,6 @@ const ProductPage = () => {
 					))}
 				</div>
 
-				<div className="sale-checkbox">
-					<label>
-						<input
-							type="checkbox"
-							checked={onSaleOnly}
-							onChange={handleOnSaleChange}
-						/>
-						Solo prodotti in promozione
-					</label>
-				</div>
-
 				<div className="price-slider">
 					<RangeSlider
 						minValue={minPrice}

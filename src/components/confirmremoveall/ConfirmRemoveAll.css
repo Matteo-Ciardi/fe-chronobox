@@ -7,6 +7,7 @@
 	cursor: pointer;
 	font-size: 14px;
 	margin-bottom: 20px;
+	box-shadow: 0px 0px 10px 1px black;
 }
 
 .remove-all-btn:hover {
