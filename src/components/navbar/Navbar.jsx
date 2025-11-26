@@ -72,7 +72,7 @@ const Navbar = () => {
 	return (
 		<nav className="navbar">
 			<div className="container">
-				<h4 className="shipping-header">SPEDIZONE GRATUITA SOPRA I €170</h4>
+				<h4 className="shipping-header">COSTI DI SPEDIZIONE: €30 📦 GRATIS SOPRA I €170 🚀</h4>
 				<div className="navbar-container" ref={containerRef}>
 					<button
 						className={`hamburger ${mobileMenuOpen ? "is-open" : ""}`}
