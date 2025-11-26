@@ -255,29 +255,55 @@ const CheckoutPage = () => {
 		// Lista di provider email considerati validi
 		const validEmailProviders = [
 			// Microsoft
-			"outlook.com", "hotmail.com", "live.com", "msn.com",
-			"outlook.it", "hotmail.it",
+			"outlook.com",
+			"hotmail.com",
+			"live.com",
+			"msn.com",
+			"outlook.it",
+			"hotmail.it",
 
 			// Google
 			"gmail.com",
 
 			// Yahoo / AOL
-			"yahoo.com", "yahoo.it", "ymail.com", "rocketmail.com", "aol.com",
+			"yahoo.com",
+			"yahoo.it",
+			"ymail.com",
+			"rocketmail.com",
+			"aol.com",
 
 			// Apple
-			"icloud.com", "mac.com", "me.com",
+			"icloud.com",
+			"mac.com",
+			"me.com",
 
 			// Italiani popolari
-			"libero.it", "virgilio.it", "email.it",
-			"tim.it", "alice.it", "tin.it", "inwind.it",
-			"poste.it", "fastwebnet.it", "tiscali.it",
+			"libero.it",
+			"virgilio.it",
+			"email.it",
+			"tim.it",
+			"alice.it",
+			"tin.it",
+			"inwind.it",
+			"poste.it",
+			"fastwebnet.it",
+			"tiscali.it",
 
 			// Internazionali e privacy
-			"gmx.com", "gmx.net", "protonmail.com", "proton.me",
-			"zoho.com", "yandex.com", "mail.com", "mail.ru",
+			"gmx.com",
+			"gmx.net",
+			"protonmail.com",
+			"proton.me",
+			"zoho.com",
+			"yandex.com",
+			"mail.com",
+			"mail.ru",
 
 			// PEC italiane
-			"pec.it", "legalmail.it", "pec.aruba.it", "arubapec.it",
+			"pec.it",
+			"legalmail.it",
+			"pec.aruba.it",
+			"arubapec.it",
 		];
 
 		// -----------------------------------------------------------
@@ -320,10 +346,32 @@ const CheckoutPage = () => {
 
 			// Lista estensioni dominio valide (TLD)
 			const validTLDs = [
-				"com", "it", "net", "org", "edu", "gov", "io", "co",
-				"info", "biz", "me", "online", "shop", "store",
-				"tech", "design", "cloud", "dev", "app", "site",
-				"tv", "news", "live", "digital", "academy", "careers"
+				"com",
+				"it",
+				"net",
+				"org",
+				"edu",
+				"gov",
+				"io",
+				"co",
+				"info",
+				"biz",
+				"me",
+				"online",
+				"shop",
+				"store",
+				"tech",
+				"design",
+				"cloud",
+				"dev",
+				"app",
+				"site",
+				"tv",
+				"news",
+				"live",
+				"digital",
+				"academy",
+				"careers",
 			];
 
 			// Se è un provider famoso, tutto ok

@@ -4,6 +4,11 @@
 	display: flex;
 }
 
+/* Hide accordion toggle on desktop */
+.filters-accordion-toggle {
+	display: none;
+}
+
 .filters {
 	margin-top: 55px;
 	margin-right: 20px;
@@ -175,6 +180,11 @@
 		width: 95%;
 	}
 
+	/* Keep accordion button hidden on tablet */
+	.filters-accordion-toggle {
+		display: none;
+	}
+
 	/* Filtri ordinati e ben distribuiti */
 	.filters {
 		width: 100%;
@@ -218,11 +228,52 @@
 		padding: 0 10px;
 	}
 
+	/* Accordion toggle button - visible only on mobile */
+	.filters-accordion-toggle {
+		display: block;
+		width: 100%;
+		padding: 14px 20px;
+		background-color: var(--mauve-bark);
+		color: #fff;
+		border: none;
+		border-radius: 8px;
+		font-size: 1rem;
+		font-weight: 600;
+		cursor: pointer;
+		margin-top: 60px;
+		margin-bottom: 10px;
+		text-align: center;
+		transition: background-color 0.3s ease;
+		box-shadow: 0 0 10px 1px black;
+	}
+
+	.filters-accordion-toggle:hover {
+		background-color: var(--dusty-taupe);
+	}
+
+	/* Filters section as collapsible panel on mobile */
 	.filters {
 		flex-direction: column;
 		width: 100%;
 		align-items: flex-start;
 		gap: 15px;
+		max-height: 0;
+		overflow: hidden;
+		opacity: 0;
+		transition:
+			max-height 0.4s ease,
+			opacity 0.3s ease,
+			padding 0.3s ease;
+		padding: 0 10px;
+		margin-top: 0;
+		margin-right: 0;
+	}
+
+	.filters.filters-open {
+		max-height: 1500px;
+		opacity: 1;
+		padding: 20px 10px;
+		margin-bottom: 20px;
 	}
 
 	.order-select {
