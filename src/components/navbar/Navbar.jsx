@@ -69,6 +69,19 @@ const Navbar = () => {
 	const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
 	const closeMobileMenu = () => setMobileMenuOpen(false);
 
+	// Stato wishlist count
+	const [wishlistCount, setWishlistCount] = useState(0);
+
+	useEffect(() => {
+		const updateWishlistCount = () => {
+			const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+			setWishlistCount(wishlist.length);
+		};
+		updateWishlistCount();
+		window.addEventListener("wishlistUpdate", updateWishlistCount);
+		return () => window.removeEventListener("wishlistUpdate", updateWishlistCount);
+	}, []);
+
 	return (
 		<nav className="navbar">
 			<div className="container">
@@ -130,8 +143,11 @@ const Navbar = () => {
 									isActive ? "nav-link active" : "nav-link"
 								}
 							>
-								<span className="nav-label" ref={wishlistRef}>
+								<span className="nav-label wishlist-label" ref={wishlistRef}>
 									<FaRegHeart size="22px" />
+									{wishlistCount > 0 && (
+										<span className="wishlist-badge"></span>
+									)}
 								</span>
 							</NavLink>
 						</li>
