@@ -50,21 +50,21 @@
 
 .nav-label {
 	display: inline-block;
-	padding: 0 6px;
+	/* padding: 0 6px; */
 	line-height: 1;
 	transition: color 200ms ease;
 }
 
-.nav-icon {
+/* .nav-icon {
 	margin-left: 20px;
-}
+} */
 
 .nav-cart-btn {
 	background: none;
 	border: none;
 	color: inherit;
 	cursor: pointer;
-	padding: 0 6px;
+	/* padding: 0 6px; */
 	display: inline-block;
 	transition: color 200ms ease;
 	line-height: 1;
@@ -276,10 +276,6 @@
 		justify-self: center;
 	}
 
-	.nav-icon {
-		margin-left: 12px;
-	}
-
 	/* Nascondi indicator su mobile */
 	.nav-indicator {
 		display: none;
@@ -330,14 +326,6 @@
 
 	.hamburger-inner::after {
 		top: 7px;
-	}
-
-	.navbar-right {
-		gap: 8px;
-	}
-
-	.nav-icon {
-		margin-left: 8px;
 	}
 
 	.nav-icon .nav-label svg {
