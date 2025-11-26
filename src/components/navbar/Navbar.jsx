@@ -132,7 +132,7 @@ const Navbar = () => {
 					</ul>
 
 					<NavLink to="/" className="navbar-brand">
-						<img className="logo" src="src/assets/img/IMG_3403.png" alt="page_logo"/>
+						<img className="logo" src="src/assets/img/IMG_3403.png" alt="page_logo" />
 					</NavLink>
 
 					<ul className="navbar-right">
