@@ -207,7 +207,6 @@
 	opacity: 0;
 }
 
-
 .hamburger.is-open .hamburger-inner::before {
 	top: 0;
 	transform: rotate(45deg);

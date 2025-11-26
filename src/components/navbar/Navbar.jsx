@@ -74,18 +74,23 @@ const Navbar = () => {
 
 	useEffect(() => {
 		const updateWishlistCount = () => {
-			const wishlist = JSON.parse(localStorage.getItem("wishlist") || "[]");
+			const wishlist = JSON.parse(
+				localStorage.getItem("wishlist") || "[]",
+			);
 			setWishlistCount(wishlist.length);
 		};
 		updateWishlistCount();
 		window.addEventListener("wishlistUpdate", updateWishlistCount);
-		return () => window.removeEventListener("wishlistUpdate", updateWishlistCount);
+		return () =>
+			window.removeEventListener("wishlistUpdate", updateWishlistCount);
 	}, []);
 
 	return (
 		<nav className="navbar">
 			<div className="container">
-				<h4 className="shipping-header">COSTI DI SPEDIZIONE: €30 📦 GRATIS SOPRA I €170 🚀</h4>
+				<h4 className="shipping-header">
+					COSTI DI SPEDIZIONE: €30 📦 GRATIS SOPRA I €170 🚀
+				</h4>
 				<div className="navbar-container" ref={containerRef}>
 					<button
 						className={`hamburger ${mobileMenuOpen ? "is-open" : ""}`}
@@ -132,7 +137,11 @@ const Navbar = () => {
 					</ul>
 
 					<NavLink to="/" className="navbar-brand">
-						<img className="logo" src="src/assets/img/IMG_3403.png" alt="page_logo" />
+						<img
+							className="logo"
+							src="src/assets/img/IMG_3403.png"
+							alt="page_logo"
+						/>
 					</NavLink>
 
 					<ul className="navbar-right">
@@ -143,7 +152,10 @@ const Navbar = () => {
 									isActive ? "nav-link active" : "nav-link"
 								}
 							>
-								<span className="nav-label wishlist-label" ref={wishlistRef}>
+								<span
+									className="nav-label wishlist-label"
+									ref={wishlistRef}
+								>
 									<FaRegHeart size="22px" />
 									{wishlistCount > 0 && (
 										<span className="wishlist-badge"></span>

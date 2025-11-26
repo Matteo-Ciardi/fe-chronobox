@@ -62,7 +62,7 @@ const ProductPage = () => {
 	const [maxPrice, setMaxPrice] = useState(() => initialMaxPrice);
 	const [filtersOpen, setFiltersOpen] = useState(false);
 
-	const toggleFilters = () => setFiltersOpen(prev => !prev);
+	const toggleFilters = () => setFiltersOpen((prev) => !prev);
 
 	// Gestione input
 	const handleSearchChange = (e) => setSearchTerm(e.target.value);
@@ -140,11 +140,14 @@ const ProductPage = () => {
 	return (
 		<div className="product-wrapper">
 			{/* Mobile accordion button */}
-			<button className="filters-accordion-toggle" onClick={toggleFilters}>
-				{filtersOpen ? '▲ Nascondi Filtri' : '▼ Mostra Filtri'}
+			<button
+				className="filters-accordion-toggle"
+				onClick={toggleFilters}
+			>
+				{filtersOpen ? "▲ Nascondi Filtri" : "▼ Mostra Filtri"}
 			</button>
 
-			<section className={`filters ${filtersOpen ? 'filters-open' : ''}`}>
+			<section className={`filters ${filtersOpen ? "filters-open" : ""}`}>
 				<div className="searchbar-wrapper">
 					<input
 						className="searchbar"

@@ -51,7 +51,7 @@
 }
 
 /* Quando l'input ha valore, sposta il label in alto */
-.searchbar:not(:placeholder-shown)~.searchbar-label,
+.searchbar:not(:placeholder-shown) ~ .searchbar-label,
 .searchbar-wrapper:focus-within .searchbar-label {
 	top: -1px;
 	font-size: 0.9rem;
@@ -260,7 +260,10 @@
 		max-height: 0;
 		overflow: hidden;
 		opacity: 0;
-		transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+		transition:
+			max-height 0.4s ease,
+			opacity 0.3s ease,
+			padding 0.3s ease;
 		padding: 0 10px;
 		margin-top: 0;
 		margin-right: 0;
