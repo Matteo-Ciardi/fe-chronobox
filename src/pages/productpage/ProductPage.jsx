@@ -109,7 +109,7 @@ const ProductPage = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [searchTerm, order, selectedThemes, minPrice, maxPrice, onSaleOnly]);
 
-	// Fetch prodotti filtrati
+	// Fetch filtered products from backend
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -118,7 +118,7 @@ const ProductPage = () => {
 					{
 						params: {
 							search: searchTerm,
-							order,
+							order: order.startsWith("price_") ? "" : order, // Don't send price orders to backend
 							theme: selectedThemes.join(","),
 							minPrice,
 							maxPrice,
@@ -126,7 +126,24 @@ const ProductPage = () => {
 						},
 					},
 				);
-				setProducts(Array.isArray(response.data) ? response.data : []);
+				let fetchedProducts = Array.isArray(response.data)
+					? response.data
+					: [];
+				// Sort client-side for price orders using effective price
+				if (order === "price_desc") {
+					fetchedProducts.sort(
+						(a, b) =>
+							(b.discounted_price || b.price) -
+							(a.discounted_price || a.price),
+					);
+				} else if (order === "price_asc") {
+					fetchedProducts.sort(
+						(a, b) =>
+							(a.discounted_price || a.price) -
+							(b.discounted_price || b.price),
+					);
+				}
+				setProducts(fetchedProducts);
 			} catch (error) {
 				console.error("Errore nel fetch dei prodotti:", error);
 			}
