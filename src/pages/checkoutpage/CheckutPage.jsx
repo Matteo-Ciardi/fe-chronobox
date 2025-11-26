@@ -251,16 +251,30 @@ const CheckoutPage = () => {
 
 		// Lista di provider email considerati validi
 		const validEmailProviders = [
+			// Microsoft
+			"outlook.com", "hotmail.com", "live.com", "msn.com",
+			"outlook.it", "hotmail.it",
+
+			// Google
 			"gmail.com",
-			"outlook.com",
-			"hotmail.com",
-			"live.com",
-			"yahoo.com",
-			"icloud.com",
-			"libero.it",
-			"virgilio.it",
-			"email.it",
-			"pec.it",
+
+			// Yahoo / AOL
+			"yahoo.com", "yahoo.it", "ymail.com", "rocketmail.com", "aol.com",
+
+			// Apple
+			"icloud.com", "mac.com", "me.com",
+
+			// Italiani popolari
+			"libero.it", "virgilio.it", "email.it",
+			"tim.it", "alice.it", "tin.it", "inwind.it",
+			"poste.it", "fastwebnet.it", "tiscali.it",
+
+			// Internazionali e privacy
+			"gmx.com", "gmx.net", "protonmail.com", "proton.me",
+			"zoho.com", "yandex.com", "mail.com", "mail.ru",
+
+			// PEC italiane
+			"pec.it", "legalmail.it", "pec.aruba.it", "arubapec.it",
 		];
 
 		// -----------------------------------------------------------
@@ -293,17 +307,28 @@ const CheckoutPage = () => {
 			errors.push("Il cognome non può contenere doppi spazi.");
 		}
 
-		// Email: deve essere valida e con provider riconosciuto
+		// Email: deve essere valida nella forma
 		if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(billing.email)) {
 			errors.push("Inserisci un indirizzo email valido.");
 		} else {
-			// Controllo provider email (parte dopo "@")
 			const provider = billing.email.split("@")[1];
+			const parts = provider.split(".");
+			const tld = parts[parts.length - 1]; // ultima parte del dominio (es. "it", "com", "careers")
 
+			// Lista estensioni dominio valide (TLD)
+			const validTLDs = [
+				"com", "it", "net", "org", "edu", "gov", "io", "co",
+				"info", "biz", "me", "online", "shop", "store",
+				"tech", "design", "cloud", "dev", "app", "site",
+				"tv", "news", "live", "digital", "academy", "careers"
+			];
+
+			// Se è un provider famoso, tutto ok
 			if (!validEmailProviders.includes(provider)) {
-				errors.push(
-					"Il provider email non è riconosciuto. Usa Gmail, Outlook, iCloud, Libero, Virgilio o Email",
-				);
+				// Se NON è provider famoso → controllo che il TLD sia valido
+				if (!validTLDs.includes(tld)) {
+					errors.push("Il dominio email non è valido.");
+				}
 			}
 		}
 

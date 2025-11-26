@@ -5,6 +5,8 @@ import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 import CartSidebar from "../components/cartsidebar/CartSidebar";
 
+import './DefaultLayout.css'
+
 const DefaultLayout = () => {
 	const { isCartSidebarOpen, closeCartSidebar } = useProducts();
 

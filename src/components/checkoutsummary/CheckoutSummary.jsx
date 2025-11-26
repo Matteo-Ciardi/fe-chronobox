@@ -51,7 +51,7 @@ const CheckoutCartSummary = () => {
 				<span>
 					{shippingCost > 0
 						? `+ ${shippingCost.toFixed(2)} €`
-						: "0 €"}
+						: "Gratis"}
 				</span>
 			</div>
 
