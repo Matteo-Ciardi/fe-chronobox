@@ -92,6 +92,15 @@
 	margin: 0;
 }
 
+.cart-item-letter {
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	white-space: normal;
+	font-size: 14px;
+	color: #666;
+	margin: 4px 0 0 0;
+}
+
 /* Quantity Controls */
 .cart-item-qty {
 	display: flex;

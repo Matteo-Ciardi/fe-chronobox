@@ -59,7 +59,10 @@ const CartPage = () => {
 											{item.letterContent && (
 												<div className="cart-item-letter">
 													<strong>Lettera:</strong>{" "}
-													{item.letterContent}
+													{item.letterContent.length >
+													50
+														? `${item.letterContent.substring(0, 50)}...`
+														: item.letterContent}
 												</div>
 											)}
 										</div>
