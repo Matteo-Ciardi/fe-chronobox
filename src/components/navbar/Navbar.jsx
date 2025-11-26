@@ -66,7 +66,7 @@ const Navbar = () => {
 
 	// Stato menu mobile
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-	const toggleMobileMenu = () => setMobileMenuOpen(prev => !prev);
+	const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
 	const closeMobileMenu = () => setMobileMenuOpen(false);
 
 	return (
@@ -74,7 +74,7 @@ const Navbar = () => {
 			<div className="container">
 				<div className="navbar-container" ref={containerRef}>
 					<button
-						className={`hamburger ${mobileMenuOpen ? 'is-open' : ''}`}
+						className={`hamburger ${mobileMenuOpen ? "is-open" : ""}`}
 						onClick={toggleMobileMenu}
 						aria-label="Menu"
 						aria-expanded={mobileMenuOpen}
@@ -85,7 +85,10 @@ const Navbar = () => {
 						</span>
 					</button>
 
-					<ul className={`navbar-left ${mobileMenuOpen ? 'open' : ''}`} onClick={closeMobileMenu}>
+					<ul
+						className={`navbar-left ${mobileMenuOpen ? "open" : ""}`}
+						onClick={closeMobileMenu}
+					>
 						<li className="nav-links">
 							<NavLink
 								to="/"

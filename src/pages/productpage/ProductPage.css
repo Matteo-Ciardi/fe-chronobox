@@ -35,11 +35,6 @@
 	border: 1px solid #ddd;
 	border-radius: 50px;
 	box-sizing: border-box;
-}
-
-
-.searchbar:focus {
-	outline: none;
 	background-color: transparent;
 	color: #ffffff;
 }
@@ -51,21 +46,20 @@
 }
 
 /* Quando l'input ha valore, sposta il label in alto */
-.searchbar:not(:placeholder-shown)~.searchbar-label,
-.searchbar-wrapper:focus-within .serhbar-label {
-	top: -8px;
-	font-size: 1rem;
+.searchbar:not(:placeholder-shown) ~ .searchbar-label,
+.searchbar-wrapper:focus-within .searchbar-label {
+	top: -1px;
+	font-size: 0.9rem;
 	font-weight: 800;
-	color: -3r(--d-1ty-taupe);
+	color: var(--dusty-taupe);
+	background-color: var(--dark-coffee);
 }
 
 .select-icon {
-
 	margin-right: 10px;
 }
 
-/* contenitore gen
-	ebackground-color: var(--dark-coffee);rale */
+/* contenitore generale */
 .order-select {
 	width: 220px;
 	font-size: 0.9rem;
@@ -109,8 +103,7 @@
 /* option selezionata */
 .order-select__option--is-selected {
 	background-color: #ff0000;
-	color: black;
-
+	color: #000000;
 }
 
 .filter-label {
@@ -124,7 +117,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin: 40px 0 10px 0;
+	margin: 20px 0 10px 0;
 }
 
 .checkbox {
@@ -132,18 +125,22 @@
 	width: 15px;
 	height: 15px;
 	accent-color: var(--dusty-taupe);
-	border-radius: 50%; 
+	border-radius: 50%;
 }
 
 .checkbox-label {
 	font-size: 1.2rem;
 }
 
+.sale-checkbox {
+	margin-top: 20px;
+}
+
 .product-count {
 	font-size: 0.9rem;
 	margin-top: 5px;
 	margin-left: 15px;
-	color: rgb(183, 183, 183);
+	color: rgb(184, 184, 184);
 }
 
 .no-products-message {
@@ -151,8 +148,6 @@
 	margin-left: 360px;
 	font-size: 2rem;
 }
- 
-
 
 /* ============================================
    CARD GRID (DESKTOP) – FIX AGGIUNTO
@@ -171,13 +166,10 @@
 	box-sizing: border-box;
 }
 
-
-
 /* ============================================
    TABLET - max-width 768px
 ============================================ */
 @media (max-width: 768px) {
-
 	.product-wrapper {
 		flex-direction: column;
 		width: 95%;
@@ -217,13 +209,10 @@
 	}
 }
 
-
-
 /* ============================================
    MOBILE - max-width 430px
 ============================================ */
 @media (max-width: 430px) {
-
 	.product-wrapper {
 		width: 100%;
 		padding: 0 10px;
@@ -254,4 +243,4 @@
 		width: 100%;
 		text-align: center;
 	}
-} 
+}

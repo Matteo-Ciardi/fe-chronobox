@@ -50,7 +50,7 @@
 	cursor: not-allowed;
 }
 
-.checkout-layout>.checkout-cart-summary {
+.checkout-layout > .checkout-cart-summary {
 	flex: 0 0 350px;
 	background-color: var(--desert-sand);
 	padding: 20px;
@@ -100,7 +100,7 @@
 		padding: 20px;
 	}
 
-	.checkout-layout>.checkout-cart-summary {
+	.checkout-layout > .checkout-cart-summary {
 		flex: 1 1 320px;
 		padding: 16px;
 	}
@@ -140,7 +140,7 @@
 		font-size: 0.95rem;
 	}
 
-	.checkout-layout>.checkout-cart-summary {
+	.checkout-layout > .checkout-cart-summary {
 		flex: 1 1 auto;
 		padding: 16px;
 		border-radius: 12px;
@@ -178,7 +178,7 @@
 		font-size: 0.9rem;
 	}
 
-	.checkout-layout>.checkout-cart-summary {
+	.checkout-layout > .checkout-cart-summary {
 		padding: 14px;
 		border-radius: 10px;
 	}

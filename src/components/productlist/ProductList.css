@@ -1,35 +1,35 @@
 .product-list-container {
-    padding-top: 20px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 50px 0;
-    box-sizing: border-box;
+	padding-top: 20px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+	padding: 50px 0;
+	box-sizing: border-box;
 }
 
 .product-card {
-    width: 100%;
-    box-sizing: border-box;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 /* ===============================
    TABLET - max-width 768px
 ================================= */
 @media (max-width: 768px) {
-    .product-list-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 30px 0;
-    }
+	.product-list-container {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 20px;
+		padding: 30px 0;
+	}
 }
 
 /* ===============================
    MOBILE - max-width 430px
 ================================= */
 @media (max-width: 430px) {
-    .product-list-container {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 20px;
-        padding: 20px 0;
-    }
+	.product-list-container {
+		grid-template-columns: repeat(1, 1fr);
+		gap: 20px;
+		padding: 20px 0;
+	}
 }

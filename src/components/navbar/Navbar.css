@@ -155,7 +155,10 @@
 	border-radius: 2px;
 	position: absolute;
 	left: 0;
-	transition: transform 0.25s ease, opacity 0.25s ease, top 0.25s ease;
+	transition:
+		transform 0.25s ease,
+		opacity 0.25s ease,
+		top 0.25s ease;
 }
 
 .hamburger-inner {
@@ -163,12 +166,12 @@
 }
 
 .hamburger-inner::before {
-	content: '';
+	content: "";
 	top: -8px;
 }
 
 .hamburger-inner::after {
-	content: '';
+	content: "";
 	top: 8px;
 }
 
@@ -214,7 +217,10 @@
 		max-height: 0;
 		overflow: hidden;
 		opacity: 0;
-		transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+		transition:
+			max-height 0.3s ease,
+			opacity 0.3s ease,
+			padding 0.3s ease;
 		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 	}
 
