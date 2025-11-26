@@ -14,3 +14,9 @@
 	font-size: 1.5rem;
 	margin-bottom: 40px;
 }
+
+@media (max-width: 430px) {
+	.sct-title {
+		font-size: 2.8rem;
+	}
+}

@@ -4,6 +4,11 @@
 	backdrop-filter: blur(10px);
 }
 
+.shipping-header {
+	background-color: red;
+	text-align: center;
+}
+
 .logo {
 	width: 100px;
 	height: 60px;
@@ -37,6 +42,7 @@
 	align-items: center;
 	justify-content: flex-end;
 	width: 10%;
+	gap: 10px;
 }
 
 .nav-links {
@@ -201,6 +207,7 @@
 	opacity: 0;
 }
 
+
 .hamburger.is-open .hamburger-inner::before {
 	top: 0;
 	transform: rotate(45deg);
@@ -283,6 +290,10 @@
 }
 
 @media (max-width: 430px) {
+	.shipping-header {
+		font-size: 0.9rem;
+	}
+
 	.navbar-container {
 		width: 94%;
 		padding: 12px 0;
