@@ -72,6 +72,7 @@ const Navbar = () => {
 	return (
 		<nav className="navbar">
 			<div className="container">
+				<h4 className="shipping-header">SPEDIZONE GRATUITA SOPRA I €170</h4>
 				<div className="navbar-container" ref={containerRef}>
 					<button
 						className={`hamburger ${mobileMenuOpen ? "is-open" : ""}`}
