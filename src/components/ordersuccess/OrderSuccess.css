@@ -1,3 +1,23 @@
+.dati-form{
+	color: var(--deep-mocha);
+	font-weight: bold;
+}
+
+.mb{
+	margin-bottom: 10px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.bg-p{
+	color: var(--deep-mocha);
+}
+
+.num{
+	font-size: 25px;
+	font-weight: bold;
+}
+
 .wrapper {
 	width: 70%;
 	margin: 0 auto 80px;
@@ -10,6 +30,7 @@
 	border-radius: 10px;
 	box-shadow: 0px 0px 10px 1px black;
 	padding: 30px;
+	width: 50%;
 }
 
 .section-end {
@@ -34,6 +55,7 @@
 	display: flex;
 	justify-content: space-between;
 	margin-bottom: 10px;
+	align-items: center;
 }
 
 .checkout-row-total {

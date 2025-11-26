@@ -158,7 +158,10 @@ const CheckoutPage = () => {
 			);
 			console.log("ORDER CREATED:", res.data);
 
-			setOrderSummary(summary);
+			setOrderSummary({
+				...summary,
+				orderId: res.data.id 
+			});
 			clearCart();
 		} catch (err) {
 			console.error("ORDER ERROR:", err);
