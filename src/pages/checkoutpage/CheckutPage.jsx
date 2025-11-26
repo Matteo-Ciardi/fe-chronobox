@@ -185,16 +185,6 @@ const CheckoutPage = () => {
 
 			<div className="checkout-layout">
 				<form className="checkout-form" onSubmit={handleSubmit}>
-					{/* Box che mostra tutti gli errori di validazione del form*/}
-					{formErrors.length > 0 && (
-						<div className="error-box">
-							<ul>
-								{formErrors.map((err, i) => (
-									<li key={i}>{err}</li>
-								))}
-							</ul>
-						</div>
-					)}
 
 					<BillingForm
 						billing={billing}
@@ -217,6 +207,16 @@ const CheckoutPage = () => {
 							? "Elaborazione..."
 							: "Paga e completa l'ordine"}
 					</button>
+					{/* Box che mostra tutti gli errori di validazione del form*/}
+					{formErrors.length > 0 && (
+						<div className="error-box">
+							<ul>
+								{formErrors.map((err, i) => (
+									<li key={i}>{err}</li>
+								))}
+							</ul>
+						</div>
+					)}
 				</form>
 
 				<CheckoutCartSummary />
@@ -225,7 +225,7 @@ const CheckoutPage = () => {
 	);
 
 	/****************
-		FUNZIONI  
+	 FUNZIONI  
 	*****************/
 
 	/* Funzione che formatta correttamente nome e cognome:
@@ -380,25 +380,25 @@ const CheckoutPage = () => {
 			}
 		}
 
-		// Città fatturazione: solo lettere
+		// Città spedizione: solo lettere
 		if (!onlyLetters.test(billing.city)) {
-			errors.push("La città di fatturazione può contenere solo lettere.");
+			errors.push("La città di spedizione può contenere solo lettere.");
 		}
 
-		// Paese fatturazione: solo lettere, minimo 3 caratteri
+		// Paese spedizione: solo lettere, minimo 3 caratteri
 		if (!onlyLetters.test(billing.country)) {
-			errors.push("Il paese di fatturazione può contenere solo lettere.");
+			errors.push("Il paese di spedizione può contenere solo lettere.");
 		} else if (billing.country.trim().length < 3) {
 			errors.push(
-				"Il paese di fatturazione deve contenere almeno 3 lettere.",
+				"Il paese di spedizione deve contenere almeno 3 lettere.",
 			);
 		}
 
-		// CAP fatturazione: 5 cifre e non negativo
+		// CAP spedizione: 5 cifre e non negativo
 		if (!capRegex.test(billing.zip)) {
-			errors.push("Il CAP di fatturazione deve contenere 5 cifre.");
+			errors.push("Il CAP di spedizione deve contenere 5 cifre.");
 		} else if (parseInt(billing.zip) < 0) {
-			errors.push("Il CAP di fatturazione non può essere negativo.");
+			errors.push("Il CAP di spedizione non può essere negativo.");
 		}
 
 		// ------------------------------------------------------
