@@ -118,7 +118,7 @@ const Navbar = () => {
 					</ul>
 
 					<NavLink to="/" className="navbar-brand">
-						<h1>Chronobox</h1>
+						<img className="logo" src="src/assets/img/IMG_3403.png" alt="page_logo"/>
 					</NavLink>
 
 					<ul className="navbar-right">

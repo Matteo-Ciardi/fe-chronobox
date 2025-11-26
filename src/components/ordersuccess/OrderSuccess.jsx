@@ -55,21 +55,21 @@ const OrderSuccessSummary = ({ summary }) => {
 								{summary.productsTotal.toFixed(2)} €
 							</p>
 						</div>
-						<p className="checkout-row">
+						<div className="checkout-row">
 							<p>Spedizione: </p>
 							<p className="price">
 								{summary.shippingCost > 0
 									? `${summary.shippingCost.toFixed(2)} €`
 									: "Gratis"}
 							</p>
-						</p>
+						</div>
 
-						<p className="checkout-row-total">
+						<div className="checkout-row-total">
 							<p>Totale ordine: </p>
 							<p className="price">
 								{summary.total.toFixed(2)} €
 							</p>
-						</p>
+						</div>
 					</section>
 				</div>
 			</div>

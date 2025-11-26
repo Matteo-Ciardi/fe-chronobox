@@ -21,6 +21,7 @@
 .subtitle {
 	text-align: center;
 	font-size: 1.8rem;
+	font-weight: 600;
 	padding: 40px;
 	color: var(--desert-sand);
 	text-shadow: 2px 2px 1px #000000;

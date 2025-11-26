@@ -17,7 +17,7 @@ const Hero = () => {
 						<span>Chronobox</span>
 					</h1>
 
-					<p className="subtitle">Conserva ciò che conta davvero</p>
+					<p className="subtitle">Rivoluzionare i ricordi per un futuro incerto</p>
 
 					<div className="hero-buttons">
 						<Link to="/prodotti">

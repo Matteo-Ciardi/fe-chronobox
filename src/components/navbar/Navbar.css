@@ -4,6 +4,11 @@
 	backdrop-filter: blur(10px);
 }
 
+.logo {
+	width: 100px;
+	height: 60px;
+}
+
 .navbar {
 	position: fixed;
 	width: 100vw;
